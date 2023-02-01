@@ -1,0 +1,82 @@
+{
+    "totalItems": 1,
+    "kind": "books#volumes",
+    "items": [
+        {
+            "saleInfo": {
+                "country": "CA",
+                "isEbook": false,
+                "saleability": "NOT_FOR_SALE"
+            },
+            "searchInfo": {
+                "textSnippet": "In a future North America, where the rulers of Panem maintain control through an annual televised survival competition pitting young people from each of the twelve districts against one another, sixteen-year-old Katniss&#39;s skills are put to ..."
+            },
+            "kind": "books#volume",
+            "volumeInfo": {
+                "industryIdentifiers": [
+                    {
+                        "identifier": "9780439023528",
+                        "type": "ISBN_13"
+                    },
+                    {
+                        "identifier": "0439023521",
+                        "type": "ISBN_10"
+                    }
+                ],
+                "pageCount": 386,
+                "printType": "BOOK",
+                "readingModes": {
+                    "image": true,
+                    "text": false
+                },
+                "previewLink": "http://books.google.ca/books?id=hlb_sM1AN0gC&printsec=frontcover&dq=isbn:0439023521&hl=&cd=1&source=gbs_api",
+                "canonicalVolumeLink": "https://books.google.com/books/about/The_Hunger_Games.html?hl=&id=hlb_sM1AN0gC",
+                "description": "In a future North America, where the rulers of Panem maintain control through an annual televised survival competition pitting young people from each of the twelve districts against one another, sixteen-year-old Katniss's skills are put to the test when she voluntarily takes her younger sister's place.",
+                "language": "en",
+                "title": "The Hunger Games",
+                "imageLinks": {
+                    "thumbnail": "http://books.google.com/books/content?id=hlb_sM1AN0gC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+                    "smallThumbnail": "http://books.google.com/books/content?id=hlb_sM1AN0gC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
+                },
+                "averageRating": 4.5,
+                "panelizationSummary": {
+                    "containsImageBubbles": false,
+                    "containsEpubBubbles": false
+                },
+                "publisher": "Scholastic Inc.",
+                "ratingsCount": 389,
+                "publishedDate": "2008",
+                "categories": [
+                    "Juvenile Fiction"
+                ],
+                "maturityRating": "NOT_MATURE",
+                "allowAnonLogging": false,
+                "contentVersion": "0.1.1.0.preview.1",
+                "authors": [
+                    "Suzanne Collins"
+                ],
+                "infoLink": "http://books.google.ca/books?id=hlb_sM1AN0gC&dq=isbn:0439023521&hl=&source=gbs_api"
+            },
+            "etag": "klI2j0qjk/I",
+            "id": "hlb_sM1AN0gC",
+            "accessInfo": {
+                "accessViewStatus": "SAMPLE",
+                "country": "CA",
+                "viewability": "PARTIAL",
+                "pdf": {
+                    "isAvailable": true,
+                    "acsTokenLink": "http://books.google.ca/books/download/The_Hunger_Games-sample-pdf.acsm?id=hlb_sM1AN0gC&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+                },
+                "webReaderLink": "http://play.google.com/books/reader?id=hlb_sM1AN0gC&hl=&source=gbs_api",
+                "epub": {
+                    "isAvailable": false
+                },
+                "publicDomain": false,
+                "quoteSharingAllowed": false,
+                "embeddable": true,
+                "textToSpeechPermission": "ALLOWED"
+            },
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/hlb_sM1AN0gC"
+        }
+    ]
+}
