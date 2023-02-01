@@ -7,13 +7,12 @@ public class Main {
     public static void main(String[] args) {
     	googleJSON googleAPI = new googleJSON();
     	String ISBN = "9780451524935";
-    	JSONObject json = googleAPI.getJSON(ISBN);
+    	JSONObject isbnJSON = googleAPI.getJSON(ISBN);
     	
     	String searchKey = "Hunger Games";
-    	json = googleAPI.getSearch(searchKey);
+    	JSONObject searchJSON = googleAPI.getSearch(searchKey);
     	
-    	
-    	System.out.println(json);
+    	System.out.println(searchJSON);
     }
    
 }
