@@ -6,13 +6,20 @@ import org.json.JSONObject;
 public class Main {
     public static void main(String[] args) {
     	googleJSON googleAPI = new googleJSON();
-    	String ISBN = "9780451524935";
+    	String ISBN = "‎‎‎9780451524935";
     	JSONObject isbnJSON = googleAPI.getJSON(ISBN);
     	
-    	String searchKey = "Hunger Games";
+    	String searchKey = "Pokemon";
     	JSONObject searchJSON = googleAPI.getSearch(searchKey);
     	
-    	System.out.println(searchJSON);
+    	for (int i = 0; i < 10; i++) {//10 is the max amount of results output by GAPI 
+        	JSONObject search = googleAPI.getSearchIndex(searchJSON, i);
+        	String name = googleAPI.getSearchName(search); 
+        	String rating = googleAPI.getSearchRating(search);
+        	System.out.print(name);
+        	System.out.println(", Rated: "+ rating + " stars");
+    	}
+    	
     }
    
 }

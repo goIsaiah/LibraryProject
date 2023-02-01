@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class googleJSON {
@@ -57,10 +59,7 @@ public class googleJSON {
                 response.append(output);
             }
             json = new JSONObject(response.toString());
-//            JSONObject item = json.getJSONArray("items").getJSONObject(0);
-//            JSONObject volumeInfo = item.getJSONObject("volumeInfo");
-//            String title = volumeInfo.getString("title");
-//            System.out.println("The title of the book is: '"+title+"'");
+//            
             
             connection.disconnect();
         } catch (Exception e) {
@@ -69,8 +68,35 @@ public class googleJSON {
 		return json;
 	}
 
+	
+	
 	private String removeSpaces(String s) {
-		return s.replaceAll(" ", "%20");
+		return s.replaceAll(" ", "%20"); //%20 is a whitespace for URLS
+	}
+
+	public JSONObject getSearchIndex(JSONObject searchJSON, int searchIndex) {
+		JSONArray arr = searchJSON.getJSONArray("items");
+    	JSONObject indexJSON = (JSONObject) arr.get(searchIndex);
+		return indexJSON;
+	}
+
+	public String getSearchName(JSONObject search) {
+		JSONObject volumeInfo = search.getJSONObject("volumeInfo");
+		String title = volumeInfo.getString("title");
+		return title;
+	}
+
+	public String getSearchRating(JSONObject search) {
+//		System.out.println(search);
+		String rating = "No";
+		try {
+			JSONObject volumeInfo = search.getJSONObject("volumeInfo");
+			int x = volumeInfo.getInt("averageRating");
+			rating = String.format("%d", x);
+		}catch (Exception e) {
+//			e.printStackTrace();
+		}
+		return rating;
 	}
 
 
