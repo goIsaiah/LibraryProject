@@ -27,17 +27,11 @@ public class googleJSON {
                 response.append(output);
             }
             json = new JSONObject(response.toString());
-//            JSONObject item = json.getJSONArray("items").getJSONObject(0);
-//            JSONObject volumeInfo = item.getJSONObject("volumeInfo");
-//            String title = volumeInfo.getString("title");
-//            System.out.println("The title of the book is: '"+title+"'");
-            
             connection.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
         }
 		return json;
-
 	}
 
 	public JSONObject getSearch(String searchKey) {
@@ -59,16 +53,12 @@ public class googleJSON {
                 response.append(output);
             }
             json = new JSONObject(response.toString());
-//            
-            
             connection.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
         }
 		return json;
 	}
-
-	
 	
 	private String removeSpaces(String s) {
 		return s.replaceAll(" ", "%20"); //%20 is a whitespace for URLS
@@ -87,18 +77,27 @@ public class googleJSON {
 	}
 
 	public String getSearchRating(JSONObject search) {
-//		System.out.println(search);
 		String rating = "No";
 		try {
 			JSONObject volumeInfo = search.getJSONObject("volumeInfo");
 			int x = volumeInfo.getInt("averageRating");
 			rating = String.format("%d", x);
 		}catch (Exception e) {
-//			e.printStackTrace();
 		}
 		return rating;
 	}
 
+	
+	public String getSearchCoverURL(JSONObject search) {
+		String URL = "";
+		try {
+			JSONObject volumeInfo = search.getJSONObject("volumeInfo");
+			JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
+			URL = imageLinks.getString("thumbnail");
+		}catch (Exception e) {
+		}
+		return URL;
+	}
 
 	
 }
