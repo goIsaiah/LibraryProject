@@ -8,7 +8,7 @@ import java.net.URL;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class googleJSON {
+public class GoogleJSON {
 	public JSONObject getJSON(String ISBN){
         JSONObject json = null;
         String urlString = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + ISBN;
@@ -87,7 +87,6 @@ public class googleJSON {
 		return rating;
 	}
 
-	
 	public String getSearchCoverURL(JSONObject search) {
 		String URL = "";
 		try {
@@ -97,6 +96,28 @@ public class googleJSON {
 		}catch (Exception e) {
 		}
 		return URL;
+	}
+
+	
+	public JSONArray getSearchAuthor(JSONObject search) {
+		JSONArray aArr = null;
+		try {
+			JSONObject volumeInfo = search.getJSONObject("volumeInfo");
+			aArr = volumeInfo.getJSONArray("authors");
+		}catch (Exception e) {
+		}
+		return aArr;
+	}
+
+	public String getSearchYear(JSONObject search) {
+		String pubYear = "";
+		try {
+			JSONObject volumeInfo = search.getJSONObject("volumeInfo");
+			pubYear = volumeInfo.getString("publishedDate");
+			pubYear = pubYear.substring(0, 4);
+		}catch (Exception e) {
+		}
+		return pubYear;
 	}
 
 	

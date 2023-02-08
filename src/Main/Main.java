@@ -1,5 +1,6 @@
 package Main;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.Scanner;
 
@@ -8,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
     	Scanner sc = new Scanner(System.in);
     	
-    	googleJSON googleAPI = new googleJSON();
+    	GoogleJSON googleAPI = new GoogleJSON();
     	String ISBN = "‎‎‎9780451524935";
     	JSONObject isbnJSON = googleAPI.getJSON(ISBN);
     	
@@ -17,12 +18,17 @@ public class Main {
     	sc.close();
     	JSONObject searchJSON = googleAPI.getSearch(searchKey);
     	
-    	for (int i = 0; i < 10; i++) {//10 is the max amount of results output by GAPI 
+    	for (int i = 0; i < 1; i++) {//10 is the max amount of results output by GAPI 
         	JSONObject search = googleAPI.getSearchIndex(searchJSON, i);
         	String name = googleAPI.getSearchName(search); 
         	String rating = googleAPI.getSearchRating(search);
         	String coverURL = googleAPI.getSearchCoverURL(search);
-        	System.out.print(name);
+        	JSONArray authors = googleAPI.getSearchAuthor(search);
+        	String year = googleAPI.getSearchYear(search);
+        	System.out.println(year);
+        	// (APA) AUTHOR, FIRSTINTIAL, MIDDLEINITIAL, YEAR, TITLE, PUBLISHER
+        	Citation cite = new Citation();
+        	String apa = cite.getAPA(search);
         	System.out.println(", Rated: "+ rating + " stars, " + coverURL);
     	}
     	
