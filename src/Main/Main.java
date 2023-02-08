@@ -2,6 +2,10 @@ package Main;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import Logic.Citation;
+import Logic.GoogleJSON;
+
 import java.util.Scanner;
 
 public class Main {
