@@ -59,10 +59,6 @@ public class GoogleJSON {
 		return json;
 	}
 	
-	private String removeSpaces(String s) {
-		return s.replaceAll(" ", "%20"); //%20 is a whitespace for URLS
-	}
-
 	public JSONObject getSearchIndex(JSONObject searchJSON, int searchIndex) {
 		JSONArray arr = searchJSON.getJSONArray("items");
     	JSONObject indexJSON = (JSONObject) arr.get(searchIndex);
@@ -117,6 +113,20 @@ public class GoogleJSON {
 		}catch (Exception e) {
 		}
 		return pubYear;
+	}
+
+	public String getSearchPublisher(JSONObject search) {
+		String pub = "";
+		try {
+			JSONObject volumeInfo = search.getJSONObject("volumeInfo");
+			pub = volumeInfo.getString("publisher");
+		}catch (Exception e) {
+		}
+		return pub;
+	}
+
+	private String removeSpaces(String s) {
+		return s.replaceAll(" ", "%20"); //%20 is a whitespace for URLS
 	}
 
 	

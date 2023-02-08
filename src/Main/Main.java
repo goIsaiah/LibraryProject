@@ -18,13 +18,13 @@ public class Main {
     	JSONObject searchJSON = googleAPI.getSearch(searchKey);
     	
     	for (int i = 0; i < 1; i++) {//10 is the max amount of results output by GAPI 
-        	JSONObject search = googleAPI.getSearchIndex(searchJSON, i);
-        	String name = googleAPI.getSearchName(search); 
-        	String rating = googleAPI.getSearchRating(search);
-        	String coverURL = googleAPI.getSearchCoverURL(search);
-        	JSONArray authors = googleAPI.getSearchAuthor(search);
-        	String year = googleAPI.getSearchYear(search);
-        	System.out.println(year);
+        	JSONObject search = googleAPI.getSearchIndex(searchJSON, i); //Search API
+        	String name = googleAPI.getSearchName(search); //Title of book
+        	String rating = googleAPI.getSearchRating(search); //Rating out of five
+        	String coverURL = googleAPI.getSearchCoverURL(search); //Cover URL
+        	JSONArray authors = googleAPI.getSearchAuthor(search); //Author Array
+        	String year = googleAPI.getSearchYear(search); //Year of published
+        	String publisher = googleAPI.getSearchPublisher(search); //Publisher
         	// (APA) AUTHOR, FIRSTINTIAL, MIDDLEINITIAL, YEAR, TITLE, PUBLISHER
         	Citation cite = new Citation();
         	String apa = cite.getAPA(search);
