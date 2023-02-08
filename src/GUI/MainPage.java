@@ -5,6 +5,8 @@ import javax.swing.border.Border;
 import net.miginfocom.swing.MigLayout;
 import java.awt.*;
 import java.net.URL;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainPage extends JFrame {
 
@@ -31,6 +33,10 @@ public class MainPage extends JFrame {
         img = img.getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH);
         hamIcon = new ImageIcon(img);
         JButton hamburger = new JButton();
+        hamburger.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         hamburger.setIcon(hamIcon);
         hamburger.setPreferredSize(new Dimension(75, 75));
         hamburger.setBorder(null);
