@@ -1,4 +1,4 @@
-package Main;
+package Logic;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
