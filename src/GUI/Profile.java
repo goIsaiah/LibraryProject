@@ -21,6 +21,12 @@ import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import java.awt.Component;
 import net.miginfocom.swing.MigLayout;
+import javax.swing.border.LineBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.MatteBorder;
 
 public class Profile {
 
@@ -29,7 +35,8 @@ public class Profile {
 	
 	//____________________________________________________________
 	private JFrame frame;
-	private JTextField txtBookmate;
+	private JLabel txtBookmate;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -65,6 +72,7 @@ public class Profile {
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 1080, 607);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
 		frame.getContentPane().setLayout(null);
 		
 		// sidebar
@@ -114,29 +122,19 @@ public class Profile {
         setting.setContentAreaFilled(false);
         setting.setPreferredSize(new Dimension(25, 25));
         
-        
-        
-		
 		
 		// Logo 
-		txtBookmate = new JTextField();
-		txtBookmate.setEditable(false);
+		txtBookmate = new JLabel();
 		txtBookmate.setHorizontalAlignment(SwingConstants.CENTER);
 		txtBookmate.setFont(new Font("Lucida Grande", Font.BOLD, 25));
 		txtBookmate.setText("BookMate");
 		txtBookmate.setBounds(112, 19, 140, 33); 
 		frame.getContentPane().add(txtBookmate);
-		txtBookmate.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(112, 68, 69));
 		panel_1.setBounds(154, 68, 125, 125);
 		frame.getContentPane().add(panel_1);
-		
-		
-		
-		
-		
 		
 		// Info 
 		JLabel ProfileName = new JLabel("Profile Name");
@@ -170,5 +168,40 @@ public class Profile {
 		numFollowers.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
 		numFollowers.setBounds(660, 169, 61, 16);
 		frame.getContentPane().add(numFollowers);
+		
+		JPanel SearchPanel = new JPanel();
+		SearchPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		SearchPanel.setBounds(696, 25, 311, 30);
+		frame.getContentPane().add(SearchPanel);
+		SearchPanel.setLayout(null);
+		
+		textField = new JTextField();
+		textField.setBounds(0, 0, 311, 30);
+		SearchPanel.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(9, 6, 47, 17);
+		frame.getContentPane().add(btnNewButton);
+		
+		JButton Search = new JButton("");
+		Search.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		Search.setIcon(new ImageIcon("/Users/vinceflores/Library/Mobile Documents/com~apple~CloudDocs/uni/Semester 4/EECS 2311/iteration-1-designs/Frame 64.png"));
+		Search.setBackground(new Color(255, 255, 255));
+		Search.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		Search.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		Search.setBounds(624, 24, 65, 30);
+		frame.getContentPane().add(Search);
+		
+		JButton btnNewButton_1_1 = new JButton("");
+		btnNewButton_1_1.setIcon(new ImageIcon("/Users/vinceflores/Library/Mobile Documents/com~apple~CloudDocs/uni/Semester 4/EECS 2311/iteration-1-designs/Frame 65.png"));
+		btnNewButton_1_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		btnNewButton_1_1.setBackground(new Color(255, 255, 255));
+		btnNewButton_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		btnNewButton_1_1.setBounds(551, 24, 65, 30);
+		frame.getContentPane().add(btnNewButton_1_1);
 	}
 }
