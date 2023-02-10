@@ -15,4 +15,10 @@ of the books they’ve checked out or placed holds on.  BookMate's social media 
 - [ ] Book Recommendations
 - [ ] Rate and Review Books
 
+## TODO
+- [ ] Connect Book class and User class
+- [ ] Ability to add books from gui 
+- [ ] Display book information in profile gui
+
+
 
