@@ -8,7 +8,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.net.URL;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import net.miginfocom.swing.MigLayout;
 
 public class Template extends JFrame {
 
@@ -59,11 +59,11 @@ public class Template extends JFrame {
 	public Component searchBar() {
 		//SEARCH_FIELD
         JTextField searchField = new JTextField(15);
-        searchField.setPreferredSize(new Dimension(searchField.getPreferredSize().width, 40));
+        searchField.setPreferredSize(new Dimension(searchField.getPreferredSize().width, 20));
         searchField.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 20));
         searchField.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY),
-            BorderFactory.createEmptyBorder(0, 20, 0, 0) // Add left margin for the text
+            BorderFactory.createEmptyBorder(0, 0, 0, 0) // Add left margin for the text
         ));
         searchField.setBackground(new Color(240, 240, 240));
         
@@ -76,16 +76,16 @@ public class Template extends JFrame {
         JLabel searchIconLabel = new JLabel(searchIcon);
 
         //SEARCH_PANEL
-        JPanel searchPanel = new JPanel(new BorderLayout());
-        searchPanel.add(searchIconLabel, BorderLayout.WEST);
-        searchPanel.add(searchField, BorderLayout.CENTER);
+        JPanel searchPanel = new JPanel(new MigLayout("", "[]10[]"));
+        searchPanel.add(searchIconLabel,"cell 0 0");
+        searchPanel.add(searchField, "cell 1 0");
         
         //SEARCH_BUTTON
         JButton searchButton = new JButton("Search");
         searchButton.setBorderPainted(false);
         searchButton.setContentAreaFilled(false);
         searchButton.setFocusPainted(false);
-        searchPanel.add(searchButton, BorderLayout.EAST);
+        searchPanel.add(searchButton, "cell 2 0");
 		return searchPanel;
 
 	}
