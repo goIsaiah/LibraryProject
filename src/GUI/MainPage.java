@@ -4,9 +4,6 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import net.miginfocom.swing.MigLayout;
 import java.awt.*;
-import java.net.URL;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class MainPage extends Template {
 	private Container container = getContentPane();
@@ -15,10 +12,12 @@ public class MainPage extends Template {
     	
         JPanel content = new JPanel(new MigLayout("", "[]30[]", "[]30[]"));
         content.setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
+        content.setBackground(Color.white);
+        container.add(content, BorderLayout.CENTER);
+        
         JLabel label = new JLabel("BookMate");
         label.setFont(new Font(Font.SANS_SERIF, Font.BOLD,30));
         content.add(label, "cell 0 0");
-        container.add(content, BorderLayout.CENTER);
         
         JTextField field = new JTextField("                                     ");
         field.setFont(new Font(Font.SANS_SERIF, Font.ITALIC,20));
@@ -39,13 +38,11 @@ public class MainPage extends Template {
             content.add(label3, cell);
             content.add(label4, cell2);
         }
-        
-        content.setBackground(Color.white);
-        
+    
+        closeOP();
     }
 
 	public static void main(String[] args) {
-        // Create an instance of the frame
         new MainPage();
     }
 }
