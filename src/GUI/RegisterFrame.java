@@ -20,6 +20,7 @@ import net.miginfocom.swing.MigLayout;
 public class RegisterFrame extends Template {
 
 	private JPanel contentPane;
+	private Container container = getContentPane();
 
 	/**
 	 * Launch the application.
@@ -41,6 +42,26 @@ public class RegisterFrame extends Template {
 	 * Create the frame.
 	 */
 	public RegisterFrame() {
+		
+		super();	
+    	
+    	//CONTENT_FRAME
+        JPanel content = new JPanel(new MigLayout("", "[]30[]", "[]30[]"));
+        content.setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
+        content.setBackground(Color.white);
+        container.add(content, BorderLayout.CENTER);
+        
+        //BOOKMATE_LABEL
+        JLabel label = new JLabel("BookMate");
+        label.setFont(new Font(Font.SANS_SERIF, Font.BOLD,30));
+        content.add(label, "cell 0 0");
+        
+        //SEARCH_BAR
+        content.add(searchBar(), "cell 1 0");
+        
+        closeOP();
+		
+		/*
 		setTitle("BookMate");
         
         //ICON
@@ -69,6 +90,8 @@ public class RegisterFrame extends Template {
         container.add(content, BorderLayout.CENTER);
 
 		setContentPane(contentPane);
+		closeOP();
+		*/
 	}
 
 }
