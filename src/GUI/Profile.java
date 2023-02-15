@@ -1,113 +1,92 @@
 package GUI;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.BorderLayout;
 import java.awt.Color;
-import javax.swing.JTextField;
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
-import javax.swing.SwingConstants;
 
-public class Profile {
+import javax.swing.*;
 
-	private JFrame frame;
-	private JTextField txtBookmate;
-	private JTextField txtProfilename;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+import DomainObjects.User;
+import net.miginfocom.swing.MigLayout;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Profile window = new Profile();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+public class Profile extends Template{
 
-	/**
-	 * Create the application.
-	 */
+	private Container container = getContentPane();
 	public Profile() {
-		initialize();
-	}
+		super(); 
+		
+        JPanel content = new JPanel(new MigLayout("", "[]20[]200[]", "[]30[]"));
+        content.setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
+        content.setBackground(Color.white);
+        container.add(content, BorderLayout.CENTER);
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 1080, 607);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(11, 106, 203));
-		panel.setBounds(0, 0, 61, 607);
-		frame.getContentPane().add(panel);
-		
-		txtBookmate = new JTextField();
-		txtBookmate.setHorizontalAlignment(SwingConstants.CENTER);
-		txtBookmate.setFont(new Font("Lucida Grande", Font.BOLD, 25));
-		txtBookmate.setText("BookMate");
-		txtBookmate.setBounds(112, 19, 140, 33); 
-		frame.getContentPane().add(txtBookmate);
-		txtBookmate.setColumns(10);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(112, 68, 69));
-		panel_1.setBounds(154, 68, 125, 125);
-		frame.getContentPane().add(panel_1);
-		
-		txtProfilename = new JTextField();
-		txtProfilename.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
-		txtProfilename.setHorizontalAlignment(SwingConstants.CENTER);
-		txtProfilename.setText("ProfileName");
-		txtProfilename.setBounds(300, 68, 87, 15);
-		frame.getContentPane().add(txtProfilename);
-		txtProfilename.setColumns(10);
-		
-		textField = new JTextField();
-		textField.setText("ProfileName");
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
-		textField.setColumns(10);
-		textField.setBounds(300, 88, 87, 15);
-		frame.getContentPane().add(textField);
-		
-		textField_1 = new JTextField();
-		textField_1.setText("ProfileName");
-		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_1.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
-		textField_1.setColumns(10);
-		textField_1.setBounds(299, 110, 87, 15);
-		frame.getContentPane().add(textField_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setText("ProfileName");
-		textField_2.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_2.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
-		textField_2.setColumns(10);
-		textField_2.setBounds(415, 142, 87, 15);
-		frame.getContentPane().add(textField_2);
-		
-		textField_3 = new JTextField();
-		textField_3.setText("ProfileName");
-		textField_3.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_3.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
-		textField_3.setColumns(10);
-		textField_3.setBounds(543, 142, 87, 15);
-		frame.getContentPane().add(textField_3);
+        //BOOKMATE_LABEL
+        JLabel label = new JLabel("BookMate");
+        label.setFont(new Font(Font.SANS_SERIF, Font.BOLD,30));
+        content.add(label, "cell 0 0");
+        
+        
+        //SEARCH_BAR
+        content.add(searchBar(), "cell 2 0");
+        
+        // PROFILE PHOTO
+        JPanel photo = addProfilePhoto();
+        content.add(photo, "cell 0 1");
+        JPanel userInfo = addProfileInfo(); 
+        content.add(userInfo , "cell 1 1");
+        
+        closeOP();
 	}
+	
+	
+	private JPanel addProfilePhoto() {
+		JPanel photo = new JPanel(); 
+		photo.setPreferredSize(new Dimension(125, 125));
+		photo.setBackground(Color.decode("#714545"));
+		return photo; 
+	}
+	
+	private JPanel addProfileInfo() {
+		MigLayout layout = new MigLayout("", "[]300[]250[]" , "[]10[]10[]20[][]") ; 
+		JPanel info = new JPanel(layout);
+		
+		
+		JLabel profileName = new JLabel("Profile Name") ; 
+		JLabel email = new JLabel("email@eecs.yorku.ca"); 
+		JLabel numRead = new JLabel("0"); 
+//		numRead.setHorizontalAlignment(SwingConstants.CENTER);
+//		numRead.setVerticalAlignment(SwingConstants.CENTER);
+		
+		JLabel numFollowers = new JLabel("0");
+		JLabel noRead = new JLabel("#Read");
+		JLabel noFollowers  = new JLabel("#Followers");
+		
+		profileName.setFont(new Font(Font.SANS_SERIF, Font.BOLD,15));
+		numRead.setFont(new Font(Font.SANS_SERIF, Font.PLAIN,12));
+		numFollowers.setFont(new Font(Font.SANS_SERIF, Font.PLAIN,12));
+		noFollowers.setFont(new Font(Font.SANS_SERIF, Font.BOLD,13));
+		noFollowers.setFont(new Font(Font.SANS_SERIF, Font.BOLD,13));
+		
+		
+		info.add(profileName, "cell 0 0");
+		info.add(email, "cell 0 1");
+		info.add(noRead, "cell 1 2");
+		info.add(noFollowers, "cell 2 2");
+		info.add(numRead, "cell 1 3 3 1");
+		info.add(numFollowers, "cell 2 3 3 1");
+		
+		return info ; 
+		
+	}
+	
+	
+	
+	public static void main(String[] args) {
+//		System.out.println("Hello");
+		new Profile();
+	}
+	
+	
 }

@@ -2,70 +2,52 @@ package GUI;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
 
 import net.miginfocom.swing.MigLayout;
 import java.awt.*;
 import java.net.URL;
 
-public class MainPage extends JFrame {
-
+public class MainPage extends Template {
+	private Container container = getContentPane();
     public MainPage() {
-        setTitle("BookMate");
-        
-        //ICON
-        URL iconUrl = getClass().getResource("/Icon.png");
-        ImageIcon icon = new ImageIcon(iconUrl);
-        setIconImage(icon.getImage());
-        
-        //SIDEBAR
-        Container container = getContentPane();
-        container.setLayout(new BorderLayout());
-        JPanel sidebar = new JPanel();
-        sidebar.setPreferredSize(new Dimension(225, 0));
-        sidebar.setBackground(Color.decode("#0B6BCC"));
-        container.add(sidebar, BorderLayout.WEST);
-        
-        //HAMBURGER
-        URL hamURL = getClass().getResource("/Ham.png");
-        ImageIcon hamIcon = new ImageIcon(hamURL);
-        Image img = hamIcon.getImage();
-        img = img.getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH);
-        hamIcon = new ImageIcon(img);
-        JButton hamburger = new JButton();
-        hamburger.setIcon(hamIcon);
-        hamburger.setPreferredSize(new Dimension(75, 75));
-        hamburger.setBorder(null);
-        hamburger.setContentAreaFilled(false);
-        sidebar.add(hamburger);
-        
-        //TITLE
-        JPanel content = new JPanel(new MigLayout());
-        content.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        JLabel label = new JLabel("   BookMate");
-        label.setFont(new Font(Font.SANS_SERIF, Font.BOLD,30));
-        content.add(label, "dock north");
+    	super();	
+    	
+    	//CONTENT_FRAME
+        JPanel content = new JPanel(new MigLayout("", "[]30[]", "[]30[]"));
+        content.setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
+        content.setBackground(Color.white);
         container.add(content, BorderLayout.CENTER);
         
+        //BOOKMATE_LABEL
+        JLabel label = new JLabel("BookMate");
+        label.setFont(new Font(Font.SANS_SERIF, Font.BOLD,30));
+        content.add(label, "cell 0 0");
         
-        JLabel label2 = new JLabel("TITLE ");
-        Border border = BorderFactory.createLineBorder(Color.DARK_GRAY, 2);
-        label2.setBorder(border);
-        label2.setFont(new Font(Font.SANS_SERIF, Font.BOLD,30));
-        content.add(label2, "span");
+        //SEARCH_BAR
+        content.add(searchBar(), "cell 1 0");
         
+        //MAIN_PAGE_RESULTS
+        Border border = BorderFactory.createLineBorder(Color.DARK_GRAY, 1);
+        for (int i = 1; i < 7; i++) {
+        	JLabel label3 = new JLabel("    �This is a title of a book �  - �Author� - �Genre�- � Rating� -�ISBN�(Optional)    ");
+        	JLabel label4 = new JLabel("   Add    ");
+        	border = BorderFactory.createLineBorder(Color.DARK_GRAY, 1);
+            label3.setBorder(border);
+            label4.setBorder(border);
+            label3.setFont(new Font(Font.SANS_SERIF, Font.ITALIC,20));
+            label3.setPreferredSize(new Dimension(600, 50));
+            String cell = "cell 0 " + i;
+            String cell2 = "cell 1 " + i;
+            content.add(label3, cell);
+            content.add(label4, cell2);
+        }
         
-//        content.setBackground(Color.BLACK);
-        
-        //SIZE AND LOCATION
-        setSize(1200, 700);
-        setLocationRelativeTo(null);
-        getContentPane().setBackground(Color.white);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+        //CLOSING_OPERATIONS
+        closeOP();
     }
 
-    public static void main(String[] args) {
-        // Create an instance of the frame
+	public static void main(String[] args) {
         new MainPage();
     }
 }
