@@ -16,11 +16,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
+import javax.swing.JTextField;
 
 public class RegisterFrame extends Template {
 
 	private JPanel contentPane;
 	private Container container = getContentPane();
+	private JTextField usernameField;
 
 	/**
 	 * Launch the application.
@@ -46,7 +48,7 @@ public class RegisterFrame extends Template {
 		super();	
     	
     	//CONTENT_FRAME
-        JPanel content = new JPanel(new MigLayout("", "[]30[]", "[]30[]"));
+        JPanel content = new JPanel(new MigLayout("", "[]30[grow]", "[]30[][][][][]"));
         content.setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
         content.setBackground(Color.white);
         container.add(content, BorderLayout.CENTER);
@@ -58,6 +60,14 @@ public class RegisterFrame extends Template {
         
         //SEARCH_BAR
         content.add(searchBar(), "cell 1 0");
+        
+        //USERNAME_FIELD
+        usernameField = new JTextField();
+        content.add(usernameField, "cell 1 5,growx");
+        usernameField.setColumns(10);
+        usernameField.setPreferredSize(new Dimension(338, 41));
+        Dimension size = usernameField.getPreferredSize();
+        usernameField.setBounds(101, 229, size.width, size.height);
         
         closeOP();
 		
