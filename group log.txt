@@ -17,7 +17,7 @@
    
    
 ﻿Meeting 3: Wednesday, February 15th, 2023   
- * Group members present: -Isaiah, Sathira, Vince, Abbey
+ * Group members present: -Isaiah, Sathira, Vince, Abbey, Jet
  * Tasks completed: 
    * Continued to work on the GUI
    * Wrote some JUnit test cases for Google JSON
