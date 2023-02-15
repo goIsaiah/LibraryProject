@@ -35,25 +35,28 @@ public class Template extends JFrame {
 		JPanel sidebar = new JPanel();
 		sidebar.setPreferredSize(new Dimension(75, 0));
 		sidebar.setBackground(Color.decode("#0B6BCC"));
+		sidebar.setLayout(new MigLayout("wrap", "[]", "[]825[]10[]")); 
+		
+		
 		container.add(sidebar, BorderLayout.WEST);
 		// HAMBURGER_MENU
 		URL hamURL = getClass().getResource("/Ham.png");
 		ImageIcon hamIcon = new ImageIcon(hamURL);
 		Image img = hamIcon.getImage();
-		img = img.getScaledInstance(75, 75, java.awt.Image.SCALE_SMOOTH);
+		img = img.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
 		hamIcon = new ImageIcon(img);
 		JButton hamburger = new JButton();
 		hamburger.setIcon(hamIcon);
-		hamburger.setPreferredSize(new Dimension(75, 75));
+		hamburger.setPreferredSize(new Dimension(40, 40));
 		hamburger.setBorder(null);
 		hamburger.setContentAreaFilled(false);
-		sidebar.add(hamburger);
+		sidebar.add(hamburger , "cell 0 0");
 		
 		JButton home = sideButton("/home.png"); 
 		JButton profile = sideButton("/profile.png"); 
-		sidebar.add(home);
-		sidebar.add(profile);
-		// 
+		sidebar.add(home, "cell 0 1");
+		sidebar.add(profile , "cell 0 2");
+		
 
 	}
 	
@@ -62,7 +65,7 @@ public class Template extends JFrame {
 		URL homeUrl = getClass().getResource(s);
 		ImageIcon homeIcon = new ImageIcon(homeUrl);
 		Image img = homeIcon.getImage();
-		img = img.getScaledInstance(35, 35, java.awt.Image.SCALE_SMOOTH);
+		img = img.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
 		homeIcon = new ImageIcon(img);
 		JButton home = new JButton();
 		home.setIcon(homeIcon);
