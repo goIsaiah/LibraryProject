@@ -4,6 +4,7 @@
 * Group members present: -Isaiah, Sathira, Vince, Abbey
 * Tasks completed today
    * Started group log
-   * Finished the architecture sketch
+   * Finished the architecture sketch (link: https://app.diagrams.net/#G1WaKYVchVge2UGp_aNj7k2ToYPRLotawL)
    * Dividing up roles equally for iteration 1
    * Working on the login and registration
+   * Finished book class
