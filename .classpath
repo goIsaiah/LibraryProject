@@ -10,7 +10,5 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="resources/JSON.jar"/>
 	<classpathentry kind="lib" path="resources/MigLayout.jar"/>
-	<classpathentry kind="lib" path="resources/Ham2.png"/>
-	<classpathentry kind="lib" path="resources/settings2.png"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
