@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.net.URL;
 
@@ -41,7 +42,7 @@ public class RegisterFrame extends Template {
 			}
 		});
 	}
-
+	
 	/**
 	 * Create the frame.
 	 */
@@ -65,7 +66,7 @@ public class RegisterFrame extends Template {
         
         //USERNAME_FIELD
         usernameField = new JTextField();
-        content.add(usernameField, "cell 1 5,growx");
+        content.add(usernameField, "cell 0 1,growx");
         usernameField.setColumns(10);
         usernameField.setPreferredSize(new Dimension(338, 41));
         Dimension userSize = usernameField.getPreferredSize();
@@ -73,7 +74,7 @@ public class RegisterFrame extends Template {
         
         //EMAIL_FIELD
         emailField = new JTextField();
-        content.add(emailField, "cell 1 5,growx");
+        content.add(emailField, "cell 0 2,growx");
         emailField.setColumns(10);
         emailField.setPreferredSize(new Dimension(338, 41));
         Dimension emailSize = emailField.getPreferredSize();
@@ -81,7 +82,7 @@ public class RegisterFrame extends Template {
         
         //PASSWORD_FIELD
         passwordField = new JTextField();
-        content.add(emailField, "cell 1 5,growx");
+        content.add(passwordField, "cell 0 3,growx");
         passwordField.setColumns(10);
         passwordField.setPreferredSize(new Dimension(338, 41));
         Dimension passwordSize = passwordField.getPreferredSize();
