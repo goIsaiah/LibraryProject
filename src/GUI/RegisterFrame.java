@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextField;
+import javax.swing.JSeparator;
 
 public class RegisterFrame extends Template {
 
@@ -48,45 +49,59 @@ public class RegisterFrame extends Template {
 	 */
 	public RegisterFrame() {
 		
-		super();	
-    	
+		super();
+		
     	//CONTENT_FRAME
-        JPanel content = new JPanel(new MigLayout("", "[]30[grow]", "[]30[][][][][]"));
+        JPanel content = new JPanel();
         content.setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
         content.setBackground(Color.white);
         container.add(content, BorderLayout.CENTER);
+        content.setLayout(null);
         
         //BOOKMATE_LABEL
         JLabel label = new JLabel("BookMate");
+        label.setBounds(57, 39, 146, 39);
         label.setFont(new Font(Font.SANS_SERIF, Font.BOLD,30));
-        content.add(label, "cell 0 0");
+        content.add(label);
         
         //SEARCH_BAR
         content.add(searchBar(), "cell 1 0");
         
         //USERNAME_FIELD
         usernameField = new JTextField();
-        content.add(usernameField, "cell 0 1,growx");
-        usernameField.setColumns(10);
+        //usernameField.setColumns(10);
         usernameField.setPreferredSize(new Dimension(338, 41));
         Dimension userSize = usernameField.getPreferredSize();
-        usernameField.setBounds(101, 229, userSize.width, userSize.height);
-        
-        //EMAIL_FIELD
-        emailField = new JTextField();
-        content.add(emailField, "cell 0 2,growx");
-        emailField.setColumns(10);
-        emailField.setPreferredSize(new Dimension(338, 41));
-        Dimension emailSize = emailField.getPreferredSize();
-        emailField.setBounds(101, 291, emailSize.width, emailSize.height);
+        usernameField.setBounds(57, 109, 338, 41);
+        content.add(usernameField);
         
         //PASSWORD_FIELD
         passwordField = new JTextField();
-        content.add(passwordField, "cell 0 3,growx");
-        passwordField.setColumns(10);
+        //passwordField.setColumns(10);
         passwordField.setPreferredSize(new Dimension(338, 41));
         Dimension passwordSize = passwordField.getPreferredSize();
-        passwordField.setBounds(101, 346, passwordSize.width, passwordSize.height);
+        
+        //EMAIL_FIELD
+        emailField = new JTextField();
+        //emailField.setColumns(10);
+        emailField.setPreferredSize(new Dimension(338, 41));
+        Dimension emailSize = emailField.getPreferredSize();
+        emailField.setBounds(57, 299, 338, 41);
+        content.add(emailField);
+        passwordField.setBounds(57, 489, 338, 41);
+        content.add(passwordField);
+        
+        JSeparator separator = new JSeparator();
+        separator.setBounds(57, 158, 338, 131);
+        content.add(separator);
+        
+        JSeparator separator_1 = new JSeparator();
+        separator_1.setBounds(57, 365, 1, 2);
+        content.add(separator_1);
+        
+        JSeparator separator_2 = new JSeparator();
+        separator_2.setBounds(57, 350, 338, 131);
+        content.add(separator_2);
         
         closeOP();
 		
@@ -122,5 +137,4 @@ public class RegisterFrame extends Template {
 		closeOP();
 		*/
 	}
-
 }
