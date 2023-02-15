@@ -1,20 +1,22 @@
 package Databases;
 
+
 import java.util.ArrayList;
+import DomainObjects.Book;
 
 public class books {
-	private ArrayList<book> book = new ArrayList<book>();
+	private ArrayList<Book> book = new ArrayList<Book>();
 
-	public ArrayList<book> getBook() {
+	public ArrayList<Book> getBook() {
 		return book;
 	}
 
-	public void setBook(ArrayList<book> book) {
+	public void setBook(ArrayList<Book> book) {
 		this.book = book;
 	}
 	
 
-	public void addBook(book b) {
+	public void addBook(Book b) {
 		book.add(b);
 		
 	}
