@@ -1,32 +1,37 @@
 package GUI;
 
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
+
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
 
 import net.miginfocom.swing.MigLayout;
-import java.awt.*;
-import java.net.URL;
 
 public class MainPage extends Template {
 	private Container container = getContentPane();
     public MainPage() {
-    	super();	
-    	
+    	super();
+
     	//CONTENT_FRAME
         JPanel content = new JPanel(new MigLayout("", "[]30[]", "[]30[]"));
         content.setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
         content.setBackground(Color.white);
         container.add(content, BorderLayout.CENTER);
-        
+
         //BOOKMATE_LABEL
         JLabel label = new JLabel("BookMate");
         label.setFont(new Font(Font.SANS_SERIF, Font.BOLD,30));
         content.add(label, "cell 0 0");
-        
+
         //SEARCH_BAR
         content.add(searchBar(), "cell 1 0");
-        
+
         //MAIN_PAGE_RESULTS
         Border border = BorderFactory.createLineBorder(Color.DARK_GRAY, 1);
         for (int i = 1; i < 7; i++) {
@@ -42,7 +47,7 @@ public class MainPage extends Template {
             content.add(label3, cell);
             content.add(label4, cell2);
         }
-        
+
         //CLOSING_OPERATIONS
         closeOP();
     }
