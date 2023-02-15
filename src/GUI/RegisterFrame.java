@@ -23,6 +23,8 @@ public class RegisterFrame extends Template {
 	private JPanel contentPane;
 	private Container container = getContentPane();
 	private JTextField usernameField;
+	private JTextField emailField;
+	private JTextField passwordField;
 
 	/**
 	 * Launch the application.
@@ -66,8 +68,24 @@ public class RegisterFrame extends Template {
         content.add(usernameField, "cell 1 5,growx");
         usernameField.setColumns(10);
         usernameField.setPreferredSize(new Dimension(338, 41));
-        Dimension size = usernameField.getPreferredSize();
-        usernameField.setBounds(101, 229, size.width, size.height);
+        Dimension userSize = usernameField.getPreferredSize();
+        usernameField.setBounds(101, 229, userSize.width, userSize.height);
+        
+        //EMAIL_FIELD
+        emailField = new JTextField();
+        content.add(emailField, "cell 1 5,growx");
+        emailField.setColumns(10);
+        emailField.setPreferredSize(new Dimension(338, 41));
+        Dimension emailSize = emailField.getPreferredSize();
+        emailField.setBounds(101, 291, emailSize.width, emailSize.height);
+        
+        //PASSWORD_FIELD
+        passwordField = new JTextField();
+        content.add(emailField, "cell 1 5,growx");
+        passwordField.setColumns(10);
+        passwordField.setPreferredSize(new Dimension(338, 41));
+        Dimension passwordSize = passwordField.getPreferredSize();
+        passwordField.setBounds(101, 346, passwordSize.width, passwordSize.height);
         
         closeOP();
 		
