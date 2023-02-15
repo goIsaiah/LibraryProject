@@ -27,7 +27,7 @@ public class MainPageTemplate extends Template {
         closeOP();
     }
 
-	public static void main(String[] args) {
-        new MainPage();
-    }
+//	public static void main(String[] args) {
+//        new MainPage();
+//    }
 }

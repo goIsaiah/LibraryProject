@@ -30,7 +30,7 @@ public class MainPage extends Template {
         //MAIN_PAGE_RESULTS
         Border border = BorderFactory.createLineBorder(Color.DARK_GRAY, 1);
         for (int i = 1; i < 7; i++) {
-        	JLabel label3 = new JLabel("    “This is a title of a book “  - “Author” - “Genre”- “ Rating” -”ISBN”(Optional)    ");
+        	JLabel label3 = new JLabel("    ï¿½This is a title of a book ï¿½  - ï¿½Authorï¿½ - ï¿½Genreï¿½- ï¿½ Ratingï¿½ -ï¿½ISBNï¿½(Optional)    ");
         	JLabel label4 = new JLabel("   Add    ");
         	border = BorderFactory.createLineBorder(Color.DARK_GRAY, 1);
             label3.setBorder(border);

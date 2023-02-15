@@ -1,5 +1,5 @@
 package GUI;
-
+ 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -16,9 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
-
+ 
 public class Template extends JFrame {
-
+ 
 	public Template() {
 		// WINDOW_NAME
 		setTitle("BookMate");
@@ -45,28 +45,28 @@ public class Template extends JFrame {
 		hamburger.setBorder(null);
 		hamburger.setContentAreaFilled(false);
 		sidebar.add(hamburger);
-		
+ 
 	}
-	
+ 
 	public void closeOP() {
-		setSize(1280, 720);
+		setSize(1920, 1080);
 		setLocationRelativeTo(null);
 		getContentPane().setBackground(Color.white);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
-	
+ 
 	public Component searchBar() {
 		//SEARCH_FIELD
         JTextField searchField = new JTextField(15);
-        searchField.setPreferredSize(new Dimension(searchField.getPreferredSize().width, 20));
+//        searchField.setPreferredSize(new Dimension(500, 10));
         searchField.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 20));
         searchField.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY),
             BorderFactory.createEmptyBorder(0, 0, 0, 0) // Add left margin for the text
         ));
         searchField.setBackground(new Color(240, 240, 240));
-        
+ 
         //SEARCH_ICON
         URL searchURL = getClass().getResource("/searchIcon.png");
         ImageIcon searchIcon = new ImageIcon(searchURL);
@@ -74,12 +74,12 @@ public class Template extends JFrame {
         img = img.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
         searchIcon = new ImageIcon(img);
         JLabel searchIconLabel = new JLabel(searchIcon);
-
+ 
         //SEARCH_PANEL
         JPanel searchPanel = new JPanel(new MigLayout("", "[]10[]"));
         searchPanel.add(searchIconLabel,"cell 0 0");
         searchPanel.add(searchField, "cell 1 0");
-        
+ 
         //SEARCH_BUTTON
         JButton searchButton = new JButton("Search");
         searchButton.setBorderPainted(false);
@@ -87,7 +87,8 @@ public class Template extends JFrame {
         searchButton.setFocusPainted(false);
         searchPanel.add(searchButton, "cell 2 0");
 		return searchPanel;
-
+ 
 	}
-
+ 
 }
+ 
