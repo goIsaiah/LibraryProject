@@ -6,6 +6,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
+import DomainObjects.User;
+import Logic.AlreadyAFriendException;
+import Logic.Authentication;
 import Logic.Citation;
 import Logic.GoogleJSON;
 
@@ -63,6 +66,89 @@ class JUnitTests {
 		assertEquals("Penguin Books", publisher);
 		
 		
+	}
+	
+	@Test
+	void authenticationTest()
+	{
+		User user = new User("abbey", "abbey123");
+		Authentication a = new Authentication(user);
+		
+		//testing the authentication methods
+		//correctName method
+		assertTrue(a.correctName("abbey"));
+		assertFalse(a.correctName("jimmy"));
+		
+		//correctPassword method
+		assertTrue(a.correctPassword("abbey123"));
+		assertFalse(a.correctName("Abbey123"));
+		
+		//authenticated method
+		assertEquals(user.getUsername(), "abbey");
+		assertEquals(user.getPassword(), "abbey123");
+		assertTrue(a.authenticated(a.correctName("abbey"), a.correctPassword("abbey123")));
+		assertFalse(a.authenticated(a.correctName("abbey"), a.correctPassword("abbey1234")));
+		assertFalse(a.authenticated(a.correctName("jimmy"), a.correctPassword("abbey123")));
+		
+		
+	}
+	
+	@Test
+	void userTest()
+	{
+		User abbey = new User("abbey", "abbey123");
+		User vince = new User("vince", "vince123");
+		User sathira = new User("sathira", "sathira123");
+		User isaiah = new User("isaiah", "isaiah123");
+		User jet = new User("jet", "jet123");
+		User badfriend = new User("badfriend", "badfriend123");
+		
+		//testing the addFriend method
+		try
+		{
+			abbey.addFriend(vince);
+			abbey.addFriend(sathira);
+			abbey.addFriend(isaiah);
+			abbey.addFriend(jet);
+			abbey.addFriend(badfriend);
+		}
+		catch (AlreadyAFriendException e)
+		{
+			fail("error thrown unexpectedly");
+		}
+		
+		//trying to friend a user that has already been friended
+		try
+		{
+			abbey.addFriend(vince);
+			fail("exception not thrown");
+		}
+		catch(AlreadyAFriendException e)
+		{
+			
+		}
+		
+		
+		//testing the remove friend function
+		try
+		{
+			abbey.removeFriend(badfriend); //this should succeed
+		}
+		catch (Exception e)
+		{
+			fail("error thrown unexpectedly");
+		}
+		
+		//trying to remove a friend not on friend list
+		try
+		{
+			abbey.removeFriend(badfriend); //now they are no longer friends, this should throw excpetion
+			fail("exception not thrown");
+		}
+		catch (Exception e)
+		{
+			
+		}
 	}
 
 }
