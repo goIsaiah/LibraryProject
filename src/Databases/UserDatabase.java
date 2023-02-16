@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import DomainObjects.User;
 public class UserDatabase {
 	
-	private ArrayList<User> users = new ArrayList<User>();
+	private static ArrayList<User> users = new ArrayList<User>();
 
 	public ArrayList<User> getUsers() {
 		return users;
