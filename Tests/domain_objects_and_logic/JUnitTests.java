@@ -1,4 +1,4 @@
-package Tests;
+package domain_objects_and_logic;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -4,7 +4,7 @@ package Databases;
 import java.util.ArrayList;
 import DomainObjects.Book;
 
-public class bookmain {
+public class BookDB {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -26,10 +26,6 @@ public class bookmain {
 		Books.add(Book3);
 		Books.add(Book4);
 		Books.add(Book5);
-		
-		
-		
-
 	}
 
 }
