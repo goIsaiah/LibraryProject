@@ -17,7 +17,7 @@ public class User
 	private Date dateJoined;
 	private ArrayList<Book> checkedOutBooks;
 	private ArrayList<User> followerList; 
-	
+
 	//creating constructor
 	public User(String username, String password)
 	{
@@ -29,39 +29,54 @@ public class User
 		this.birthday = null;
 		this.dateJoined = new Date();
 		this.checkedOutBooks = null;
+
+		this.checkedOutBooks = new ArrayList<Book>();
+		this.followerList = new ArrayList<User>();
 	}
-	
-	
+
+
 	// to be tested 
 	/**
 	 * 
-	 * @param u another User that this User wants to add as a freind or follow. 
-	 * @return return true if u is added successfully, and false if not.
+	 * @param u another User that this User wants to add as a friend/follow. 
+	 * @return void
 	 * @throws AlreadyAFriendException when the User u already is a friend or a follower of this User. 
 	 */
-	public boolean addFriend(User u) throws AlreadyAFriendException {
-		
-		if(this.followerList.contains(u)) throw new AlreadyAFriendException();
-		else {
-			this.followerList.add(u);
-			return true; 
+	public void addFriend(User u) throws AlreadyAFriendException 
+	{
+
+		if(this.followerList.contains(u)) //if they already are followers
+		{
+			throw new AlreadyAFriendException();
 		}
-		
+		else 
+		{
+			this.followerList.add(u);
+		}
+
 	}
-	
-	
-	
+
+
 	// to be tested
 	/**
 	 * 
 	 * @param u A user that is in this User's list of followers that this User wants to remove. 
+	 * @return void
+	 * @throws Exception if the user to remove isn't found
 	 */
-	public void removeFriend(User u ) {
+	public void removeFriend(User u) throws Exception
+	{
 		if(this.followerList.contains(u))
+		{
 			this.followerList.remove(this.followerList.indexOf(u));
+		}
+		else
+		{
+			throw new Exception("failed, follower to remove not found");
+		}
 	}
 
-	
+
 	//accessor and mutator methods
 	public String getFirstName() 
 	{
