@@ -12,7 +12,6 @@ public class LibraryUI {
 		try {
 			template.closeOP();
 			 new Profile(template);
-			
 		} catch (Exception e) {
 		} 
 	}
