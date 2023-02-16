@@ -12,11 +12,11 @@ import javax.swing.*;
 import net.miginfocom.swing.MigLayout;
 
 public class Profile {
-	private Template temp = new Template(); 
+	private static Template temp = new Template(); 
 	private Container container = temp.getContentPane();
 	
 
-	public Profile(String s) {
+	public Profile(Template template) {
 		
         JPanel content = new JPanel(new MigLayout("", "[]20[]200[]", "[]30[]"));
         content.setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
@@ -89,7 +89,7 @@ public class Profile {
 	
 	public static void main(String[] args) {
 //		System.out.println("Hello");
-		new Profile("TRUE");
+		new Profile(temp);
 	}
 	
 	

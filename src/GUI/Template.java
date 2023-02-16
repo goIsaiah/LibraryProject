@@ -7,6 +7,8 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
 
 import javax.swing.BorderFactory;
@@ -54,11 +56,31 @@ public class Template extends JFrame {
 		
 		JButton home = sideButton("/home.png"); 
 		JButton profile = sideButton("/profile.png"); 
+		
+		profile.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new Profile(new Template());
+			}
+		}); 
+		
+		home.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new MainPage();
+			}
+			
+		});
+		
+		
 		sidebar.add(home, "cell 0 1");
 		sidebar.add(profile , "cell 0 2");
 		
 
 	}
+	
+	
 	
 	private JButton sideButton(String s) {
 		
@@ -117,6 +139,8 @@ public class Template extends JFrame {
         searchButton.setContentAreaFilled(false);
         searchButton.setFocusPainted(false);
         searchPanel.add(searchButton, "cell 2 0");
+        
+        
 		return searchPanel;
 
 	}
