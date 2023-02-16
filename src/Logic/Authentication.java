@@ -14,7 +14,6 @@ public class Authentication{
 		
 		if(str.equals(user.getUsername()))
 			return true;
-		
 		return false; 
 	}
 	
@@ -22,7 +21,6 @@ public class Authentication{
 		
 		if(str.equals(user.getPassword())) 
 			return true; 
-		
 		return false; 
 	}
 
