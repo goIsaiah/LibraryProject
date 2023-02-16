@@ -8,14 +8,15 @@ import java.awt.Font;
 
 import javax.swing.*;
 
-import DomainObjects.User;
+//import DomainObjects.User;
 import net.miginfocom.swing.MigLayout;
 
-public class Profile extends Template{
+public class Profile {
+	private Template temp = new Template(); 
+	private Container container = temp.getContentPane();
+	
 
-	private Container container = getContentPane();
-	public Profile() {
-		super(); 
+	public Profile(String s) {
 		
         JPanel content = new JPanel(new MigLayout("", "[]20[]200[]", "[]30[]"));
         content.setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
@@ -29,7 +30,7 @@ public class Profile extends Template{
         
         
         //SEARCH_BAR
-        content.add(searchBar(), "cell 2 0");
+        content.add(temp.searchBar(), "cell 2 0");
         
         // PROFILE PHOTO
         JPanel photo = addProfilePhoto();
@@ -37,18 +38,21 @@ public class Profile extends Template{
         JPanel userInfo = addProfileInfo(); 
         content.add(userInfo , "cell 1 1");
         
-        closeOP();
+       temp.closeOP();
 	}
 	
+	public JPanel addContentPanel() {
+		return new JPanel(new MigLayout("", "[]20[]200[]", "[]30[]"));
+	}
 	
-	private JPanel addProfilePhoto() {
+	public JPanel addProfilePhoto() {
 		JPanel photo = new JPanel(); 
 		photo.setPreferredSize(new Dimension(125, 125));
 		photo.setBackground(Color.decode("#714545"));
 		return photo; 
 	}
 	
-	private JPanel addProfileInfo() {
+	public JPanel addProfileInfo() {
 		MigLayout layout = new MigLayout("", "[]300[]250[]" , "[]10[]10[]20[][]") ; 
 		JPanel info = new JPanel(layout);
 		
@@ -85,7 +89,7 @@ public class Profile extends Template{
 	
 	public static void main(String[] args) {
 //		System.out.println("Hello");
-		new Profile();
+		new Profile("TRUE");
 	}
 	
 	

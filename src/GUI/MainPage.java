@@ -13,11 +13,10 @@ import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
 
-public class MainPage extends Template {
-	private Container container = getContentPane();
+public class MainPage {
+	private Template temp = new Template();
+	private Container container = temp.getContentPane();
     public MainPage() {
-    	super();
-
     	//CONTENT_FRAME
         JPanel content = new JPanel(new MigLayout("", "[]30[]", "[]30[]"));
         content.setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
@@ -30,7 +29,7 @@ public class MainPage extends Template {
         content.add(label, "cell 0 0");
 
         //SEARCH_BAR
-        content.add(searchBar(), "cell 1 0");
+        content.add(temp.searchBar(), "cell 1 0");
 
         //MAIN_PAGE_RESULTS
         Border border = BorderFactory.createLineBorder(Color.DARK_GRAY, 1);
@@ -49,7 +48,7 @@ public class MainPage extends Template {
         }
 
         //CLOSING_OPERATIONS
-        closeOP();
+        temp.closeOP();
     }
 
 	public static void main(String[] args) {
