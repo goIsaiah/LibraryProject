@@ -18,7 +18,7 @@ class JUnitTests {
 	@Test
 	void authenticationTest()
 	{
-		User user = new User("abbey", "abbey123");
+		User user = new User("abbey", "abbey123", "abbey@my.yorku.ca");
 		Authentication a = new Authentication(user);
 
 		//testing the authentication methods
@@ -43,12 +43,12 @@ class JUnitTests {
 	@Test
 	void userTest()
 	{
-		User abbey = new User("abbey", "abbey123");
-		User vince = new User("vince", "vince123");
-		User sathira = new User("sathira", "sathira123");
-		User isaiah = new User("isaiah", "isaiah123");
-		User jet = new User("jet", "jet123");
-		User badfriend = new User("badfriend", "badfriend123");
+		User abbey = new User("abbey", "abbey123", "abbey@my.yorku.ca");
+		User vince = new User("vince", "vince123", "vince@my.yorku.ca");
+		User sathira = new User("sathira", "sathira123", "sathira@my.yorku.ca");
+		User isaiah = new User("isaiah", "isaiah123", "isaiah@my.yorku.ca");
+		User jet = new User("jet", "jet123", "jet@my.yorku.ca");
+		User badfriend = new User("badfriend", "badfriend123", "badfriend@my.yorku.ca");
 
 		//testing the addFriend method
 		try
