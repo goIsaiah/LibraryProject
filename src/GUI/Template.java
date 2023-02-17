@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -21,6 +22,8 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import net.miginfocom.swing.MigLayout;
+
+import Logic.SearchforBook;
 
 public class Template extends JFrame {
 
@@ -132,6 +135,9 @@ public class Template extends JFrame {
         JPanel searchPanel = new JPanel(new MigLayout("", "[]10[]"));
         searchPanel.add(searchIconLabel,"cell 0 0");
         searchPanel.add(searchField, "cell 1 0");
+        
+       
+ 
 
         //SEARCH_BUTTON
         JButton searchButton = new JButton("Search");
@@ -139,7 +145,26 @@ public class Template extends JFrame {
         searchButton.setContentAreaFilled(false);
         searchButton.setFocusPainted(false);
         searchPanel.add(searchButton, "cell 2 0");
+    /*    searchButton.addActionListener(e -> { 
+        	String query =  searchField.getText();
+        	SearchforBook b = new SearchforBook();
+        	if(b.checkBook(query)== true) {
+        		new Template();
+        	}
+        	*/
+        searchButton.setEnabled(true);
+        searchButton.addActionListener(new ActionListener(){
+    			@Override
+    			public void actionPerformed(ActionEvent e) {
+    				String query =  searchField.getText();
+    	        	SearchforBook b = new SearchforBook();
+    	        	if(b.checkBook(query)== true) {
+    	        		new MainPage();
+    			}
+    		}; 
+        });
         
+
         
 		return searchPanel;
 

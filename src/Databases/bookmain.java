@@ -6,8 +6,8 @@ import DomainObjects.Book;
 
 public class bookmain {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
+		
 
 		Book Book1 = new Book("Harry Potter: The Goblet of Fire", "JK Rowlking", 2000, 5 );
 
@@ -19,8 +19,12 @@ public class bookmain {
 
 		Book Book5 = new Book("IT", "Stephen King", 1986, 9);
 		
-		ArrayList<Book> Books = new ArrayList<Book>(); 
+		ArrayList<Book> Books; 
 		
+		
+	public bookmain() {
+		Books = new ArrayList<Book>();
+
 		Books.add(Book1);
 		Books.add(Book2);
 		Books.add(Book3);
@@ -28,8 +32,17 @@ public class bookmain {
 		Books.add(Book5);
 		
 		
+	}
+	
+	   public ArrayList<Book> getList() {
+	       return Books;
+	   }
+	
+
+	
+		
 		
 
-	}
+	
 
 }
