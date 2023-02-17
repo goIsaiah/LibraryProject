@@ -68,6 +68,7 @@ public class Template extends JFrame {
 		panelContainer.add(new MainPage(searchBar()), "Main");
         panelContainer.add(new Profile(searchBar()), "Profile");
         
+        
         container.add(panelContainer, BorderLayout.CENTER);
 		closeOP();
 		
@@ -149,7 +150,8 @@ public class Template extends JFrame {
     				String query =  searchField.getText();
     	        	SearchforBook b = new SearchforBook();
     	        	if(b.checkBook(query)== true) {
-    	        		new MainPage();
+    	        		panelContainer.add(new MainPage(b.getSearchBook(), searchPanel), "SearchMain");
+    	        		showPanel("SearchMain");
     			}
     		}; 
         });
