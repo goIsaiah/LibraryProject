@@ -29,9 +29,8 @@ public class UserDatabase implements Database<User> {
 
 	
 	@Override
-	public boolean addData(User user) {
+	public boolean addData(User user) throws Excepion{
 		if(users.contains(user)) throw new Exception(); 
-		
 		else {
 			users.add(user);
 			return true;
