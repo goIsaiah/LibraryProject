@@ -1,6 +1,9 @@
-package Tests;
+package logic_domain_objects;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,6 +14,9 @@ import Logic.AlreadyAFriendException;
 import Logic.Authentication;
 import Logic.Citation;
 import Logic.GoogleJSON;
+import Logic.SearchforBook;
+import DomainObjects.Book;
+import Databases.bookmain;
 
 class JUnitTests {
 
@@ -36,8 +42,6 @@ class JUnitTests {
 		assertTrue(a.authenticated(a.correctName("abbey"), a.correctPassword("abbey123")));
 		assertFalse(a.authenticated(a.correctName("abbey"), a.correctPassword("abbey1234")));
 		assertFalse(a.authenticated(a.correctName("jimmy"), a.correctPassword("abbey123")));
-
-
 	}
 
 	@Test
@@ -152,5 +156,14 @@ class JUnitTests {
 
 	}
 	
+	@Test
+	void SearchforBook() {
+		SearchforBook search = new SearchforBook();
+		bookmain booklist = new bookmain();
+		ArrayList<Book> b = booklist.getList();
+		String title = "Harry Potter: The Goblet of Fire";
+		assertTrue(title, search.checkBook(title));
+		
+	}
 
 }

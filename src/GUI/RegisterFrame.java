@@ -77,6 +77,7 @@ public class RegisterFrame extends Template {
         
         //USERNAME_FIELD
         usernameField = new JTextField();
+        usernameField.setText("Username");
         //usernameField.setColumns(10);
         usernameField.setPreferredSize(new Dimension(338, 41));
         Dimension userSize = usernameField.getPreferredSize();
@@ -85,12 +86,14 @@ public class RegisterFrame extends Template {
         
         //PASSWORD_FIELD
         passwordField = new JTextField();
+        passwordField.setText("Password");
         //passwordField.setColumns(10);
         passwordField.setPreferredSize(new Dimension(338, 41));
         Dimension passwordSize = passwordField.getPreferredSize();
         
         //EMAIL_FIELD
         emailField = new JTextField();
+        emailField.setText("Email");
         //emailField.setColumns(10);
         emailField.setPreferredSize(new Dimension(338, 41));
         Dimension emailSize = emailField.getPreferredSize();
@@ -121,6 +124,7 @@ public class RegisterFrame extends Template {
         			printWriter.println(usernameField.getText());
             		printWriter.println(emailField.getText());
             		printWriter.println(passwordField.getText());
+            		printWriter.close();
         		} catch (IOException ex) {
         			
         		}

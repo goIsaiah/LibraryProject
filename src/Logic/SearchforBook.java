@@ -5,13 +5,12 @@ import Databases.bookmain;
 import DomainObjects.Book;
 public class SearchforBook {
 private String query;
-private bookmain b;
+private bookmain b = new bookmain();
 
 
 
 public SearchforBook() {
-	bookmain b = new bookmain();
-	ArrayList<Book> Books = b.getList(); 
+	
 }
 
 public Boolean checkBook(String q) {
