@@ -27,6 +27,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import DomainObjects.User;
 
 public class RegisterFrame extends Template {
 
@@ -125,6 +126,7 @@ public class RegisterFrame extends Template {
             		printWriter.println(emailField.getText());
             		printWriter.println(passwordField.getText());
             		printWriter.close();
+            		User user = new User(usernameField.getText(), passwordField.getText(), emailField.getText());
         		} catch (IOException ex) {
         			
         		}
