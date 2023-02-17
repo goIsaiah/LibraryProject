@@ -85,6 +85,12 @@ public class Template extends JFrame {
 		JButton regButton = regPanel.getRegisterButton();
 		regButton.addActionListener(e -> showPanel("Main")); 
 	}
+	
+	/*
+	private void registerText(RegisterFrame regPanel) {
+		
+	}
+	*/
 
 	private void showPanel(String string) {
 		CardLayout cardLayout = (CardLayout) panelContainer.getLayout();

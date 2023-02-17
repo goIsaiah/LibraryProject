@@ -97,21 +97,21 @@ public class RegisterFrame extends JPanel {
         
         registerButton = new JButton("Register");
         registerButton.setBounds(57, 682, 85, 21);
-//        registerButton.addActionListener(new ActionListener() {
-//        	public void actionPerformed(ActionEvent e) {
-//        		File file = new File("userDatabase.txt");
-//        		PrintWriter printWriter;
-//        		try {
-//        			printWriter = new PrintWriter(new FileWriter(file, true));
-//        			printWriter.println(usernameField.getText());
-//            		printWriter.println(emailField.getText());
-//            		printWriter.println(passwordField.getText());
-//            		printWriter.close();
-//        		} catch (IOException ex) {
-//        			
-//        		}
-//        	}
-//        });
+        registerButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		File file = new File("userDatabase.txt");
+        		PrintWriter printWriter;
+        		try {
+        			printWriter = new PrintWriter(new FileWriter(file, true));
+        			printWriter.println(usernameField.getText());
+            		printWriter.println(emailField.getText());
+            		printWriter.println(passwordField.getText());
+            		printWriter.close();
+        		} catch (IOException ex) {
+        			
+        		}
+        	}
+        });
 
         add(registerButton);
         
@@ -156,4 +156,10 @@ public class RegisterFrame extends JPanel {
 	public JButton getRegisterButton() {
 		return registerButton;
 	}
+	
+	/*
+	public JTextField getUsername() {
+		return 
+	}
+	*/
 }
