@@ -36,8 +36,6 @@ class JUnitTests {
 		assertTrue(a.authenticated(a.correctName("abbey"), a.correctPassword("abbey123")));
 		assertFalse(a.authenticated(a.correctName("abbey"), a.correctPassword("abbey1234")));
 		assertFalse(a.authenticated(a.correctName("jimmy"), a.correctPassword("abbey123")));
-
-
 	}
 
 	@Test
