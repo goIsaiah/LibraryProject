@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -11,36 +12,34 @@ import javax.swing.*;
 //import DomainObjects.User;
 import net.miginfocom.swing.MigLayout;
 
-public class Profile {
-	private static Template temp = new Template(); 
-	private Container container = temp.getContentPane();
-	
+public class Profile extends JPanel{
 
-	public Profile(Template template) {
+	public Profile() {
 		
-        JPanel content = new JPanel(new MigLayout("", "[]20[]200[]", "[]30[]"));
-        content.setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
-        content.setBackground(Color.white);
-        container.add(content, BorderLayout.CENTER);
+	}
+	
+	public Profile(Component component) {
+		
+		setLayout(new MigLayout("", "[]30[]", "[]30[]"));
+        setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
+        setBackground(Color.white);
 
         //BOOKMATE_LABEL
         JLabel label = new JLabel("BookMate");
         label.setFont(new Font(Font.SANS_SERIF, Font.BOLD,30));
-        content.add(label, "cell 0 0");
+        add(label, "cell 0 0");
         
-        
-        //SEARCH_BAR
-        content.add(temp.searchBar(), "cell 2 0");
         
         // PROFILE PHOTO
         JPanel photo = addProfilePhoto();
-        content.add(photo, "cell 0 1");
+        add(photo, "cell 0 1");
         JPanel userInfo = addProfileInfo(); 
-        content.add(userInfo , "cell 1 1");
+        add(userInfo , "cell 1 1");
+        add(component, "cell 2 0");
         
-       temp.closeOP();
 	}
 	
+
 	public JPanel addContentPanel() {
 		return new JPanel(new MigLayout("", "[]20[]200[]", "[]30[]"));
 	}
@@ -83,13 +82,6 @@ public class Profile {
 		
 		return info ; 
 		
-	}
-	
-	
-	
-	public static void main(String[] args) {
-//		System.out.println("Hello");
-		new Profile(temp);
 	}
 	
 	

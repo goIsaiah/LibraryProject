@@ -2,7 +2,6 @@ package GUI;
 
 public class LibraryUI {
 	
-	private Template template = new Template(); 
 	
 	public LibraryUI() {
 		init();
@@ -14,8 +13,7 @@ public class LibraryUI {
 	
 	private void init() {
 		try {
-			template.closeOP();
-			 new Profile(template);
+			 new Template();
 		} catch (Exception e) {
 		} 
 	}
