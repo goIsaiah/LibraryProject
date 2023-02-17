@@ -1,0 +1,25 @@
+﻿Meeting 1: Wednesday, February 8th, 2023
+
+
+* Group members present: -Isaiah, Sathira, Vince, Abbey
+* Tasks completed today
+   * Started group log
+   * Finished the architecture sketch (link: https://app.diagrams.net/#G1WaKYVchVge2UGp_aNj7k2ToYPRLotawL)
+   * Dividing up roles equally for iteration 1
+   * Working on the login and registration
+   * Finished book class and User class
+
+﻿Meeting 2: Tuesday, February 14th, 2023
+ 
+ * Group members present: -Isaiah, Sathira, Vince
+ *Tasks completed: 
+   * Contuned to work on the GUI
+   
+   
+﻿Meeting 3: Wednesday, February 15th, 2023   
+ * Group members present: -Isaiah, Sathira, Vince, Abbey, Jet
+ * Tasks completed: 
+   * Continued to work on the GUI
+   * Wrote some JUnit test cases for Google JSON
+   * Worked on the Wiki
+   * 
