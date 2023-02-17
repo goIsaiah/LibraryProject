@@ -29,7 +29,7 @@ public class UserDatabase implements Database<User> {
 
 	
 	@Override
-	public boolean addData(User user) throws Excepion{
+	public boolean addData(User user) throws Exception{
 		if(users.contains(user)) throw new Exception(); 
 		else {
 			users.add(user);
