@@ -22,3 +22,6 @@ Passwordtest
 Usernametest3
 Emailtest3
 Passwordtest3
+Username
+Email
+Password

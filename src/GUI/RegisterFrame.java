@@ -118,48 +118,10 @@ public class RegisterFrame extends JPanel {
         JSeparator separator_2_1 = new JSeparator();
         separator_2_1.setBounds(57, 540, 338, 131);
         add(separator_2_1);
-        
-		
-		/*
-		setTitle("BookMate");
-        
-        //ICON
-        URL iconUrl = getClass().getResource("/Icon.png");
-        ImageIcon icon = new ImageIcon(iconUrl);
-        setIconImage(icon.getImage());
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1080, 607);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		
-		//SIDEBAR
-        Container container = getContentPane();
-        container.setLayout(new BorderLayout());
-        JPanel sidebar = new JPanel();
-        sidebar.setPreferredSize(new Dimension(75, 0));
-        sidebar.setBackground(Color.decode("#0B6BCC"));
-        container.add(sidebar, BorderLayout.WEST);
-        
-        JPanel content = new JPanel(new MigLayout("", "[]30[]", "[]30[]"));
-        content.setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
-        JLabel label = new JLabel("BookMate");
-        label.setFont(new Font(Font.SANS_SERIF, Font.BOLD,30));
-        content.add(label, "cell 0 0");
-        container.add(content, BorderLayout.CENTER);
-
-		setContentPane(contentPane);
-		closeOP();
-		*/
 	}
 	
 	public JButton getRegisterButton() {
 		return registerButton;
 	}
-	
-	/*
-	public JTextField getUsername() {
-		return 
-	}
-	*/
+
 }
