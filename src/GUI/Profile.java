@@ -59,8 +59,6 @@ public class Profile extends JPanel{
 		JLabel profileName = new JLabel("Profile Name") ; 
 		JLabel email = new JLabel("email@eecs.yorku.ca"); 
 		JLabel numRead = new JLabel("0"); 
-//		numRead.setHorizontalAlignment(SwingConstants.CENTER);
-//		numRead.setVerticalAlignment(SwingConstants.CENTER);
 		
 		JLabel numFollowers = new JLabel("0");
 		JLabel noRead = new JLabel("#Read");
