@@ -58,18 +58,20 @@ public class Template extends JFrame {
 		//Side Buttons
 		JButton home = sideButton("/home.png"); 
 		JButton profile = sideButton("/profile.png"); 
+		JButton register = sideButton("/profile.png"); 
 		sidebar.add(home, "cell 0 1");
 		sidebar.add(profile , "cell 0 2");
-		
+		sidebar.add(register , "cell 0 3");
 		//Side Button on Click
 		home.addActionListener(e -> showPanel("Main")); 
 		profile.addActionListener(e -> showPanel("Profile")); 
+		register.addActionListener(e -> showPanel("Register")); 
 		
 		//Panel Container 
 		panelContainer = new JPanel(new CardLayout());
 		panelContainer.add(new MainPage(searchBar()), "Main");
         panelContainer.add(new Profile(searchBar()), "Profile");
-        
+        panelContainer.add(new RegisterFrame(searchBar()), "Register");
         container.add(panelContainer, BorderLayout.CENTER);
 		closeOP();
 		
