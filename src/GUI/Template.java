@@ -58,7 +58,7 @@ public class Template extends JFrame {
 		//Side Buttons
 		JButton home = sideButton("/home.png"); 
 		JButton profile = sideButton("/profile.png"); 
-		JButton register = sideButton("/profile.png"); 
+		JButton register = sideButton("/settings.png"); 
 		sidebar.add(home, "cell 0 1");
 		sidebar.add(profile , "cell 0 2");
 		sidebar.add(register , "cell 0 3");
@@ -67,16 +67,25 @@ public class Template extends JFrame {
 		profile.addActionListener(e -> showPanel("Profile")); 
 		register.addActionListener(e -> showPanel("Register")); 
 		
+		//Register Object
+		RegisterFrame regPanel = new RegisterFrame(searchBar());
+		registerCall(regPanel);
+		
 		//Panel Container 
 		panelContainer = new JPanel(new CardLayout());
 		panelContainer.add(new MainPage(searchBar()), "Main");
         panelContainer.add(new Profile(searchBar()), "Profile");
-        panelContainer.add(new RegisterFrame(searchBar()), "Register");
+        panelContainer.add(regPanel, "Register");
         container.add(panelContainer, BorderLayout.CENTER);
 		closeOP();
 		
 	}
 	
+	private void registerCall(RegisterFrame regPanel) {
+		JButton regButton = regPanel.getRegisterButton();
+		regButton.addActionListener(e -> showPanel("Main")); 
+	}
+
 	private void showPanel(String string) {
 		CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
         cardLayout.show(panelContainer, string);

@@ -34,6 +34,7 @@ public class RegisterFrame extends JPanel {
 	private JTextField usernameField;
 	private JTextField emailField;
 	private JTextField passwordField;
+	private JButton registerButton;
 	
 	public RegisterFrame() {
 		
@@ -94,23 +95,24 @@ public class RegisterFrame extends JPanel {
         separator_2.setBounds(57, 350, 338, 131);
         add(separator_2);
         
-        JButton registerButton = new JButton("Register");
-        registerButton.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		File file = new File("userDatabase.txt");
-        		PrintWriter printWriter;
-        		try {
-        			printWriter = new PrintWriter(new FileWriter(file, true));
-        			printWriter.println(usernameField.getText());
-            		printWriter.println(emailField.getText());
-            		printWriter.println(passwordField.getText());
-            		printWriter.close();
-        		} catch (IOException ex) {
-        			
-        		}
-        	}
-        });
+        registerButton = new JButton("Register");
         registerButton.setBounds(57, 682, 85, 21);
+//        registerButton.addActionListener(new ActionListener() {
+//        	public void actionPerformed(ActionEvent e) {
+//        		File file = new File("userDatabase.txt");
+//        		PrintWriter printWriter;
+//        		try {
+//        			printWriter = new PrintWriter(new FileWriter(file, true));
+//        			printWriter.println(usernameField.getText());
+//            		printWriter.println(emailField.getText());
+//            		printWriter.println(passwordField.getText());
+//            		printWriter.close();
+//        		} catch (IOException ex) {
+//        			
+//        		}
+//        	}
+//        });
+
         add(registerButton);
         
         JSeparator separator_2_1 = new JSeparator();
@@ -149,5 +151,9 @@ public class RegisterFrame extends JPanel {
 		setContentPane(contentPane);
 		closeOP();
 		*/
+	}
+	
+	public JButton getRegisterButton() {
+		return registerButton;
 	}
 }
