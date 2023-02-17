@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -28,52 +29,31 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class RegisterFrame extends Template {
+public class RegisterFrame extends JPanel {
 
-	private JPanel contentPane;
-	private Container container = getContentPane();
 	private JTextField usernameField;
 	private JTextField emailField;
 	private JTextField passwordField;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RegisterFrame frame = new RegisterFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	
-	/**
-	 * Create the frame.
-	 */
 	public RegisterFrame() {
 		
-		super();
+	}
+	
+	public RegisterFrame(Component component) {
 		
     	//CONTENT_FRAME
-        JPanel content = new JPanel();
-        content.setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
-        content.setBackground(Color.white);
-        container.add(content, BorderLayout.CENTER);
-        content.setLayout(null);
+        setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
+        setBackground(Color.white);
+        setLayout(null);
         
         //BOOKMATE_LABEL
         JLabel label = new JLabel("BookMate");
         label.setBounds(57, 39, 146, 39);
         label.setFont(new Font(Font.SANS_SERIF, Font.BOLD,30));
-        content.add(label);
+        add(label);
         
         //SEARCH_BAR
-        content.add(searchBar(), "cell 1 0");
+        add(component, "cell 1 0");
         
         //USERNAME_FIELD
         usernameField = new JTextField();
@@ -82,7 +62,7 @@ public class RegisterFrame extends Template {
         usernameField.setPreferredSize(new Dimension(338, 41));
         Dimension userSize = usernameField.getPreferredSize();
         usernameField.setBounds(57, 109, 338, 41);
-        content.add(usernameField);
+        add(usernameField);
         
         //PASSWORD_FIELD
         passwordField = new JTextField();
@@ -98,21 +78,21 @@ public class RegisterFrame extends Template {
         emailField.setPreferredSize(new Dimension(338, 41));
         Dimension emailSize = emailField.getPreferredSize();
         emailField.setBounds(57, 299, 338, 41);
-        content.add(emailField);
+        add(emailField);
         passwordField.setBounds(57, 489, 338, 41);
-        content.add(passwordField);
+        add(passwordField);
         
         JSeparator separator = new JSeparator();
         separator.setBounds(57, 158, 338, 131);
-        content.add(separator);
+        add(separator);
         
         JSeparator separator_1 = new JSeparator();
         separator_1.setBounds(57, 365, 1, 2);
-        content.add(separator_1);
+        add(separator_1);
         
         JSeparator separator_2 = new JSeparator();
         separator_2.setBounds(57, 350, 338, 131);
-        content.add(separator_2);
+        add(separator_2);
         
         JButton registerButton = new JButton("Register");
         registerButton.addActionListener(new ActionListener() {
@@ -131,13 +111,12 @@ public class RegisterFrame extends Template {
         	}
         });
         registerButton.setBounds(57, 682, 85, 21);
-        content.add(registerButton);
+        add(registerButton);
         
         JSeparator separator_2_1 = new JSeparator();
         separator_2_1.setBounds(57, 540, 338, 131);
-        content.add(separator_2_1);
+        add(separator_2_1);
         
-        closeOP();
 		
 		/*
 		setTitle("BookMate");
