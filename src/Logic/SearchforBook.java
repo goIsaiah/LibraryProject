@@ -22,7 +22,7 @@ public Boolean checkBook(String q) {
 	ArrayList<Book> Books = b.getList(); 
 	
 	for(int i = 0; i <= Books.size()-1; i++) {
-		String a = Books.get(i).getTitle();
+		String a = Books.get(i).getTitle(); 
 		if(q.equals(a)) {
 			searchResult = Books.get(i);
 			return true;
