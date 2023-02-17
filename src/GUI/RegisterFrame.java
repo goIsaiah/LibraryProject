@@ -19,6 +19,14 @@ import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextField;
 import javax.swing.JSeparator;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class RegisterFrame extends Template {
 
@@ -102,6 +110,28 @@ public class RegisterFrame extends Template {
         JSeparator separator_2 = new JSeparator();
         separator_2.setBounds(57, 350, 338, 131);
         content.add(separator_2);
+        
+        JButton registerButton = new JButton("Register");
+        registerButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		File file = new File("userDatabase.txt");
+        		PrintWriter printWriter;
+        		try {
+        			printWriter = new PrintWriter(new FileWriter(file, true));
+        			printWriter.println(usernameField.getText());
+            		printWriter.println(emailField.getText());
+            		printWriter.println(passwordField.getText());
+        		} catch (IOException ex) {
+        			
+        		}
+        	}
+        });
+        registerButton.setBounds(57, 682, 85, 21);
+        content.add(registerButton);
+        
+        JSeparator separator_2_1 = new JSeparator();
+        separator_2_1.setBounds(57, 540, 338, 131);
+        content.add(separator_2_1);
         
         closeOP();
 		
