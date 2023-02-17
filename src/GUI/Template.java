@@ -1,7 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
-
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -11,7 +11,6 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,20 +19,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-
 import net.miginfocom.swing.MigLayout;
-
 import Logic.SearchforBook;
 
 public class Template extends JFrame {
-
+	private JPanel panelContainer;
 	public Template() {
 		// WINDOW_NAME
 		setTitle("BookMate");
+		
 		// ICON
 		URL iconUrl = getClass().getResource("/Icon.png");
 		ImageIcon icon = new ImageIcon(iconUrl);
 		setIconImage(icon.getImage());
+		
 		// SIDEBAR
 		Container container = getContentPane();
 		container.setLayout(new BorderLayout());
@@ -41,9 +40,8 @@ public class Template extends JFrame {
 		sidebar.setPreferredSize(new Dimension(75, 0));
 		sidebar.setBackground(Color.decode("#0B6BCC"));
 		sidebar.setLayout(new MigLayout("wrap", "[]", "[]825[]10[]")); 
-		
-		
 		container.add(sidebar, BorderLayout.WEST);
+		
 		// HAMBURGER_MENU
 		URL hamURL = getClass().getResource("/Ham.png");
 		ImageIcon hamIcon = new ImageIcon(hamURL);
@@ -57,34 +55,33 @@ public class Template extends JFrame {
 		hamburger.setContentAreaFilled(false);
 		sidebar.add(hamburger , "cell 0 0");
 		
+		//Side Buttons
 		JButton home = sideButton("/home.png"); 
 		JButton profile = sideButton("/profile.png"); 
-		
-		profile.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new Profile(new Template());
-			}
-		}); 
-		
-		home.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new MainPage();
-			}
-			
-		});
-		
-		
+		JButton register = sideButton("/profile.png"); 
 		sidebar.add(home, "cell 0 1");
 		sidebar.add(profile , "cell 0 2");
+		sidebar.add(register , "cell 0 3");
+		//Side Button on Click
+		home.addActionListener(e -> showPanel("Main")); 
+		profile.addActionListener(e -> showPanel("Profile")); 
+		register.addActionListener(e -> showPanel("Register")); 
 		
-
+		//Panel Container 
+		panelContainer = new JPanel(new CardLayout());
+		panelContainer.add(new MainPage(searchBar()), "Main");
+        panelContainer.add(new Profile(searchBar()), "Profile");
+        panelContainer.add(new RegisterFrame(searchBar()), "Register");
+        container.add(panelContainer, BorderLayout.CENTER);
+		closeOP();
+		
 	}
 	
-	
-	
+	private void showPanel(String string) {
+		CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
+        cardLayout.show(panelContainer, string);
+	}
+
 	private JButton sideButton(String s) {
 		
 		URL homeUrl = getClass().getResource(s);
@@ -97,14 +94,10 @@ public class Template extends JFrame {
 		home.setPreferredSize(new Dimension(35, 35));
 		home.setBorder(null);
 		home.setContentAreaFilled(false);
-		
 		return home ; 
-		
 		
 	}
 	
-	
-
  	public void closeOP() {
 		setSize(1920, 1080);
 		setLocationRelativeTo(null);
@@ -135,23 +128,13 @@ public class Template extends JFrame {
         JPanel searchPanel = new JPanel(new MigLayout("", "[]10[]"));
         searchPanel.add(searchIconLabel,"cell 0 0");
         searchPanel.add(searchField, "cell 1 0");
-        
        
- 
-
         //SEARCH_BUTTON
         JButton searchButton = new JButton("Search");
         searchButton.setBorderPainted(false);
         searchButton.setContentAreaFilled(false);
         searchButton.setFocusPainted(false);
         searchPanel.add(searchButton, "cell 2 0");
-    /*    searchButton.addActionListener(e -> { 
-        	String query =  searchField.getText();
-        	SearchforBook b = new SearchforBook();
-        	if(b.checkBook(query)== true) {
-        		new Template();
-        	}
-        	*/
         searchButton.setEnabled(true);
         searchButton.addActionListener(new ActionListener(){
     			@Override
@@ -159,13 +142,11 @@ public class Template extends JFrame {
     				String query =  searchField.getText();
     	        	SearchforBook b = new SearchforBook();
     	        	if(b.checkBook(query)== true) {
-    	        		new MainPage();
+    	        		panelContainer.add(new MainPage(b.getSearchBook(), searchPanel), "SearchMain");
+    	        		showPanel("SearchMain");
     			}
     		}; 
         });
-        
-
-        
 		return searchPanel;
 
 	}
