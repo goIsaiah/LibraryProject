@@ -19,16 +19,17 @@ public class UserDatabase {
 		if(users.contains(user)) {
 			return users.get(users.indexOf(user));
 		}
+		return null;
 	}
 
 	public boolean addUser(User user) throws Exception{
-		if(users.contains(user))throw new Exception(); 
+		if(users.contains(user)) throw new Exception(); 
 		
 		else {
 			users.add(user);
 			return true;
 		}
-		return false; 
+		 
 		
 	}
 	

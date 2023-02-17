@@ -1,14 +1,17 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import net.miginfocom.swing.MigLayout;
@@ -16,6 +19,8 @@ import net.miginfocom.swing.MigLayout;
 public class MainPage {
 	private Template temp = new Template();
 	private Container container = temp.getContentPane();
+	 private JTextField searchField;
+	  private JButton searchButton;
     public MainPage() {
     	//CONTENT_FRAME
         JPanel content = new JPanel(new MigLayout("", "[]30[]", "[]30[]"));
@@ -29,7 +34,12 @@ public class MainPage {
         content.add(label, "cell 0 0");
 
         //SEARCH_BAR
-        content.add(temp.searchBar(), "cell 1 0");
+       content.add(temp.searchBar(), "cell 1 0");
+        
+       
+     
+      
+        
 
         //MAIN_PAGE_RESULTS
         Border border = BorderFactory.createLineBorder(Color.DARK_GRAY, 1);
