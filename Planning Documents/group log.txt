@@ -23,3 +23,16 @@
    * Wrote some JUnit test cases for Google JSON
    * Worked on the Wiki
    * 
+   
+﻿Meeting 4: Thursday, February 16th, 2023
+ * Group members present: -Isaiah, Sathira, Vince, Jet
+ * Tasks completed:
+   * Continued working on GUI
+   * Continued working on Wiki
+
+*Meeting 5: Friday, February 17th, 2023
+ * Group members present: -Isaiah, Sathira, Vince, Jet
+ * Tasks completed:
+   * Changed frames to extend JPanel instead of Template
+   * Found an error with the sidebar; buttons on the bottom might not appear if the scale of your device is too high
+   * Creating an account is added to the database text file
