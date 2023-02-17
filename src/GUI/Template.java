@@ -39,7 +39,8 @@ public class Template extends JFrame {
 		JPanel sidebar = new JPanel();
 		sidebar.setPreferredSize(new Dimension(75, 0));
 		sidebar.setBackground(Color.decode("#0B6BCC"));
-		sidebar.setLayout(new MigLayout("wrap", "[]", "[]825[]10[]")); 
+		sidebar.setLayout(new MigLayout("wrap", "[]", "[]push[]5[]5[]")); 
+		sidebar.setBorder(BorderFactory.createEmptyBorder(0, 10, 30, 0));
 		container.add(sidebar, BorderLayout.WEST);
 		
 		// HAMBURGER_MENU
