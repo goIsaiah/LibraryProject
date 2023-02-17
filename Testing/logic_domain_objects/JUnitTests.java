@@ -1,5 +1,6 @@
 package logic_domain_objects;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -163,6 +164,7 @@ class JUnitTests {
 		ArrayList<Book> b = booklist.getList();
 		String title = "Harry Potter: The Goblet of Fire";
 		assertTrue(title, search.checkBook(title));
+	
 		
 	}
 
