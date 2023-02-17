@@ -3,7 +3,7 @@ package Databases;
 import java.util.ArrayList;
 
 import DomainObjects.User;
-public class UserDatabase {
+public class UserDatabase implements Database<User> {
 	
 	private static ArrayList<User> users = new ArrayList<User>();
 	
@@ -21,27 +21,32 @@ public class UserDatabase {
 		}
 		return null;
 	}
+	
+	@Override 
+	public User getData(String s) {
+		return null;
+	}
 
-	public boolean addUser(User user) throws Exception{
+	
+	@Override
+	public boolean addData(User user) {
 		if(users.contains(user)) throw new Exception(); 
 		
 		else {
 			users.add(user);
 			return true;
 		}
-		 
-		
 	}
+
 	
-	public boolean removeUser(User user) {
+	@Override 
+	public boolean removeData(User user) {
 		if(users.contains(user)) {
 			users.remove(users.indexOf(user));
 			return true;
 		}
 		return false;
 	}
-	
-
 	
 
 }
