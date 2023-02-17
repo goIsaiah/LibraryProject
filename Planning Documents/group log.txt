@@ -31,7 +31,7 @@
    * Continued working on Wiki
 
 *Meeting 5: Friday, February 17th, 2023
- * Group members present: -Isaiah, Sathira, Vince, Jet
+ * Group members present: -Isaiah, Sathira, Vince, Jet, Abbey
  * Tasks completed:
    * Changed frames to extend JPanel instead of Template
    * Found an error with the sidebar; buttons on the bottom might not appear if the scale of your device is too high
