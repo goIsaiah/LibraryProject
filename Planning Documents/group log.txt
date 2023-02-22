@@ -41,4 +41,7 @@
 * Group members present: -Isaiah, Sathira, Vince, Abbey
 * Tasks completed: 
    * Started working on the UML 
-   * Delegating tasks for Iteration 2
+      *GUI
+      *Logic
+      *Domain Objects 
+More to be added on the next meeting. 
