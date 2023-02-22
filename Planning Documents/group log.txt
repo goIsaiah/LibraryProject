@@ -36,3 +36,12 @@
    * Changed frames to extend JPanel instead of Template
    * Found an error with the sidebar; buttons on the bottom might not appear if the scale of your device is too high
    * Creating an account is added to the database text file
+   
+*Meeting 6: Tuesday, February 21st, 2023
+* Group members present: -Isaiah, Sathira, Vince, Abbey
+* Tasks completed: 
+   * Started working on the UML 
+      *GUI
+      *Logic
+      *Domain Objects 
+More to be added on the next meeting. 
