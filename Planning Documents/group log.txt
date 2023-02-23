@@ -45,3 +45,9 @@
       *Logic
       *Domain Objects 
 More to be added on the next meeting. 
+
+*Meeting 7: Thursday, February 23rd, 2023
+* Group members present: -Isaiah, Sathira, Vince
+* Tasks completed:
+  * Implemented mySQL database
+  * Created new welcome page
