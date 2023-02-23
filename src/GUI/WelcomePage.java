@@ -43,12 +43,22 @@ public class WelcomePage extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnNewButton_1 = new JButton("Login");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login login = new Login();
+				login.setVisible(true);
+				dispose();
+			}
+		});
 		btnNewButton_1.setBounds(239, 148, 171, 21);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton = new JButton("Register");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Register register = new Register();
+				register.setVisible(true);
+				dispose();
 			}
 		});
 		btnNewButton.setBounds(47, 148, 135, 21);
