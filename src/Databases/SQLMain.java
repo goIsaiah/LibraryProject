@@ -5,9 +5,9 @@ import java . sql .*;
 public class SQLMain {
 
 	public static void main(String[] args) {
-		String url = "jdbc:mysql://localhost:3306/example " ;
+		String url = "jdbc:mysql://localhost:3306/example" ;
 		String user = "root" ;
-		String password = "1977" ;
+		String password = "Fade2black" ;
 		String query = "show tables;" ;
 		try {
 			Connection con = DriverManager.getConnection ( url , user , password ) ;
@@ -18,7 +18,7 @@ public class SQLMain {
 				for ( int i = 1; i < 2; i ++) {
 					data += data + result . getString ( i ) ;
 				} 
-				System . out . println (data) ;
+				System.out.println(data) ;
 				}
 			}catch (SQLException e) {
 			e.printStackTrace();
