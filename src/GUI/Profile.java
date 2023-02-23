@@ -14,11 +14,8 @@ import net.miginfocom.swing.MigLayout;
 
 public class Profile extends JPanel{
 
-	public Profile() {
-		
-	}
 	
-	public Profile(Component component) {
+	public Profile() {
 		
 		setLayout(new MigLayout("", "[]30[]", "[]30[]"));
         setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
@@ -35,7 +32,6 @@ public class Profile extends JPanel{
         add(photo, "cell 0 1");
         JPanel userInfo = addProfileInfo(); 
         add(userInfo , "cell 1 1");
-        add(component, "cell 2 0");
         
 	}
 	
@@ -59,8 +55,6 @@ public class Profile extends JPanel{
 		JLabel profileName = new JLabel("Profile Name") ; 
 		JLabel email = new JLabel("email@eecs.yorku.ca"); 
 		JLabel numRead = new JLabel("0"); 
-//		numRead.setHorizontalAlignment(SwingConstants.CENTER);
-//		numRead.setVerticalAlignment(SwingConstants.CENTER);
 		
 		JLabel numFollowers = new JLabel("0");
 		JLabel noRead = new JLabel("#Read");

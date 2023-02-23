@@ -1,30 +1,18 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.net.URL;
-
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextField;
 import javax.swing.JSeparator;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,10 +26,6 @@ public class RegisterFrame extends JPanel {
 	
 	public RegisterFrame() {
 		
-	}
-	
-	public RegisterFrame(Component component) {
-		
     	//CONTENT_FRAME
         setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
         setBackground(Color.white);
@@ -52,9 +36,6 @@ public class RegisterFrame extends JPanel {
         label.setBounds(57, 39, 146, 39);
         label.setFont(new Font(Font.SANS_SERIF, Font.BOLD,30));
         add(label);
-        
-        //SEARCH_BAR
-        add(component, "cell 1 0");
         
         //USERNAME_FIELD
         usernameField = new JTextField();
@@ -118,48 +99,10 @@ public class RegisterFrame extends JPanel {
         JSeparator separator_2_1 = new JSeparator();
         separator_2_1.setBounds(57, 540, 338, 131);
         add(separator_2_1);
-        
-		
-		/*
-		setTitle("BookMate");
-        
-        //ICON
-        URL iconUrl = getClass().getResource("/Icon.png");
-        ImageIcon icon = new ImageIcon(iconUrl);
-        setIconImage(icon.getImage());
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1080, 607);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		
-		//SIDEBAR
-        Container container = getContentPane();
-        container.setLayout(new BorderLayout());
-        JPanel sidebar = new JPanel();
-        sidebar.setPreferredSize(new Dimension(75, 0));
-        sidebar.setBackground(Color.decode("#0B6BCC"));
-        container.add(sidebar, BorderLayout.WEST);
-        
-        JPanel content = new JPanel(new MigLayout("", "[]30[]", "[]30[]"));
-        content.setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
-        JLabel label = new JLabel("BookMate");
-        label.setFont(new Font(Font.SANS_SERIF, Font.BOLD,30));
-        content.add(label, "cell 0 0");
-        container.add(content, BorderLayout.CENTER);
-
-		setContentPane(contentPane);
-		closeOP();
-		*/
 	}
 	
 	public JButton getRegisterButton() {
 		return registerButton;
 	}
-	
-	/*
-	public JTextField getUsername() {
-		return 
-	}
-	*/
+
 }

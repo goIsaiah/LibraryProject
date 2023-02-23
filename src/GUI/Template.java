@@ -24,6 +24,7 @@ import Logic.SearchforBook;
 
 public class Template extends JFrame {
 	private JPanel panelContainer;
+	private Component searchPanel;
 	public Template() {
 		// WINDOW_NAME
 		setTitle("BookMate");
@@ -68,16 +69,20 @@ public class Template extends JFrame {
 		profile.addActionListener(e -> showPanel("Profile")); 
 		register.addActionListener(e -> showPanel("Register")); 
 		
+		//SEARCH_BAR
+		searchPanel = searchBar();
+		
 		//Register Object
-		RegisterFrame regPanel = new RegisterFrame(searchBar());
+		RegisterFrame regPanel = new RegisterFrame();
 		registerCall(regPanel);
 		
 		//Panel Container 
 		panelContainer = new JPanel(new CardLayout());
-		panelContainer.add(new MainPage(searchBar()), "Main");
-        panelContainer.add(new Profile(searchBar()), "Profile");
+		panelContainer.add(new MainPage(), "Main");
+        panelContainer.add(new Profile(), "Profile");
         panelContainer.add(regPanel, "Register");
         container.add(panelContainer, BorderLayout.CENTER);
+        container.add(searchPanel, BorderLayout.EAST);
 		closeOP();
 		
 	}
@@ -86,16 +91,11 @@ public class Template extends JFrame {
 		JButton regButton = regPanel.getRegisterButton();
 		regButton.addActionListener(e -> showPanel("Main")); 
 	}
-	
-	/*
-	private void registerText(RegisterFrame regPanel) {
-		
-	}
-	*/
 
 	private void showPanel(String string) {
 		CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
         cardLayout.show(panelContainer, string);
+        add(searchPanel, BorderLayout.EAST);
 	}
 
 	private JButton sideButton(String s) {
@@ -158,7 +158,7 @@ public class Template extends JFrame {
     				String query =  searchField.getText();
     	        	SearchforBook b = new SearchforBook();
     	        	if(b.checkBook(query)== true) {
-    	        		panelContainer.add(new MainPage(b.getSearchBook(), searchPanel), "SearchMain");
+    	        		panelContainer.add(new MainPage(b.getSearchBook()), "SearchMain");
     	        		showPanel("SearchMain");
     			}
     		}; 
