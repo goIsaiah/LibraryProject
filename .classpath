@@ -11,5 +11,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="resources/JSON.jar"/>
 	<classpathentry kind="lib" path="resources/MigLayout.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Sathira Williams/Downloads/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
