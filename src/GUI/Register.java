@@ -14,6 +14,7 @@ public class Register extends JFrame {
 	private JPanel contentPane;
 	private JTextField usernameField;
 	private JPasswordField passwordField;
+	private JTextField emailField;
 
 	/**
 	 * Launch the application.
@@ -59,6 +60,13 @@ public class Register extends JFrame {
 		passwordField = new JPasswordField();
 		passwordField.setBounds(104, 118, 134, 19);
 		contentPane.add(passwordField);
+		
+		JLabel emailLabel = new JLabel("Email:");
+		emailLabel.setBounds(44, 181, 100, 13);
+		contentPane.add(emailLabel);
+		
+		emailField = new JTextField();
+		emailField.setBounds();
 
 		setContentPane(contentPane);
 	}
