@@ -1,12 +1,8 @@
 groupLog for iteration 2
 
 Deligations:
-*text
+abbey: working on databases (creating tables for User and Book), working on displaying ratings and reviews of the books
 
-Meetings: dd/mm/yyyy; 
-- anovnaonraa;
-
-
-
+Meetings: 24/02/2023; 
 
 
