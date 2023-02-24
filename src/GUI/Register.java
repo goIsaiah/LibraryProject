@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.EventQueue;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -66,7 +67,12 @@ public class Register extends JFrame {
 		contentPane.add(emailLabel);
 		
 		emailField = new JTextField();
-		emailField.setBounds();
+		emailField.setBounds(104, 178, 134, 19);
+		contentPane.add(emailField);
+		
+		JButton btnNewButton = new JButton("Register");
+		btnNewButton.setBounds(44, 228, 85, 21);
+		contentPane.add(btnNewButton);
 
 		setContentPane(contentPane);
 	}
