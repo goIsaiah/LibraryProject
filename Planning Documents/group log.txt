@@ -1,53 +1,11 @@
-﻿Meeting 1: Wednesday, February 8th, 2023
+groupLog for iteration 2
+
+Deligations:
+*text
+
+Meetings: dd/mm/yyyy; 
 
 
-* Group members present: -Isaiah, Sathira, Vince, Abbey
-* Tasks completed today
-   * Started group log
-   * Finished the architecture sketch (link: https://app.diagrams.net/#G1WaKYVchVge2UGp_aNj7k2ToYPRLotawL)
-   * Dividing up roles equally for iteration 1
-   * Working on the login and registration
-   * Finished book class and User class
 
-﻿Meeting 2: Tuesday, February 14th, 2023
- 
- * Group members present: -Isaiah, Sathira, Vince
- *Tasks completed: 
-   * Contuned to work on the GUI
-   
-   
-﻿Meeting 3: Wednesday, February 15th, 2023   
- * Group members present: -Isaiah, Sathira, Vince, Abbey, Jet
- * Tasks completed: 
-   * Continued to work on the GUI
-   * Wrote some JUnit test cases for Google JSON
-   * Worked on the Wiki
-   * 
-   
-﻿Meeting 4: Thursday, February 16th, 2023
- * Group members present: -Isaiah, Sathira, Vince, Jet
- * Tasks completed:
-   * Continued working on GUI
-   * Continued working on Wiki
 
-*Meeting 5: Friday, February 17th, 2023
- * Group members present: -Isaiah, Sathira, Vince, Jet, Abbey
- * Tasks completed:
-   * Changed frames to extend JPanel instead of Template
-   * Found an error with the sidebar; buttons on the bottom might not appear if the scale of your device is too high
-   * Creating an account is added to the database text file
-   
-*Meeting 6: Tuesday, February 21st, 2023
-* Group members present: -Isaiah, Sathira, Vince, Abbey
-* Tasks completed: 
-   * Started working on the UML 
-      *GUI
-      *Logic
-      *Domain Objects 
-More to be added on the next meeting. 
 
-*Meeting 7: Thursday, February 23rd, 2023
-* Group members present: -Isaiah, Sathira, Vince
-* Tasks completed:
-  * Implemented mySQL database
-  * Created new welcome page
