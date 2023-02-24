@@ -10,6 +10,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import DomainObjects.User;
+
 public class Register extends JFrame {
 
 	private JPanel contentPane;
@@ -75,6 +77,18 @@ public class Register extends JFrame {
 		contentPane.add(btnNewButton);
 
 		setContentPane(contentPane);
+		
+		if (checkUser(usernameField.getText(), String.valueOf(passwordField.getPassword()), emailField.getText()) == true) {
+			// add user to database
+			User user = new User(usernameField.getText(), String.valueOf(passwordField.getPassword()), emailField.getText());
+			//new Template(user);
+			this.dispose();
+		}
+	}
+	
+	public boolean checkUser (String username, String password, String email) {
+		// Checks the database to see if the account already exists
+		return true;
 	}
 
 }
