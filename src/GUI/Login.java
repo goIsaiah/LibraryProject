@@ -45,7 +45,7 @@ public class Login extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Username:");
-		lblNewLabel.setBounds(44, 61, 50, 13);
+		lblNewLabel.setBounds(44, 61, 100, 13);
 		contentPane.add(lblNewLabel);
 		
 		textField = new JTextField();
@@ -54,7 +54,7 @@ public class Login extends JFrame {
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Password:");
-		lblNewLabel_1.setBounds(44, 121, 50, 13);
+		lblNewLabel_1.setBounds(44, 121, 100, 13);
 		contentPane.add(lblNewLabel_1);
 		
 		passwordField = new JPasswordField();
