@@ -1,4 +1,4 @@
-package sqldb;
+package sqlDB;
 
 import java.sql.SQLException;
 

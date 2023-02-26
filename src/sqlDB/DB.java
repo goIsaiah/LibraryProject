@@ -1,7 +1,11 @@
 package sqlDB;
 
 public interface DB {
-	public static String url = "jdbc:mysql://localhost:3306/bookmateD"; 
-	public static String user = root; 
-	public static String password = ""; 
+
+
+	public <E> void addItem(E item); 
+	public <E> void removeItem(E item); 
+	public <E> String getItem(E item);
+	public void setPassword(String psw);
+ 	
 }
