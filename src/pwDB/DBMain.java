@@ -110,5 +110,40 @@ public class DBMain {
 	    statement.setString(4, "0446310789");
 	    statement.setInt(5, 1813);
 	    statement.executeUpdate();
+	    
+	    statement.setInt(1, 4);
+	    statement.setString(2, "Harry Potter and the Sorcerer's Stone");
+	    statement.setString(3, "J. K. Rowling");
+	    statement.setString(4, "1338596705");
+	    statement.setInt(5, 2020);
+	    statement.executeUpdate();
+	    
+	    statement.setInt(1, 5);
+	    statement.setString(2, "Diary of a Wimpy Kid");
+	    statement.setString(3, "Jeff Kinney");
+	    statement.setString(4, "0141324902");
+	    statement.setInt(5, 2007);
+	    statement.executeUpdate();
+	    
+	    statement.setInt(1, 6);
+	    statement.setString(2, "The Great Gatsby");
+	    statement.setString(3, "F. Scott Fitzgerald");
+	    statement.setString(4, "9780743273565");
+	    statement.setInt(5, 1925);
+	    statement.executeUpdate();
+	    
+	    statement.setInt(1, 7);
+	    statement.setString(2, "Fahrenheit 451");
+	    statement.setString(3, "Ray Bradbury");
+	    statement.setString(4, "9781451673319");
+	    statement.setInt(5, 2011);
+	    statement.executeUpdate();
+	    
+	    statement.setInt(1, 8);
+	    statement.setString(2, "Murder on the Orient Express");
+	    statement.setString(3, "Agatha Christie");
+	    statement.setString(4, "9780007119318");
+	    statement.setInt(5, 2007);
+	    statement.executeUpdate();
 	}
 }

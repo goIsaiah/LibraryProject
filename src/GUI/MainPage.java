@@ -18,7 +18,7 @@ import net.miginfocom.swing.MigLayout;
 import pwDB.DBMain;
 
 public class MainPage extends JPanel{
-	
+	static int numOfResults = 7;
 	
     public MainPage() throws SQLException {
     	DBMain db = new DBMain();
@@ -55,9 +55,9 @@ public class MainPage extends JPanel{
 	}
     
     private void showBookList(ArrayList<Book> bookList) {
-    	String padding = "               ";
+    	String padding = "        ";
     	Border border = BorderFactory.createLineBorder(Color.DARK_GRAY, 1);
-    	for (int i = 0; i < bookList.size(); i++) {
+    	for (int i = 0; i < bookList.size() && i < numOfResults; i++) {
         	String title = bookList.get(i).getTitle();
         	String author = bookList.get(i).getAuthor();
         	int rating = bookList.get(i).getRating();
