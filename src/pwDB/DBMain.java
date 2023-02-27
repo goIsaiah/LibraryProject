@@ -7,6 +7,7 @@ import DomainObjects.Book;
 
 public class DBMain {
 	static String url = "jdbc:mysql://localhost:3306/myDB";
+	static String urlRoot = "jdbc:mysql://localhost:3306";
 	static String user = "root";
 	static String password = "1977";
 	static String create_LIBTABLE =
@@ -64,14 +65,18 @@ public class DBMain {
 
 	private static void batchInsert() {
 		try {
-			Connection con = DriverManager.getConnection(url, user, password);
+			Connection con = DriverManager.getConnection(urlRoot, user, password);
 			boolean exists = tableExists(con, "LIBRARY");
 			if (exists) {
 //				printDB(con);
 				System.out.println("Database exists!");
 		    }
 			else {
+				
 				Statement statement = con.createStatement();
+	            statement.executeUpdate("CREATE SCHEMA mydb");
+	            con = DriverManager.getConnection(url, user, password);
+	            statement = con.createStatement();
 				statement.executeUpdate(create_LIBTABLE);
 				DBBooks(con);
 			}

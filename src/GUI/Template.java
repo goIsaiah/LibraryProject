@@ -121,11 +121,13 @@ public class Template extends JFrame {
 	}
 	
  	public void closeOP() {
-		setSize(1920, 1080);
+ 		setSize(1920,1080);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setLocationRelativeTo(null);
 		getContentPane().setBackground(Color.white);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setVisible(true);
+		
 	}
 
 	public Component searchBar() {
@@ -136,7 +138,7 @@ public class Template extends JFrame {
             BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY),
             BorderFactory.createEmptyBorder(0, 0, 0, 0) // Add left margin for the text
         ));
-        searchField.setBackground(new Color(240, 240, 240));
+        searchField.setBackground(Color.WHITE);
 
         //SEARCH_ICON
         URL searchURL = getClass().getResource("/searchIcon.png");
@@ -150,6 +152,7 @@ public class Template extends JFrame {
         JPanel searchPanel = new JPanel(new MigLayout("", "[]10[]"));
         searchPanel.add(searchIconLabel,"cell 0 0");
         searchPanel.add(searchField, "cell 1 0");
+        searchPanel.setBackground(Color.WHITE);
        
         //SEARCH_BUTTON
         JButton searchButton = new JButton("Search");
