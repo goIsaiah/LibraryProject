@@ -26,7 +26,6 @@ import javax.swing.WindowConstants;
 import DomainObjects.Book;
 import net.miginfocom.swing.MigLayout;
 import pwDB.DBMain;
-import Logic.SearchforBook;
 
 public class Template extends JFrame {
 	private JPanel panelContainer;
@@ -99,9 +98,20 @@ public class Template extends JFrame {
 	}
 
 	private void showPanel(String string) {
-		CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
-        cardLayout.show(panelContainer, string);
-        add(searchPanel, BorderLayout.EAST);
+		if (string == "Main") {
+			try {
+				panelContainer.add(new MainPage(), "Main");
+				CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
+		        cardLayout.show(panelContainer, string);
+		        add(searchPanel, BorderLayout.EAST);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} else {
+			CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
+	        cardLayout.show(panelContainer, string);
+	        add(searchPanel, BorderLayout.EAST); 
+        }
 	}
 
 	private JButton sideButton(String s) {
