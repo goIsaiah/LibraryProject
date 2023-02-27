@@ -15,6 +15,7 @@ public abstract class LibraryDB {
 	protected String query; 
 	protected ResultSet rs;
 	private boolean dbExists; 
+<<<<<<< HEAD
 
 	/**
 	 * This constructor initializes the database if it doesn't exists yet. 
@@ -64,4 +65,41 @@ public abstract class LibraryDB {
 
 	}
 
+=======
+	
+	/**
+	 * This constructor initializes the database if it doesn't exists yet. 
+	 * @param str is a password to be set by the user
+	 * @throws SQLException when statement results in a syntax error with mysql. 
+	 */
+	public LibraryDB(String str) throws SQLException {
+		password = str; 
+		 con = DriverManager.getConnection(url, user, password);
+		 statement = con.createStatement();
+		 query = "SELECT IF(EXISTS(SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'database_name'), true, false) AS db_exists;\n";
+		rs = statement.executeQuery(query); 
+		
+		if(rs.next()) {
+			 dbExists = rs.getBoolean("db_exists");
+			if(dbExists) {	
+				query = "CREATE DATABASE IF NOT EXISTS librarydb;";
+				statement.execute(query);
+				url = url + "librarydb";
+				/*
+				 * TODO 
+				 * -make tables for BookDB
+				 * -make tables for UserDB
+				 */
+			}
+			else {
+				query = "CREATE DATABASE IF NOT EXISTS librarydb;";
+				statement.execute(query);
+				url = url + "librarydb";
+			}
+				
+		} // end of if
+		
+	}
+	
+>>>>>>> refs/remotes/origin/pwDB
 }

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 package sqldb;
+=======
+package sqlDB;
+>>>>>>> refs/remotes/origin/pwDB
 
 import java.sql.SQLException;
 

@@ -11,6 +11,9 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,13 +22,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+
+import DomainObjects.Book;
 import net.miginfocom.swing.MigLayout;
+import pwDB.DBMain;
 import Logic.SearchforBook;
 
 public class Template extends JFrame {
 	private JPanel panelContainer;
 	private Component searchPanel;
-	public Template() {
+	public Template() throws SQLException {
 		// WINDOW_NAME
 		setTitle("BookMate");
 		
@@ -115,11 +121,13 @@ public class Template extends JFrame {
 	}
 	
  	public void closeOP() {
-		setSize(1920, 1080);
+ 		setSize(1920,1080);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setLocationRelativeTo(null);
 		getContentPane().setBackground(Color.white);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setVisible(true);
+		
 	}
 
 	public Component searchBar() {
@@ -130,7 +138,7 @@ public class Template extends JFrame {
             BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY),
             BorderFactory.createEmptyBorder(0, 0, 0, 0) // Add left margin for the text
         ));
-        searchField.setBackground(new Color(240, 240, 240));
+        searchField.setBackground(Color.WHITE);
 
         //SEARCH_ICON
         URL searchURL = getClass().getResource("/searchIcon.png");
@@ -144,6 +152,7 @@ public class Template extends JFrame {
         JPanel searchPanel = new JPanel(new MigLayout("", "[]10[]"));
         searchPanel.add(searchIconLabel,"cell 0 0");
         searchPanel.add(searchField, "cell 1 0");
+        searchPanel.setBackground(Color.WHITE);
        
         //SEARCH_BUTTON
         JButton searchButton = new JButton("Search");
@@ -156,11 +165,15 @@ public class Template extends JFrame {
     			@Override
     			public void actionPerformed(ActionEvent e) {
     				String query =  searchField.getText();
-    	        	SearchforBook b = new SearchforBook();
-    	        	if(b.checkBook(query)== true) {
-    	        		panelContainer.add(new MainPage(b.getSearchBook()), "SearchMain");
-    	        		showPanel("SearchMain");
-    			}
+    				try {
+						DBMain db = new DBMain();
+						ArrayList<Book> bookList = db.searchLibrary(query);
+						panelContainer.add(new MainPage(bookList), "SearchMain");
+						showPanel("SearchMain");
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+    				
     		}; 
         });
 		return searchPanel;

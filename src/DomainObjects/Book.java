@@ -19,6 +19,14 @@ public class Book
 		this.rating = rating;
 	}
 
+	public Book(String title, String author, int yearPublished, String isbn)
+	{
+		this.title = title;
+		this.author = author;
+		this.yearPublished = yearPublished;
+		this.isbn=isbn;
+	}
+	
 	public String getTitle() 
 	{
 		return title;
