@@ -11,6 +11,9 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,13 +22,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+
+import DomainObjects.Book;
 import net.miginfocom.swing.MigLayout;
+import pwDB.DBMain;
 import Logic.SearchforBook;
 
 public class Template extends JFrame {
 	private JPanel panelContainer;
 	private Component searchPanel;
-	public Template() {
+	public Template() throws SQLException {
 		// WINDOW_NAME
 		setTitle("BookMate");
 		
@@ -156,11 +162,15 @@ public class Template extends JFrame {
     			@Override
     			public void actionPerformed(ActionEvent e) {
     				String query =  searchField.getText();
-    	        	SearchforBook b = new SearchforBook();
-    	        	if(b.checkBook(query)== true) {
-    	        		panelContainer.add(new MainPage(b.getSearchBook()), "SearchMain");
-    	        		showPanel("SearchMain");
-    			}
+    				try {
+						DBMain db = new DBMain();
+						ArrayList<Book> bookList = db.searchLibrary(query);
+						panelContainer.add(new MainPage(bookList), "SearchMain");
+						showPanel("SearchMain");
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+    				
     		}; 
         });
 		return searchPanel;
