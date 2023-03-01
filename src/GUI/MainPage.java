@@ -73,7 +73,15 @@ public class MainPage extends JPanel{
 		revalidate();
 		repaint();
 		framePanel(book.getTitle());
-		
+		JLabel author = new JLabel("By: " + book.getAuthor());
+        author.setFont(new Font(Font.SANS_SERIF, Font.ITALIC,20));
+        add(author, "cell 0 1");
+        JLabel isbn = new JLabel("ISBN-13: "  + book.getIsbn());
+        isbn.setFont(new Font(Font.SANS_SERIF, Font.PLAIN,20));
+        add(isbn, "cell 0 2");
+        JLabel yearPub = new JLabel("Published: "  + book.getYearPublished());
+        yearPub.setFont(new Font(Font.SANS_SERIF, Font.PLAIN,20));
+        add(yearPub, "cell 0 3");
 	}
 
 }
