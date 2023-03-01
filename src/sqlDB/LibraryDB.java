@@ -1,4 +1,4 @@
-package sqldb;
+package sqlDB;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,7 +15,6 @@ public abstract class LibraryDB {
 	protected String query; 
 	protected ResultSet rs;
 	private boolean dbExists; 
-<<<<<<< HEAD
 
 	/**
 	 * This constructor initializes the database if it doesn't exists yet. 

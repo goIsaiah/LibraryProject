@@ -17,13 +17,11 @@ public class DBUser {
 	
 	static String create_USERTABLE =
 			"create table USERTABLE" 
-			+ "(USER_ID integer NOT NULL, "
-			+ "USERNAME varchar(40) NOT NULL, "
+			+ "(USERNAME varchar(40) NOT NULL, "
 			+ "PASSWORD varchar(40) NOT NULL, "
-			+ "EMAIL varchar(60) NOT NULL UNIQUE, "
-			+ "PRIMARY KEY (USER_ID))";
+			+ "EMAIL varchar(60) NOT NULL UNIQUE);";
 	
-	static String insert_USERTABLE = "INSERT INTO USERTABLE (USER_ID, USERNAME, PASSWORD, EMAIL) VALUES (?, ?, ?, ?)";
+	static String insert_USERTABLE = "INSERT INTO USERTABLE (USERNAME, PASSWORD, EMAIL) VALUES (?, ?, ?)";
 	
 	public static void main(String[] args) {
 		checkDB();
@@ -78,23 +76,36 @@ public class DBUser {
 	private static void DBUsers(Connection con) throws SQLException {
 	    PreparedStatement statement = con.prepareStatement(insert_USERTABLE);
 	    
-	    statement.setInt(1, 1);
-	    statement.setString(2, "Polywertz");
+	    statement.setString(1, "Polywertz");
 	    statement.setString(3, "123456");
 	    statement.setString(4, "Polywertz@gmail.com");
 	    statement.executeUpdate();
 	    
-	    statement.setInt(1, 2);
 	    statement.setString(2, "Polywertz2");
 	    statement.setString(3, "123456");
 	    statement.setString(4, "Polywertz2@gmail.com");
 	    statement.executeUpdate();
 	    
-	    statement.setInt(1, 3);
 	    statement.setString(2, "Polywertz23");
 	    statement.setString(3, "123456");
 	    statement.setString(4, "Polywertz23@gmail.com");
 	    statement.executeUpdate();
+	}
+	
+	public void registerUser(String username, String pw, String email) {
+		// String query = "";
+		try {
+			Connection con = DriverManager.getConnection(urlRoot, user, password);
+			// Statement statement = con.createStatement();
+			// ResultSet result = statement.executeQuery(query);
+			PreparedStatement statement = con.prepareStatement(insert_USERTABLE);
+			statement.setString(1, username);
+			statement.setString(2, pw);
+			statement.setString(3, email);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	

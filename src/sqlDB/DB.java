@@ -1,4 +1,4 @@
-package sqldb;
+package sqlDB;
 
 public interface DB {
 
@@ -8,8 +8,4 @@ public interface DB {
 	public <E> String getItem(E item);
 	public void setPassword(String psw);
  	
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/pwDB
 }
