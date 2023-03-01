@@ -1,6 +1,12 @@
 package GUI;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import DomainObjects.User;
+import pwDB.DBUser;
 
 public class Register extends JFrame {
 
@@ -75,20 +82,19 @@ public class Register extends JFrame {
 		JButton btnNewButton = new JButton("Register");
 		btnNewButton.setBounds(44, 228, 85, 21);
 		contentPane.add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		DBUser db = new DBUser();
+				boolean check = db.checkUserExists(usernameField.getText(), String.valueOf(passwordField.getPassword()), emailField.getText());
+				if (check == false) {
+					db.registerUser(usernameField.getText(), String.valueOf(passwordField.getPassword()), emailField.getText());
+					new Login();
+					dispose();
+				}
+        	}
+        });
 
 		setContentPane(contentPane);
-		
-		if (checkUser(usernameField.getText(), String.valueOf(passwordField.getPassword()), emailField.getText()) == true) {
-			// add user to database
-			User user = new User(usernameField.getText(), String.valueOf(passwordField.getPassword()), emailField.getText());
-			//new Template(user);
-			this.dispose();
-		}
-	}
-	
-	public boolean checkUser (String username, String password, String email) {
-		// Checks the database to see if the account already exists
-		return true;
 	}
 
 }
