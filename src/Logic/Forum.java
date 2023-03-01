@@ -19,25 +19,37 @@ public class Forum {
 	private  String user = "root";
 	private  String url = ""; 
 	private  String password = "Fade2black"; 
+	private String query; 
+	private Connection conn; 
+	private Statement stmt; 
+	
 	
 	/*
 	 * Assumees that table Commeents(id int , comment text, user varchar(255), book_title varchar(255)) 
 	 * is in the database
 	 */
 	
-	public  void addComment(Comment comment) {
-		Connection conn = null;
-		Statement stmt = null;
+	public Forum() {
 		url = "jdbc:mysql://localhost:3306/bookmateD";
+		try {
+			conn = DriverManager.getConnection(url,user, password);
+			stmt = conn.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	public  void addComment(Comment comment) {
+
 		String bookTitle= "Harry Poter"; 
-		String query = "INSERT INTO Comments(id, comment, user, book_title)"
+		query = "INSERT INTO Comments(id, comment, user, book_title)"
 				+ "VALUES" + "("+"\'3\'"+"," 
 				+"\'"+ comment.getMessage() +"\'"+"," + "\'"+comment.getUser()+"\'" +"," +"\'"+ bookTitle+"\'"+  ")";
 		
 		try {
-			conn = DriverManager.getConnection(url,user, password);
-			stmt = conn.createStatement();
-			
+
 			
 			//TODO remove duplicates 
 			
@@ -45,18 +57,28 @@ public class Forum {
 			int res = stmt.executeUpdate(query);
 			System.out.println(res);
 			stmt.close();
-			conn.close();
+			
 		} catch (SQLException e) {
 			System.out.println(e.getSQLState());
-		} 
+		} 	
 	}
 	
 	public void removeComment(int id) {
-
-		for(int i = 0 ; i<comments.size(); i++) {
-			if(comments.get(i).getId() == id )
-				comments.remove(i); 
-		}
+		query = "Delete from Comments where " + Integer.toString(id) + " ;";
+		
+		try {
+			
+			int res = stmt.executeUpdate(query);
+			System.out.println(res);
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		
+		
 		
 	}
 	

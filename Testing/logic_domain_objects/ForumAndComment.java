@@ -12,7 +12,7 @@ import Logic.Forum;
 class ForumAndComment {
 
 	@Test
-	void addCommenttest() {
+	public void addCommenttest() {
 		
 		String msg = "This is a an amazing book to read"; 
 		User user = new User("vince", "psw" ,"@email.com" );
@@ -20,8 +20,17 @@ class ForumAndComment {
 		user.setLastName("Flores");
 		Comment comment = new Comment(user,msg );
 		Forum forum = new Forum(); 
-		
 		forum.addComment(comment);
+		
+		
+		
+	}
+	
+	
+	@Test 
+	public void removeComment() {
+		Forum forum = new Forum(); 
+		forum.removeComment(3);
 		
 	}
 
