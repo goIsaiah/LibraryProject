@@ -15,9 +15,11 @@ public class User
 	private String password;
 	private String email;
 	private String birthday;
+	//	private String email;
 	private Date dateJoined;
 	private ArrayList<Book> checkedOutBooks;
 	private ArrayList<User> followerList; 
+	private ArrayList<Book> favouritesList;
 
 	//creating constructor
 	public User(String username, String password, String email)
@@ -34,6 +36,7 @@ public class User
 
 		this.checkedOutBooks = new ArrayList<Book>();
 		this.followerList = new ArrayList<User>();
+		this.favouritesList = new ArrayList<Book>();
 	}
 
 
@@ -58,7 +61,6 @@ public class User
 
 	}
 
-
 	// to be tested
 	/**
 	 * 
@@ -77,6 +79,80 @@ public class User
 			throw new Exception("failed, follower to remove not found");
 		}
 	}
+
+	/**
+	 * 
+	 * @param b, the Book the user wants to checkout 
+	 * @throws Exception when the book has already been checked out
+	 * TODO: write junit test cases for this methods
+	 */
+	public void checkoutBook(Book b) throws Exception
+	{
+		if (checkedOutBooks.contains(b))
+		{
+			throw new Exception("book already checkout out");
+		}
+		else
+		{
+			checkedOutBooks.add(b);
+		}
+	}
+
+	/**
+	 * 
+	 * @param b, the book the user wants to return
+	 * @throws Exception if they have not checkout out the book previously
+	 * TODO: write junit test cases for this method
+	 */
+	public void returnBook(Book b) throws Exception
+	{
+		if (checkedOutBooks.contains(b))
+		{
+			checkedOutBooks.remove(b); //remove the book from holds
+		}
+		else
+		{
+			throw new Exception("error, cannot return book because you have not checked it out");
+		}
+	}
+
+	/**
+	 * 
+	 * @param b, the book the user wants to add to favourites
+	 * @throws Exception if the book is already in the favourites list
+	 * TODO: write junit test case for this method
+	 */
+	public void addToFavourites(Book b) throws Exception
+	{
+		if (favouritesList.contains(b))
+		{
+			throw new Exception("book is already added to favourites!");
+
+		}
+		else
+		{
+			favouritesList.add(b);
+		}
+	}
+	/**
+	 * 
+	 * @param b, the book the user wants to remove from favourites
+	 * @throws Exception if the book is not found in the favourites list (therefore, cannot remove the book)
+	 * TODO: write junit test case for this method
+	 */
+
+	public void removeFromFavourites(Book b) throws Exception
+	{
+		if (favouritesList.contains(b))
+		{
+			favouritesList.remove(b);		
+		}
+		else
+		{
+			throw new Exception("error, book not found in favourites");
+		}
+	}
+
 
 
 	//accessor and mutator methods
@@ -119,11 +195,11 @@ public class User
 	{
 		this.password = password;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -153,8 +229,13 @@ public class User
 		return checkedOutBooks;
 	}
 
-	public void setCheckedOutBooks(ArrayList<Book> checkedOutBooks) 
+	public ArrayList<Book> getFavouritesList()
 	{
-		this.checkedOutBooks = checkedOutBooks;
+		return favouritesList;
+	}
+	
+	public ArrayList<User> getFollowersList()
+	{
+		return followerList;
 	}
 }
