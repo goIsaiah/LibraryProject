@@ -92,6 +92,27 @@ public class DBUser {
 	    statement.executeUpdate();
 	}
 	
+	public boolean checkUserExists(String username, String pw, String email) {
+		String query = "SELECT * FROM USERTABLE";
+		try {
+			Connection con = DriverManager.getConnection(urlRoot, user, password);
+			Statement statement = con.createStatement();
+			
+			// generate result set
+			ResultSet result = statement.executeQuery(query);
+			
+			while (result.next()) {
+				if ((result.getString("USERNAME") == username && result.getString("PASSWORD") == password) || (result.getString("EMAIL") == email)) {
+					return true;
+				}
+			}
+			return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public void registerUser(String username, String pw, String email) {
 		// String query = "";
 		try {
@@ -106,6 +127,27 @@ public class DBUser {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean verify(String username, String pw) {
+		String query = "SELECT * FROM USERTABLE";
+		try {
+			Connection con = DriverManager.getConnection(urlRoot, user, password);
+			Statement statement = con.createStatement();
+			
+			// generate result set
+			ResultSet result = statement.executeQuery(query);
+			
+			while (result.next()) {
+				if (result.getString("USERNAME") == username && result.getString("PASSWORD") == password) {
+					return true;
+				}
+			}
+			return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	
