@@ -3,9 +3,12 @@ package pwDB;
 import java.sql.*;
 import java.util.ArrayList;
 
+import com.mysql.cj.util.StringUtils;
+
 import DomainObjects.Book;
 
-public class DBMain {
+
+public class DBMain { 
 	static String url = "jdbc:mysql://localhost:3306/myDB";
 	static String urlRoot = "jdbc:mysql://localhost:3306";
 	static String user = "root";
@@ -62,21 +65,39 @@ public class DBMain {
 	    ResultSet resultSet = meta.getTables(null, null, tableName, new String[] {"TABLE"});
 	    return resultSet.next();
 	}
+	
+	
+	public static boolean schemaExists(Connection conn, String schemaName) throws SQLException {
+		ResultSet rs = conn.getMetaData().getCatalogs();
+		while (rs.next()) {
+			String result = rs.getString("TABLE_CAT");
+			if (result.compareTo(schemaName) == 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
 
 	private static void batchInsert() {
 		try {
 			Connection con = DriverManager.getConnection(urlRoot, user, password);
-			boolean exists = tableExists(con, "LIBRARY");
-			if (exists) {
-//				printDB(con);
-				System.out.println("Database exists!");
-		    }
-			else {
-				
+			
+			boolean dbExists = schemaExists(con, "mydb");
+			System.out.println("DB is " + dbExists);
+			
+			if (!dbExists) {
 				Statement statement = con.createStatement();
 	            statement.executeUpdate("CREATE SCHEMA mydb");
-	            con = DriverManager.getConnection(url, user, password);
-	            statement = con.createStatement();
+			}
+			
+			con = DriverManager.getConnection(url, user, password);
+			boolean tableExists = tableExists(con, "LIBRARY");
+			
+			if (!tableExists) {
+				Statement statement = con.createStatement();
+				statement = con.createStatement();
 				statement.executeUpdate(create_LIBTABLE);
 				DBBooks(con);
 			}
