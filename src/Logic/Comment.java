@@ -1,35 +1,24 @@
 package Logic;
 
-import java.util.Random;
-
 import DomainObjects.User;
 
 public class Comment {
 	private User user; 
 	private String message; 
-	private int likes; 
 	private int id;
-	public Comment(User user, String message) {
+	
+	
+	public Comment(User user,int id, String message) {
 		this.user = user  ; 
 		this.message = message; 
-		Random random = new Random(); 
-		this.likes=0;
-		this.id =1000+ random.nextInt(120); 
+		this.id =id; 
 	}
-	
 	public String getUser() {
 		return user.getFirstName()+" "+ user.getLastName();
-		
 	}
 	
 	
-	public int getLikes() {
-		return likes;
-	}
-	
-	public void addLikes() {
-		this.likes += 1;
-	}
+
 	
 	public String getMessage() {
 		return message;
@@ -45,11 +34,7 @@ public class Comment {
 	@Override
 	public String toString() {
 		return "Comment [user=" + user.getFirstName() + " " +user.getLastName() +
-		 "\n message=" + message + "\n likes=" + likes + "\n id=" + id + "]";
+		 "\n message=" + message + "\n id=" + id + "]";
 	}
-	
-	
-	
-	
 	
 }
