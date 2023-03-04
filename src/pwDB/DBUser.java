@@ -150,6 +150,24 @@ public class DBUser {
 		return false;
 	}
 	
-	
+	public String getEmail(String username, String pw) {
+		String query = "SELECT * FROM USERTABLE";
+		try {
+			Connection con = DriverManager.getConnection(urlRoot, user, password);
+			Statement statement = con.createStatement();
+			
+			// generate result set
+			ResultSet result = statement.executeQuery(query);
+			
+			while (result.next()) {
+				if (result.getString("USERNAME") == username && result.getString("PASSWORD") == password) {
+					return result.getString("EMAIL");
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "Error";		
+	}
 
 }

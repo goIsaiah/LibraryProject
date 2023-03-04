@@ -1,10 +1,17 @@
 package GUI;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import DomainObjects.User;
+import pwDB.DBUser;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -64,5 +71,27 @@ public class Login extends JFrame {
 		JButton btnNewButton = new JButton("Login");
 		btnNewButton.setBounds(44, 175, 85, 21);
 		contentPane.add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		DBUser db = new DBUser();
+				boolean check = db.verify(textField.getText(), String.valueOf(passwordField.getPassword()));
+				if (check == true) {
+					String email = db.getEmail(textField.getText(), String.valueOf(passwordField.getPassword()));
+					User user = new User(textField.getText(), String.valueOf(passwordField.getPassword()), email);
+					try {
+						Template template = new Template();
+						template.setUser(user);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					dispose();
+				}
+				else {
+					// Remember to replace this with a new frame
+					System.out.println("Username or password is incorrect.");
+				}
+        	}
+        });
 	}
 }
