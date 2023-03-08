@@ -88,7 +88,7 @@ public class Template extends JFrame {
 		//Panel Container 
 		panelContainer = new JPanel(new CardLayout());
 		panelContainer.add(new MainPage(), "Main");
-        panelContainer.add(new Profile(), "Profile");
+//        panelContainer.add(new Profile(), "Profile");
         panelContainer.add(regPanel, "Register");
         container.add(panelContainer, BorderLayout.CENTER);
         container.add(searchPanel, BorderLayout.EAST);
