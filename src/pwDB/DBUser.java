@@ -13,7 +13,7 @@ public class DBUser {
 	static String url = "jdbc:mysql://localhost:3306/myDB";
 	static String urlRoot = "jdbc:mysql://localhost:3306";
 	static String user = "root";
-	static String password = "1977";
+	static String password = "1977"; //Change this
 	
 	static String create_USERTABLE =
 			"create table USERTABLE" 
@@ -23,9 +23,8 @@ public class DBUser {
 	
 	static String insert_USERTABLE = "INSERT INTO USERTABLE (USERNAME, PASSWORD, EMAIL) VALUES (?, ?, ?)";
 	
-	public static void main(String[] args) {
+	public DBUser() {
 		checkDB();
-		
 	}
 	
 	private static boolean tableExists(Connection conn, String tableName) throws SQLException {
@@ -77,25 +76,25 @@ public class DBUser {
 	    PreparedStatement statement = con.prepareStatement(insert_USERTABLE);
 	    
 	    statement.setString(1, "Polywertz");
-	    statement.setString(3, "123456");
-	    statement.setString(4, "Polywertz@gmail.com");
+	    statement.setString(2, "123456");
+	    statement.setString(3, "Polywertz@gmail.com");
 	    statement.executeUpdate();
 	    
-	    statement.setString(2, "Polywertz2");
-	    statement.setString(3, "123456");
-	    statement.setString(4, "Polywertz2@gmail.com");
+	    statement.setString(1, "Polywertz2");
+	    statement.setString(2, "123456");
+	    statement.setString(3, "Polywertz2@gmail.com");
 	    statement.executeUpdate();
 	    
-	    statement.setString(2, "Polywertz23");
-	    statement.setString(3, "123456");
-	    statement.setString(4, "Polywertz23@gmail.com");
+	    statement.setString(1, "Polywertz23");
+	    statement.setString(2, "123456");
+	    statement.setString(3, "Polywertz23@gmail.com");
 	    statement.executeUpdate();
 	}
 	
 	public boolean checkUserExists(String username, String pw, String email) {
 		String query = "SELECT * FROM USERTABLE";
 		try {
-			Connection con = DriverManager.getConnection(urlRoot, user, password);
+			Connection con = DriverManager.getConnection(url, user, password);
 			Statement statement = con.createStatement();
 			
 			// generate result set
@@ -116,7 +115,7 @@ public class DBUser {
 	public void registerUser(String username, String pw, String email) {
 		// String query = "";
 		try {
-			Connection con = DriverManager.getConnection(urlRoot, user, password);
+			Connection con = DriverManager.getConnection(url, user, password);
 			// Statement statement = con.createStatement();
 			// ResultSet result = statement.executeQuery(query);
 			PreparedStatement statement = con.prepareStatement(insert_USERTABLE);
@@ -132,7 +131,7 @@ public class DBUser {
 	public boolean verify(String username, String pw) {
 		String query = "SELECT * FROM USERTABLE";
 		try {
-			Connection con = DriverManager.getConnection(urlRoot, user, password);
+			Connection con = DriverManager.getConnection(url, user, password);
 			Statement statement = con.createStatement();
 			
 			// generate result set
@@ -150,6 +149,24 @@ public class DBUser {
 		return false;
 	}
 	
-	
+	public String getEmail(String username, String pw) {
+		String query = "SELECT * FROM USERTABLE";
+		try {
+			Connection con = DriverManager.getConnection(url, user, password);
+			Statement statement = con.createStatement();
+			
+			// generate result set
+			ResultSet result = statement.executeQuery(query);
+			
+			while (result.next()) {
+				if (result.getString("USERNAME") == username && result.getString("PASSWORD") == password) {
+					return result.getString("EMAIL");
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "Error";		
+	}
 
 }

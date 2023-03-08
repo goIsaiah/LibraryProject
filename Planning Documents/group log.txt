@@ -2,15 +2,12 @@ groupLog for iteration 2
 
 Deligations:
 abbey: working on databases (creating tables for User and Book), working on displaying ratings and reviews of the books
-Vince: Social media type component ; 
-Sathira: gui for citations, a feature related to google API. 
-Jet; database and some features related to interacting with books. 
+Vince: implementing gui for Forum feature ; 
+Sathira: gui for citations, a feature related to google API. Helping Isiah with the log in system. 
+Jet; implenting connection between Google Api and book databse 
 Isiah; Display profile info and completing authentication system or log in/sign up. 
 
-Meetings: 26/02/2023; 
+Meetings: 28/02/2023; 
 Present: Everyone 
 
-- Members reviewed and revised user stories and came up with a couple of new ones. This was done through a whiteboard app Miro. 
-- talked about possibly revising reccomendations feature. 
-- created a goal to complete databse before or at the end of the week. 
-
+- The team worked on their tasks

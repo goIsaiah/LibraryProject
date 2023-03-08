@@ -24,13 +24,17 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import DomainObjects.Book;
+import DomainObjects.User;
 import net.miginfocom.swing.MigLayout;
 import pwDB.DBMain;
 
 public class Template extends JFrame {
 	private JPanel panelContainer;
 	private Component searchPanel;
+	public static User user;
+	
 	public Template() throws SQLException {
+		
 		// WINDOW_NAME
 		setTitle("BookMate");
 		
@@ -84,12 +88,20 @@ public class Template extends JFrame {
 		//Panel Container 
 		panelContainer = new JPanel(new CardLayout());
 		panelContainer.add(new MainPage(), "Main");
-        panelContainer.add(new Profile(), "Profile");
+//        panelContainer.add(new Profile(), "Profile");
         panelContainer.add(regPanel, "Register");
         container.add(panelContainer, BorderLayout.CENTER);
         container.add(searchPanel, BorderLayout.EAST);
 		closeOP();
 		
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public User getUser() {
+		return this.user;
 	}
 	
 	private void registerCall(RegisterFrame regPanel) {
