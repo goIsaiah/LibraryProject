@@ -31,7 +31,7 @@ import pwDB.DBMain;
 public class Template extends JFrame {
 	private JPanel panelContainer;
 	private Component searchPanel;
-	private User user;
+	public static User user;
 	
 	public Template() throws SQLException {
 		
@@ -98,6 +98,10 @@ public class Template extends JFrame {
 	
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public User getUser() {
+		return this.user;
 	}
 	
 	private void registerCall(RegisterFrame regPanel) {

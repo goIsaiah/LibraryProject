@@ -9,14 +9,18 @@ import java.awt.Font;
 
 import javax.swing.*;
 
-//import DomainObjects.User;
+import DomainObjects.User;
+import GUI.Template;
 import net.miginfocom.swing.MigLayout;
 
 public class Profile extends JPanel{
+	
+	private User user;
 
 	
 	public Profile() {
 		
+		user = Template.user;
 		setLayout(new MigLayout("", "[]30[]", "[]30[]"));
         setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
         setBackground(Color.white);
@@ -52,8 +56,8 @@ public class Profile extends JPanel{
 		JPanel info = new JPanel(layout);
 		
 		
-		JLabel profileName = new JLabel("Profile Name") ; 
-		JLabel email = new JLabel("email@eecs.yorku.ca"); 
+		JLabel profileName = new JLabel(Template.user.getUsername()) ; 
+		JLabel email = new JLabel(Template.user.getEmail()); 
 		JLabel numRead = new JLabel("0"); 
 		
 		JLabel numFollowers = new JLabel("0");

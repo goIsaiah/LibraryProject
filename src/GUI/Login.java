@@ -80,7 +80,7 @@ public class Login extends JFrame {
 					User user = new User(textField.getText(), String.valueOf(passwordField.getPassword()), email);
 					try {
 						Template template = new Template();
-						template.setUser(user);
+						template.user = user;
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

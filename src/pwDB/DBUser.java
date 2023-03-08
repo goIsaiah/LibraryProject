@@ -13,7 +13,7 @@ public class DBUser {
 	static String url = "jdbc:mysql://localhost:3306/myDB";
 	static String urlRoot = "jdbc:mysql://localhost:3306";
 	static String user = "root";
-	static String password = "1977";
+	static String password = ""; //Change this
 	
 	static String create_USERTABLE =
 			"create table USERTABLE" 
