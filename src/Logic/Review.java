@@ -45,8 +45,18 @@ public class Review
 	
 	public String toString()
 	{
-		String s = String.format("%s reviewed %s. \nReview: %s", u.getFirstName(), b.getTitle(), message);
+		String s = String.format("%s reviewed %s. \nReview: %s", u.getUsername(), b.getTitle(), message);
 		return s;
+	}
+	
+	public Book getBook()
+	{
+		return b;
+	}
+	
+	public User getUser()
+	{
+		return u;
 	}
 	
 }

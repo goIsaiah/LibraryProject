@@ -2,61 +2,58 @@ package Logic;
 
 import java.sql.*;
 import java.util.*;
-
 import DomainObjects.*;
 
-
-public class AddRating 
+public class AddReview 
 {
-
-	private ArrayList<Rating> ratings;
+	private ArrayList<Review> reviews;
 	private int id;
+
 	//database
 	private static String user = "root";
 	private static String url = "";
 	private static String password = "1224";
 
-	public AddRating()
+	public AddReview()
 	{
-		this.ratings = new ArrayList<Rating>();
+		this.reviews = new ArrayList<Review>();
 		this.id = 0;
 	}
 
 	public static void main(String[] args) 
 	{
-
-
 		/*
 		 * assume that the table
 		 * 
-		 * CREATE TABLE Ratings(
+		 * CREATE TABLE Reviews(
 			id INT NOT NULL,
 			book VARCHAR(255),
 			user VARCHAR(255),
-			rating INT NOT NULL
+			message TEXT,
+			likes INT NOT NULL
 			);
 
 			is present in the database
 		 */
-		
-		Book b = new Book("Harry Potter", "JK Rowling", 2005, 4);
+
+		Book b = new Book("Percy Jackson", "Rick Riordan", 2005, 4);
 		User u = new User("abbey", "abbey123","abbey@gmail.com");
-		Rating r = new Rating(u, b);
-		r.setRating(5);
-		
-		addRating(r);
+		String message = "Great book! So happy I read it. Would give 6 stars if I could !!";
+		Review r = new Review(message, b, u);
+		r.likeMessage();
+		r.likeMessage();
+		r.likeMessage();
+
+		addReview(r);
 		System.out.println(r.toString());
-
-
-
 	}
 
-	public static void addRating(Rating rating)
+	public static void addReview(Review review)
 	{
 		Connection conn = null;
 		Statement statement = null;
 		url = "jdbc:mysql://localhost:3306/BookMate";
-		String query = String.format("INSERT INTO Ratings\n(id, book, user, rating) VALUES\n(%d, '%s', '%s', %d);", 2, rating.getBook().getTitle(), rating.getUser().getUsername(), rating.getRating());
+		String query = String.format("INSERT INTO Reviews\n(id, book, user, message, likes) VALUES\n(%d, '%s', '%s', '%s', %d);", 1, review.getBook().getTitle(), review.getUser().getUsername(), review.getMessage(), review.getLikes());
 
 		try
 		{
@@ -75,6 +72,8 @@ public class AddRating
 		{
 			System.out.println(e.getMessage());
 		}
+
 	}
 
+	
 }

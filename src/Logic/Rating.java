@@ -9,7 +9,7 @@ public class Rating
 	private User u;
 	private int rating;
 	
-	public Rating(User u, Book b, int rating)
+	public Rating(User u, Book b)
 	{
 		this.u = u;
 		this.b = b;
@@ -23,7 +23,7 @@ public class Rating
 	
 	public String toString()
 	{
-		String s = String.format("%s rated %s %d/5 stars", u.getFirstName(), b.getTitle(), this.rating);
+		String s = String.format("%s rated %s %d/5 stars", u.getUsername(), b.getTitle(), this.rating);
 		return s;
 	}
 	
