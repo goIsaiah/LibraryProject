@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.sql.SQLException;
 
 import javax.swing.*;
 
@@ -15,12 +16,7 @@ import net.miginfocom.swing.MigLayout;
 
 public class Profile extends JPanel{
 	
-	private User user;
-
-	
-	public Profile() {
-		
-		user = Template.user;
+	public Profile(User user) throws SQLException{
 		setLayout(new MigLayout("", "[]30[]", "[]30[]"));
         setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
         setBackground(Color.white);
@@ -30,15 +26,13 @@ public class Profile extends JPanel{
         label.setFont(new Font(Font.SANS_SERIF, Font.BOLD,30));
         add(label, "cell 0 0");
         
-        
         // PROFILE PHOTO
         JPanel photo = addProfilePhoto();
         add(photo, "cell 0 1");
-        JPanel userInfo = addProfileInfo(); 
+        JPanel userInfo = addProfileInfo(user); 
         add(userInfo , "cell 1 1");
-        
 	}
-	
+
 
 	public JPanel addContentPanel() {
 		return new JPanel(new MigLayout("", "[]20[]200[]", "[]30[]"));
@@ -51,13 +45,13 @@ public class Profile extends JPanel{
 		return photo; 
 	}
 	
-	public JPanel addProfileInfo() {
+	public JPanel addProfileInfo(User user) {
 		MigLayout layout = new MigLayout("", "[]300[]250[]" , "[]10[]10[]20[][]") ; 
 		JPanel info = new JPanel(layout);
 		
 		
-		JLabel profileName = new JLabel(Template.user.getUsername()) ; 
-		JLabel email = new JLabel(Template.user.getEmail()); 
+		JLabel profileName = new JLabel(user.getUsername()) ; 
+		JLabel email = new JLabel(user.getEmail()); 
 		JLabel numRead = new JLabel("0"); 
 		
 		JLabel numFollowers = new JLabel("0");

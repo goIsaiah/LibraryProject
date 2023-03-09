@@ -15,158 +15,32 @@ public class DBUser {
 	static String user = "root";
 	static String password = "1977"; //Change this
 	
-	static String create_USERTABLE =
-			"create table USERTABLE" 
-			+ "(USERNAME varchar(40) NOT NULL, "
-			+ "PASSWORD varchar(40) NOT NULL, "
-			+ "EMAIL varchar(60) NOT NULL UNIQUE);";
-	
-	static String insert_USERTABLE = "INSERT INTO USERTABLE (USERNAME, PASSWORD, EMAIL) VALUES (?, ?, ?)";
-	
 	public DBUser() {
-		checkDB();
 	}
 	
-	private static boolean tableExists(Connection conn, String tableName) throws SQLException {
-	    DatabaseMetaData meta = conn.getMetaData();
-	    ResultSet resultSet = meta.getTables(null, null, tableName, new String[] {"TABLE"});
-	    return resultSet.next();
-	}
-	
-	private static boolean schemaExists(Connection conn, String schemaName) throws SQLException {
-		ResultSet rs = conn.getMetaData().getCatalogs();
-		while (rs.next()) {
-			String result = rs.getString("TABLE_CAT");
-			if (result.compareTo(schemaName) == 0) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private static void checkDB() {
-		try {
-			Connection con = DriverManager.getConnection(urlRoot, user, password);
-			boolean dbExists = schemaExists(con, "mydb");
-			System.out.println("DB is " + dbExists);
-			
-			if (!dbExists) {
-				Statement statement = con.createStatement();
-	            statement.executeUpdate("CREATE SCHEMA mydb");
-			}
-			
-			con = DriverManager.getConnection(url, user, password);
-			boolean tableExists = tableExists(con, "USERTABLE");
-			
-			if (!tableExists) {
-				Statement statement = con.createStatement();
-				statement = con.createStatement();
-				statement.executeUpdate(create_USERTABLE);
-				DBUsers(con);
-			}
-		
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 
-		
+	public static boolean checkUserExists(String username, String email) throws SQLException {
+	    Connection conn = null;
+	    PreparedStatement stmt = null;
+	    ResultSet rs = null;
+	    boolean userExists = false;
+	    
+	    try {
+	        conn = DriverManager.getConnection(url, user, password);
+	        String sql = "SELECT * FROM usertable WHERE username = ? OR email = ?";
+	        stmt = conn.prepareStatement(sql);
+	        stmt.setString(1, username);
+	        stmt.setString(2, email);
+	        rs = stmt.executeQuery();
+	        
+	        if (rs.next()) {
+	            userExists = true;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } 
+	    return userExists;
 	}
 
 
-	private static void DBUsers(Connection con) throws SQLException {
-	    PreparedStatement statement = con.prepareStatement(insert_USERTABLE);
-	    
-	    statement.setString(1, "Polywertz");
-	    statement.setString(2, "123456");
-	    statement.setString(3, "Polywertz@gmail.com");
-	    statement.executeUpdate();
-	    
-	    statement.setString(1, "Polywertz2");
-	    statement.setString(2, "123456");
-	    statement.setString(3, "Polywertz2@gmail.com");
-	    statement.executeUpdate();
-	    
-	    statement.setString(1, "Polywertz23");
-	    statement.setString(2, "123456");
-	    statement.setString(3, "Polywertz23@gmail.com");
-	    statement.executeUpdate();
-	}
-	
-	public boolean checkUserExists(String username, String pw, String email) {
-		String query = "SELECT * FROM USERTABLE";
-		try {
-			Connection con = DriverManager.getConnection(url, user, password);
-			Statement statement = con.createStatement();
-			
-			// generate result set
-			ResultSet result = statement.executeQuery(query);
-			
-			while (result.next()) {
-				if ((result.getString("USERNAME") == username && result.getString("PASSWORD") == password) || (result.getString("EMAIL") == email)) {
-					return true;
-				}
-			}
-			return false;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-	
-	public void registerUser(String username, String pw, String email) {
-		// String query = "";
-		try {
-			Connection con = DriverManager.getConnection(url, user, password);
-			// Statement statement = con.createStatement();
-			// ResultSet result = statement.executeQuery(query);
-			PreparedStatement statement = con.prepareStatement(insert_USERTABLE);
-			statement.setString(1, username);
-			statement.setString(2, pw);
-			statement.setString(3, email);
-			statement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public boolean verify(String username, String pw) {
-		String query = "SELECT * FROM USERTABLE";
-		try {
-			Connection con = DriverManager.getConnection(url, user, password);
-			Statement statement = con.createStatement();
-			
-			// generate result set
-			ResultSet result = statement.executeQuery(query);
-			
-			while (result.next()) {
-				if (result.getString("USERNAME") == username && result.getString("PASSWORD") == password) {
-					return true;
-				}
-			}
-			return false;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-	
-	public String getEmail(String username, String pw) {
-		String query = "SELECT * FROM USERTABLE";
-		try {
-			Connection con = DriverManager.getConnection(url, user, password);
-			Statement statement = con.createStatement();
-			
-			// generate result set
-			ResultSet result = statement.executeQuery(query);
-			
-			while (result.next()) {
-				if (result.getString("USERNAME") == username && result.getString("PASSWORD") == password) {
-					return result.getString("EMAIL");
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return "Error";		
-	}
 
 }

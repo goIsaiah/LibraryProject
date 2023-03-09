@@ -75,7 +75,7 @@ public class Template extends JFrame {
 		sidebar.add(register , "cell 0 3");
 		//Side Button on Click
 		home.addActionListener(e -> showPanel("Main")); 
-		profile.addActionListener(e -> showPanel("Profile")); 
+		profile.addActionListener(e -> showPanel("Welcome")); 
 		register.addActionListener(e -> showPanel("Register")); 
 		
 		//SEARCH_BAR
@@ -85,10 +85,13 @@ public class Template extends JFrame {
 		RegisterFrame regPanel = new RegisterFrame();
 		registerCall(regPanel);
 		
+		//Welcome Object
+		WelcomePanel welPanel = new WelcomePanel();
+		
 		//Panel Container 
 		panelContainer = new JPanel(new CardLayout());
 		panelContainer.add(new MainPage(), "Main");
-//        panelContainer.add(new Profile(), "Profile");
+		panelContainer.add(welPanel, "Welcome");
         panelContainer.add(regPanel, "Register");
         container.add(panelContainer, BorderLayout.CENTER);
         container.add(searchPanel, BorderLayout.EAST);
@@ -109,7 +112,7 @@ public class Template extends JFrame {
 		regButton.addActionListener(e -> showPanel("Main")); 
 	}
 
-	private void showPanel(String string) {
+	public void showPanel(String string) {
 		if (string == "Main") {
 			try {
 				panelContainer.add(new MainPage(), "Main");
@@ -119,7 +122,23 @@ public class Template extends JFrame {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		} else {
+		}
+		if(string=="Profile") {
+			try {
+				panelContainer.add(new Profile(user), "Profile");
+				CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
+		        cardLayout.show(panelContainer, string);
+		        add(searchPanel, BorderLayout.EAST);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if(string=="Welcome" && user!=null) {
+			CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
+			cardLayout.show(panelContainer, "Profile");
+			add(searchPanel, BorderLayout.EAST); 
+		}
+		else {
 			CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
 	        cardLayout.show(panelContainer, string);
 	        add(searchPanel, BorderLayout.EAST); 
@@ -143,12 +162,13 @@ public class Template extends JFrame {
 	}
 	
  	public void closeOP() {
- 		setSize(1200,800);
+ 		setSize(2000,800);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setLocationRelativeTo(null);
 		getContentPane().setBackground(Color.white);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setVisible(true);
+		
 		
 	}
 
