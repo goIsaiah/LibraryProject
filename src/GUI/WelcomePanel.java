@@ -41,8 +41,55 @@ public class WelcomePanel extends JPanel{
 			}
 		});
         
+        loginButton.addActionListener(e -> {
+			try {
+				showLoginPanel();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		});
         
     }
+
+	private void showLoginPanel() throws SQLException{
+		removeAll();
+		revalidate();
+		repaint();
+		framePanel("Login");
+		JLabel usernameLabel = new JLabel("Username:");
+	    JTextField usernameField = new JTextField(20);
+	    add(usernameLabel, "cell 0 1");
+	    add(usernameField, "cell 1 1");
+		
+	    JLabel passwordLabel = new JLabel("Password:");
+	    JPasswordField passwordField = new JPasswordField(20);
+	    add(passwordLabel, "cell 0 2");
+	    add(passwordField, "cell 1 2");
+	    
+	    JButton loginButton = new JButton("Login");
+	    add(loginButton, "cell 0 3");
+	    
+	    parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
+	    loginButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		DBUser db = new DBUser();
+				boolean check;
+				try {
+					check = db.checkLogin(usernameField.getText(), passwordField.getText());
+					if (check) {
+						String email = db.getEmail(usernameField.getText());
+						User user = new User(usernameField.getText(),passwordField.getText(), email);
+						System.out.println(user.getEmail());
+						parentTemplate.setUser(user);
+						parentTemplate.showPanel("Profile");
+					}
+
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+        	}
+        });
+	}
 
 	private void showRegisterPanel() throws SQLException{
 		removeAll();
@@ -75,7 +122,7 @@ public class WelcomePanel extends JPanel{
 				try {
 					check = db.checkUserExists(usernameField.getText(), emailField.getText());
 					if (!check) {
-						//TODO Add user to database
+						db.addUser(usernameField.getText(),passwordField.getText(), emailField.getText());
 						User user = new User(usernameField.getText(),passwordField.getText(), emailField.getText());
 						parentTemplate.setUser(user);
 						parentTemplate.showPanel("Profile");

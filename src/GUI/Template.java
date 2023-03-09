@@ -162,7 +162,7 @@ public class Template extends JFrame {
 	}
 	
  	public void closeOP() {
- 		setSize(2000,800);
+ 		setSize(1280,800);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setLocationRelativeTo(null);
 		getContentPane().setBackground(Color.white);
