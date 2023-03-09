@@ -10,6 +10,7 @@ import java.awt.Rectangle;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -25,44 +26,16 @@ import net.miginfocom.swing.MigLayout;
  * 	*update CommentsPanel when a new comment is added
  */
 
-class ForumTest{
-	
-//	private static CommentTextPane forum;
-//	private static CommentsPanel forum;
-	private static JFrame frame; 
-	
-	public static void main(String[] args) {
-		
-//		forum = new CommentTextPane(); 
-//		forum = new CommentsPanel();
-		
-		ForumPanel forum = new ForumPanel(); 
-		/*
-		 * init frame
-		 */
-		frame = new JFrame(); 
-		frame.setPreferredSize(new Dimension(350, 500));
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setLocationRelativeTo(null);
-		frame.pack();
-		frame.setVisible(true);
-		frame.add(forum);
-		
-	}
-	
-}
-
-
 class ForumPanel extends JPanel{
-	private User user; 
 	private CommentsPanel panel ; 
-	private CommentTextField text; // 
+	private CommentTextField text; 
 	
 	
-	public ForumPanel() {
-		user = new User("Vince", "1234", "Vince.email.com" );; 
+	public ForumPanel( User user, String book_title, int book_id) {
+
+		
 		panel = new CommentsPanel(); 
-		text = new CommentTextField(user); 
+		text = new CommentTextField(); 
 		
 		JButton submit = new JButton(); 
 		submit.setText("Submit");
@@ -70,11 +43,16 @@ class ForumPanel extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Random rand= new Random(); 
-				
-				Comment com = new Comment(user, rand.nextInt(10), text.getTextArea().getText()); 
+				Comment com = new Comment(user, text.getTextArea().getText(), book_title, book_id ); 
 				Forum forum = new Forum(); 
-				forum.addComment(com);
+				
+				try {
+					forum.addComment(com);
+					
+					text.setTextArea(""); 
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
 				text.setTextArea("");
 			}
 			
@@ -86,9 +64,6 @@ class ForumPanel extends JPanel{
 		
 	}
 	
-
-	
-
 }
 
 
@@ -109,11 +84,15 @@ class CommentsPanel extends JPanel{
 		MigLayout mig = new MigLayout("wrap", "5[]", "4[]4[]4[]");
 		commentsPanel.setLayout(mig);
 		
-		ArrayList<String> list = forum.getComments();
-		
-		for(String s: list) {
-			commentsPanel.add(new CommentBlob(s));
+		try {
+			ArrayList<String> list = forum.getComments();
+			for(String s: list) {
+				commentsPanel.add(new CommentBlob(s));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		
 		add(sp);
 	}
 	
@@ -142,12 +121,10 @@ class CommentBlob extends JTextArea{
 class CommentTextField extends JPanel{
 	
 	private JScrollPane scroll; 
-	private User user ;
 	public JTextArea textArea;
 	
-	public CommentTextField(User user) {
+	public CommentTextField() {
 		
-		this.user = user; 
 		this.setLayout(new MigLayout("wrap", "[]",""));
 		// text to input the comments 
 		initText(); 

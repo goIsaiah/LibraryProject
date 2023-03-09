@@ -13,7 +13,7 @@ public class Forum {
 	
 	// databse 
 	private  String user = "root";
-	private  String url = ""; 
+	private String url = "jdbc:mysql://localhost:3306/myDB"; 
 	private  String password = "Fade2black"; 
 	private String query; 
 	private Connection conn; 
@@ -26,7 +26,7 @@ public class Forum {
 	 */
 	
 	public Forum() {
-		url = "jdbc:mysql://localhost:3306/bookmateD";
+
 		try {
 			conn = DriverManager.getConnection(url,user, password);
 			stmt = conn.createStatement();
@@ -37,59 +37,33 @@ public class Forum {
 	}
 	
 	
-	public  void addComment(Comment comment) {
+	public  void addComment(Comment comment) throws SQLException {
 
-		String bookTitle= "Harry Poter"; 
-		query = String.format("INSERT INTO Comments(id, comment, user, book_title) VALUES (\'%d\', \'%s\', \'%s\', \'%s\'  );"
-					, comment.getId(), comment.getMessage(), comment.getUser(), bookTitle);
-				
-		try {
+		query = String.format("INSERT INTO COMMENTS(usrname, book_id, book_title, comment) VALUES (\'%s\', %d, \'%s\', \'%s\' );"
+					, comment.getUserName(), comment.getBook_Id(),comment.getBook_Title(), comment.getMessage());
 
-			
 			if(!comment.getMessage().equals("")) {
-				int res = stmt.executeUpdate(query);
-				System.out.println(res);
+				stmt.executeUpdate(query);
 			}else {
 				System.out.println("message is empty");
 			}
-			
-			
-		} catch (SQLException e) {
-			System.out.println(e.getSQLState());
-		} 	
+
 	}
 	
-	// TODO removeComments
-	public void removeComment(int id) {
-		query = "Delete from Comments where " + Integer.toString(id) + " ;";
-		
-		try {
-			
-			int res = stmt.executeUpdate(query);
-			System.out.println(res);
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 
-		
-	}
+
 	
-	public ArrayList<String> getComments() {
-		query = "SELECT comment from Comments;"; 
+	public ArrayList<String> getComments() throws SQLException {
+		query = "SELECT comment from COMMENTS;"; 
 		ResultSet rs = null; 
 		
 		ArrayList<String> list = new ArrayList<>(); 
 		
-		try {
+	
 			rs = stmt.executeQuery(query);
 			while(rs.next()) {
 				list.add(rs.getString(1) + "\n");
 			}
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		return list;
 		
 	}
