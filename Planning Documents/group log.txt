@@ -17,6 +17,8 @@ Present: Everyone
 - Isiah completes registration and log in logic and gui. Only thing left is to connect to the new database. 
 - Sathira fixes bugs and possibly implementing citation if group decides it is needed. 
 
-The citation component is not included at this time because other user stories are at higher priority such as searching, checking out, comments/forum , and ratings and reviews. The team also has to do more integration and stub testing before the end of iteration 2. 
+The citation component is not included at this time because other user stories are at \
+higher priority such as searching, checking out, comments/forum , and ratings and reviews. \
+The team also has to do more integration and stub testing before the end of iteration 2. 
 
 Next meeting: 09/03/2023 
