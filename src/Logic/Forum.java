@@ -59,6 +59,7 @@ public class Forum {
 		} 	
 	}
 	
+	// TODO removeComments
 	public void removeComment(int id) {
 		query = "Delete from Comments where " + Integer.toString(id) + " ;";
 		

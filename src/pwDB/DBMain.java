@@ -12,7 +12,7 @@ public class DBMain {
 	static String url = "jdbc:mysql://localhost:3306/myDB";
 	static String urlRoot = "jdbc:mysql://localhost:3306";
 	static String user = "root";
-	static String password = "1977";
+	static String password = "Fade2black";
 	static String create_LIBTABLE =
 					"create table LIBRARY " 
 					+ "(LIB_ID integer NOT NULL, "
@@ -23,7 +23,7 @@ public class DBMain {
 					+ "PRIMARY KEY (LIB_ID))";
 	
 	public DBMain() throws SQLException {
-		batchInsert();
+//		batchInsert();
 	}
 	
 	public ArrayList<Book> searchLibrary(String search) throws SQLException {
