@@ -32,7 +32,7 @@ public class Template extends JFrame {
 	private JPanel panelContainer;
 	private Component searchPanel;
 	public static User user;
-	
+	public static Book book;
 	public Template() throws SQLException {
 		
 		// WINDOW_NAME
@@ -116,6 +116,16 @@ public class Template extends JFrame {
 		if (string == "Main") {
 			try {
 				panelContainer.add(new MainPage(), "Main");
+				CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
+		        cardLayout.show(panelContainer, string);
+		        add(searchPanel, BorderLayout.EAST);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (string == "Forum") {
+			try {
+				panelContainer.add(new ForumPanel(), "Forum");
 				CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
 		        cardLayout.show(panelContainer, string);
 		        add(searchPanel, BorderLayout.EAST);
@@ -220,6 +230,14 @@ public class Template extends JFrame {
         });
 		return searchPanel;
 
+	}
+
+	public void setBook(Book book) {
+		this.book=book;
+	}
+	
+	public Book getBook() {
+		return(book);
 	}
 
 }

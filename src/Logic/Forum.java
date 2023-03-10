@@ -13,8 +13,8 @@ public class Forum {
 	
 	// databse 
 	private  String user = "root";
-	private  String url = ""; 
-	private  String password = "Fade2black"; 
+	private  String url = "jdbc:mysql://localhost:3306/myDB"; 
+	private  String password = "1977"; 
 	private String query; 
 	private Connection conn; 
 	private Statement stmt; 
@@ -26,7 +26,7 @@ public class Forum {
 	 */
 	
 	public Forum() {
-		url = "jdbc:mysql://localhost:3306/bookmateD";
+		url = "jdbc:mysql://localhost:3306/mydb";
 		try {
 			conn = DriverManager.getConnection(url,user, password);
 			stmt = conn.createStatement();

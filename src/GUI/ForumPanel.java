@@ -10,6 +10,7 @@ import java.awt.Rectangle;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -115,11 +116,11 @@ class ForumPanel extends JPanel{
 	private CommentTextPane text; 
 	
 	
-	public ForumPanel() {
+	public ForumPanel() throws SQLException{
 		user = new User("Vince", "1234", "Vince.email.com" );; 
 		panel = new CommentsPanel(); 
 		text = new CommentTextPane(user); 
-		
+        setBackground(Color.white);
 		JButton submit = new JButton(); 
 		submit.setText("Submit");
 		submit.addActionListener(new ActionListener() {
@@ -150,37 +151,6 @@ class ForumPanel extends JPanel{
 	}
 	
 
-}
-
-
-
-
-
-class ForumTest{
-	
-//	private static CommentTextPane forum;
-//	private static CommentsPanel forum;
-	private static JFrame frame; 
-	
-	public static void main(String[] args) {
-		
-//		forum = new CommentTextPane(); 
-//		forum = new CommentsPanel();
-		
-		ForumPanel forum = new ForumPanel(); 
-		/*
-		 * init frame
-		 */
-		frame = new JFrame(); 
-		frame.setPreferredSize(new Dimension(350, 500));
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setLocationRelativeTo(null);
-		frame.pack();
-		frame.setVisible(true);
-		frame.add(forum);
-		
-	}
-	
 }
 
  

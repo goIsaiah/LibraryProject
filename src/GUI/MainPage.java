@@ -11,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
 import Databases.bookmain;
@@ -20,6 +21,7 @@ import pwDB.DBMain;
 
 public class MainPage extends JPanel{
 	static int numOfResults = 7;
+	private Template parentTemplate;
 	
     public MainPage() throws SQLException {
     	DBMain db = new DBMain();
@@ -82,6 +84,11 @@ public class MainPage extends JPanel{
         JLabel yearPub = new JLabel("Published: "  + book.getYearPublished());
         yearPub.setFont(new Font(Font.SANS_SERIF, Font.PLAIN,20));
         add(yearPub, "cell 0 3");
+        JButton forumButton = new JButton("   Open Comments    ");
+        parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
+        parentTemplate.setBook(book);
+        forumButton.addActionListener(e -> parentTemplate.showPanel("Forum"));
+        add(forumButton, "cell 0 4");
 	}
 
 }
