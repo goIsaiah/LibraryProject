@@ -60,9 +60,9 @@ CREATE TABLE Ratings(
 	id INT NOT NULL auto_increment PRIMARY KEY,
 	book VARCHAR(255),
 	user VARCHAR(255),
-	rating INT NOT NULL,
-    FOREIGN KEY(book) REFERENCES LIBRARY(LIB_TITLE), 
-    FOREIGN KEY(user) REFERENCES USERTABLE(USERNAME)
+	rating INT NOT NULL
+   -- FOREIGN KEY(book) REFERENCES LIBRARY(LIB_TITLE), 
+   -- FOREIGN KEY(user) REFERENCES USERTABLE(USERNAME)
 ); 
 
 CREATE TABLE Reviews(
@@ -70,8 +70,8 @@ CREATE TABLE Reviews(
 	book VARCHAR(255),
 	user VARCHAR(255),
 	message TEXT,
-    likes INT NOT NULL, 
-    FOREIGN KEY(id) REFERENCES Ratings(id)
+    likes INT NOT NULL
+   -- FOREIGN KEY(id) REFERENCES Ratings(id)
 ); 
 
 -- Populate the tabeles 
