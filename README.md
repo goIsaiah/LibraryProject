@@ -47,9 +47,9 @@ Once all the settings are the same, hit the "Start Import" button.
 Now only thing to do is to open Eclipse -> LibraryPorject -> src -> GUI -> LibraryUI.java 
 
 <img width="294" alt="one" src="https://user-images.githubusercontent.com/29023871/223938233-71200c8b-62a3-4b7d-93af-184544089c5d.png"> 
-<img width="711" alt="two" src="https://user-images.githubusercontent.com/29023871/223938312-debd4ac7-ed46-4206-b311-77dc8ab5febe.png"> \
+<img width="711" alt="two" src="https://user-images.githubusercontent.com/29023871/223938312-debd4ac7-ed46-4206-b311-77dc8ab5febe.png"> 
 
-The console will appear with a prompt asking you to enter your MySQL password.  Once you enter your password, the actual BookMate application will open. \
+The console will appear with a prompt asking you to enter your MySQL password.  Once you enter your password, the actual BookMate application will open. 
 
 ![image](https://user-images.githubusercontent.com/71765888/224206680-602781a0-adf1-440b-83d3-cfe20a307b50.png) \
 Hit the profile icon on the bottom left of the sidebar to create an account.
@@ -58,7 +58,7 @@ Enter your account information, hit "Register", and then you will be taken to yo
 ![image](https://user-images.githubusercontent.com/71765888/224207200-0348f818-08d9-4794-8813-baf61271674a.png)
 ![image](https://user-images.githubusercontent.com/71765888/224207238-562a1ee1-4a2d-496f-9e9a-74a31576536c.png) \
 If you click on the home button icon, you will see a list of books that you can open or search for in the search bar on the top right.
-![image](https://user-images.githubusercontent.com/71765888/224207413-a13945aa-5c33-47c3-a94a-010c4bc63a7e.png) \
+![image](https://user-images.githubusercontent.com/71765888/224207413-a13945aa-5c33-47c3-a94a-010c4bc63a7e.png) 
 
 ## Current Roadmap
 
