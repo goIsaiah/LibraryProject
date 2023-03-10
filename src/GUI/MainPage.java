@@ -14,10 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
+import Databases.DBMain;
 import Databases.bookmain;
 import DomainObjects.Book;
 import net.miginfocom.swing.MigLayout;
-import pwDB.DBMain;
 
 public class MainPage extends JPanel{
 	static int numOfResults = 7;

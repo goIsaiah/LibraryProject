@@ -1,4 +1,4 @@
-package pwDB;
+package Databases;
 
 import java.sql.*;
 import java.util.ArrayList;

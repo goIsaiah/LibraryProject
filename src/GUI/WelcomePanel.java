@@ -8,9 +8,9 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.*;
 
+import Databases.DBUser;
 import DomainObjects.User;
 import net.miginfocom.swing.MigLayout;
-import pwDB.DBUser;
 
 public class WelcomePanel extends JPanel{
 	 private Template parentTemplate;

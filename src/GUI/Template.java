@@ -23,10 +23,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import Databases.DBMain;
 import DomainObjects.Book;
 import DomainObjects.User;
 import net.miginfocom.swing.MigLayout;
-import pwDB.DBMain;
 
 public class Template extends JFrame {
 	private JPanel panelContainer;
