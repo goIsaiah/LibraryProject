@@ -40,7 +40,7 @@ class ReviewTests
 		assertEquals(String.format("abbey reviewed Percy Jackson.\nReview: %s\n(Edited)", newmessage), r.toString());
 	}
 	
-//	@Test
+	@Test
 	void addReviewTest() throws SQLException
 	{
 		
@@ -106,7 +106,7 @@ class ReviewTests
 			conn = DriverManager.getConnection(url, user, password);
 			query = String.format("SELECT * FROM Reviews WHERE id = ? AND book = ? AND user = ? AND message = ? AND likes = ?");
 			preparedstatement = conn.prepareStatement(query);
-			preparedstatement.setInt(1, 2);
+			preparedstatement.setInt(1, 1);
 			preparedstatement.setString(2, b.getTitle());
 			preparedstatement.setString(3, u.getUsername());
 			preparedstatement.setString(4, message);
