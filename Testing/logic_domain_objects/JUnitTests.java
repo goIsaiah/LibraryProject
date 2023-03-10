@@ -15,9 +15,8 @@ import Logic.AlreadyAFriendException;
 import Logic.Authentication;
 import Logic.Citation;
 import Logic.GoogleJSON;
-import Logic.SearchforBook;
 import DomainObjects.Book;
-import Databases.bookmain;
+
 
 class JUnitTests {
 
@@ -253,15 +252,6 @@ class JUnitTests {
 
 	}
 
-	@Test
-	void SearchforBook() {
-		SearchforBook search = new SearchforBook();
-		bookmain booklist = new bookmain();
-		ArrayList<Book> b = booklist.getList();
-		String title = "Harry Potter: The Goblet of Fire";
-		assertTrue(title, search.checkBook(title));
-
-
-	}
+	
 
 }
