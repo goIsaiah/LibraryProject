@@ -27,13 +27,12 @@ To initialize the database, please  download and run the databse script named 'l
 
 <img width="1433" alt="screnshot1" src="https://user-images.githubusercontent.com/29023871/223929924-3e5131cf-e577-4bf5-bce8-237989001d87.png">
 
-For a quick tutorial on how to run the script click
-* [mysql workbench]() 
-* [command line]() 
+Import the sql file into the workbench and run. Or run it from the command line. 
 
-If the initialization is succussful, the tables created are \
+If the initialization is succussful, the tables created are
 
-<img width="184" alt="tables" src="https://user-images.githubusercontent.com/29023871/223933109-4aa5166e-c9c7-4753-adc5-869d249352fd.png">
+![SCR-20230310-ep3](https://user-images.githubusercontent.com/29023871/224357984-bc88d91d-e2e2-4e8b-832b-681a61ae1330.png)
+
 
 ### Running the MySQL Script
 
