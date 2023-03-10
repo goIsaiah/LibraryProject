@@ -82,8 +82,8 @@ public class DBUser {
 		String sql = "INSERT INTO usertable (username, password, email) VALUES (?, ?, ?)";
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, username);
-		statement.setString(2, passwordLog);
-		statement.setString(3, email);
+		statement.setString(2, email);
+		statement.setString(3, passwordLog);
 		statement.executeUpdate();
 	}
 
