@@ -37,10 +37,11 @@ If the initialization is succussful, the tables created are \
 
 ### Running the MySQL Script
 
-Open MySQL Workbench -> Open your root/local instance account -> Server -> Data Import \
-Once you open the Data Import page, the settings should look like this: \
-
-![image](https://user-images.githubusercontent.com/71765888/224203661-a34fe2b9-d202-4cf7-8074-cdf47c49702c.png)\
+Open MySQL Workbench -> Open your root/local instance account -> Server -> Data Import 
+Once you open the Data Import page, the settings should look like this: 
+![image](https://user-images.githubusercontent.com/71765888/224203661-a34fe2b9-d202-4cf7-8074-cdf47c49702c.png)
+The path to the libraryDB.sql should be changed to the path to the file in your repository
+Once all the settings are the same, hit the "Start Import" button
 
 ### Running The Project
 
