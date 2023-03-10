@@ -13,9 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
-
 import Databases.DBMain;
-import Databases.bookmain;
 import DomainObjects.Book;
 import net.miginfocom.swing.MigLayout;
 

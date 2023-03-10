@@ -1,8 +1,6 @@
 package GUI;
 
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -11,7 +9,6 @@ import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.*;
@@ -19,120 +16,37 @@ import javax.swing.*;
 import DomainObjects.User;
 import Logic.Comment;
 import Logic.Forum;
-import net.miginfocom.swing.MigLayout;
-
-/*
- * todo:
- * 	*update CommentsPanel when a new comment is added
- */
-
-class CommentTextPane extends JPanel{
-	
-	private JScrollPane scroll; 
-	private User user ;
-	public JTextArea textArea;
-	
-	public CommentTextPane(User user) {
-		
-		this.user = user; 
-		this.setLayout(new MigLayout("wrap", "[]",""));
-		// text to input the comments 
-		initText(); 
-		initScroll();
-		add(scroll);
-		
-	}
-	private void initText() {
-		textArea = new JTextArea(5, 20);
-		textArea.setPreferredSize(new Dimension(300, 500));
-		textArea.setLineWrap(true);
-	}
-	
-	private void initScroll() {
-		scroll = new JScrollPane(textArea);
-		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-	}
-	
-	public JTextArea getTextArea() {
-		return this.textArea; 
-	}
-	
-	public void setTextArea(String str) {
-		textArea.setText(str);
-	}
-}
-
-
-class CommentBox extends JTextArea{
-	
-	public CommentBox(String comment) {
-		super(3, 21);
-		this.setText(comment);
-		this.setEditable(false);
-		this.setLineWrap(true);
-		this.setBorder(BorderFactory.createLineBorder(Color.black, 1));
-	}	
-}
-
-
-class CommentsPanel extends JPanel{
-	
-	private Forum forum;
-	private JScrollPane sp; 
-	private JPanel commentsPanel ; 
-	
-	public CommentsPanel() {
-		forum = new Forum();
-		setPreferredSize(new Dimension(300, 200));
-		commentsPanel = new JPanel(); 
-		
-		initScroll();
-		
-		MigLayout mig = new MigLayout("wrap", "5[]", "4[]4[]4[]");
-		commentsPanel.setLayout(mig);
-		
-		ArrayList<String> list = forum.getComments();
-		
-		for(String s: list) {
-			commentsPanel.add(new CommentBox(s));
-		}
-		add(sp);
-	}
-	
-	public void initScroll() {
-		sp = new JScrollPane(commentsPanel); 
-		sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		sp.setPreferredSize(getPreferredSize());
-	}
-	
-}
 
 
 class ForumPanel extends JPanel{
-	private User user; 
 	private CommentsPanel panel ; 
-	private CommentTextPane text; 
-	
-	
-	public ForumPanel() throws SQLException{
-		user = new User("Vince", "1234", "Vince.email.com" );; 
+	private CommentTextField text; 
+	public ForumPanel( User user, String book_title, int book_id) {
+
+		
 		panel = new CommentsPanel(); 
-		text = new CommentTextPane(user); 
-        setBackground(Color.white);
+		text = new CommentTextField(); 
+		
 		JButton submit = new JButton(); 
 		submit.setText("Submit");
 		submit.addActionListener(new ActionListener() {
-
+			
+			// updates database and GUI when submit button is clicked 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Random rand= new Random(); 
-				
-				Comment com = new Comment(user, rand.nextInt(10), text.getTextArea().getText()); 
+				Comment com = new Comment(user, text.getTextArea().getText(), book_title, book_id ); 
 				Forum forum = new Forum(); 
-				forum.addComment(com);
-				text.setTextArea("");
+					try {
+						forum.addComment(com);
+						
+						text.setTextArea(""); 							
+						SwingUtilities.invokeLater(() -> {
+							panel.updateCommentsPanel();
+						});
+						
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}						
 			}
 			
 		});
@@ -140,18 +54,7 @@ class ForumPanel extends JPanel{
 		add(panel);
 		add(text); 
 		add(submit);
-		
 	}
-	
-	private void init() {
-		MigLayout mig = new MigLayout("wrap", "[]", "5[]5[]5"); 
-		this.setLayout(mig);
-		this.setPreferredSize(new Dimension(400, 800));
-		
-	}
-	
-
 }
 
  
-
