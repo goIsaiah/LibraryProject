@@ -35,13 +35,12 @@ If the initialization is succussful, the tables created are \
 
 <img width="184" alt="tables" src="https://user-images.githubusercontent.com/29023871/223933109-4aa5166e-c9c7-4753-adc5-869d249352fd.png">
 
-### Change MYSQL Password
+### Running the MySQL Script
 
-Next head over to Eclipse IDE or another IDE of choice, then head over to the  src->pwDB->DBMain.java and replace the password to your 
-mysql user password. \
-<img width="288" alt="DBMain" src="https://user-images.githubusercontent.com/29023871/223933702-9071b3e2-2232-478a-b91d-6659b4c01b3c.png">
-\
-<img width="737" alt="password" src="https://user-images.githubusercontent.com/29023871/223934100-960fb2ff-aa26-4bad-a15e-53dbaf8686cb.png">
+Open MySQL Workbench -> Open your root/local instance account -> Server -> Data Import \
+Once you open the Data Import page, the settings should look like this: \
+
+![image](https://user-images.githubusercontent.com/71765888/224203661-a34fe2b9-d202-4cf7-8074-cdf47c49702c.png)\
 
 ### Running The Project
 
