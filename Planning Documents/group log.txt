@@ -22,3 +22,6 @@ higher priority such as searching, checking out, comments/forum , and ratings an
 The team also has to do more integration and stub testing before the end of iteration 2. 
 
 Next meeting: 09/03/2023 
+Present: Everyone
+- The team meets and works on testing appropriate classes as well as integration testing.
+- The team irons out final details and prepares for submission on Friday.
