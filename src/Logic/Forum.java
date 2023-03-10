@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import GUI.LibraryUI;
+
 
 
 public class Forum {
@@ -15,7 +17,7 @@ public class Forum {
 	// databse 
 	private  String user = "root";
 	private String url = "jdbc:mysql://localhost:3306/myDB"; 
-	private  String password = "1977"; 
+	static String password = LibraryUI.sqlpassword; 
 	private String query; 
 	private Connection conn; 
 	private Statement stmt; 

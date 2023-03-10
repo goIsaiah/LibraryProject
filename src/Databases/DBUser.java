@@ -7,13 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import GUI.LibraryUI;
 public class DBUser {
 	
 	static String url = "jdbc:mysql://localhost:3306/myDB";
 	static String urlRoot = "jdbc:mysql://localhost:3306";
 	static String user = "root";
-	static String password = "1977"; //Change this
+	static String password = LibraryUI.sqlpassword; //Change this
 	
 	public DBUser() {
 	}

@@ -125,7 +125,7 @@ public class Template extends JFrame {
 		}
 		if (string == "Forum") {
 			try {
-				panelContainer.add(new ForumPanel(user, book.getTitle(),1), "Forum");
+				panelContainer.add(new ForumPanel(user, book.getTitle(), 1), "Forum");
 				CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
 		        cardLayout.show(panelContainer, string);
 		        add(searchPanel, BorderLayout.EAST);

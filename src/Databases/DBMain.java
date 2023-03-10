@@ -6,13 +6,14 @@ import java.util.ArrayList;
 import com.mysql.cj.util.StringUtils;
 
 import DomainObjects.Book;
+import GUI.LibraryUI;
 
 
 public class DBMain { 
 	static String url = "jdbc:mysql://localhost:3306/myDB";
 	static String urlRoot = "jdbc:mysql://localhost:3306";
 	static String user = "root";
-	static String password = "1977";
+	static String password = LibraryUI.sqlpassword;
 	
 	public DBMain() throws SQLException {
 	}
