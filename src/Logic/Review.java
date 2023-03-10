@@ -16,6 +16,8 @@ public class Review
 		this.b = b;
 		this.u = u;
 		this.likes = 0;
+		
+		
 	}
 	
 	public void editMessage(String newmessage)

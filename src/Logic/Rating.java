@@ -16,6 +16,7 @@ public class Rating
 		this.rating = 0;
 	}
 	
+	
 	public void setRating(int newRating)
 	{
 		this.rating = newRating;

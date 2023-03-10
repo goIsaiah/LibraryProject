@@ -30,6 +30,7 @@ class RatingTests
 	@Test
 	void addRatingTest() throws SQLException
 	{
+		
 		//this should be succesful
 		System.out.println("Enter SQL password: ");
 		Scanner sc = new Scanner(System.in);
