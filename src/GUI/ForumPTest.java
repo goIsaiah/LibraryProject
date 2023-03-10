@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Dimension;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 
@@ -9,7 +10,7 @@ import DomainObjects.User;
 public class ForumPTest {
 	
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		
 		User user = new User("JohnDoe", "1234", "vincegab@my.yorku.ca"  );
 		String book_title = "1984"; 

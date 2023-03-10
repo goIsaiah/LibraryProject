@@ -21,7 +21,7 @@ import Logic.Forum;
 class ForumPanel extends JPanel{
 	private CommentsPanel panel ; 
 	private CommentTextField text; 
-	public ForumPanel( User user, String book_title, int book_id) {
+	public ForumPanel( User user, String book_title, int book_id) throws SQLException {
 
 		
 		panel = new CommentsPanel(); 
@@ -38,15 +38,20 @@ class ForumPanel extends JPanel{
 				Forum forum = new Forum(); 
 					try {
 						forum.addComment(com);
-						
-						text.setTextArea(""); 							
-						SwingUtilities.invokeLater(() -> {
-							panel.updateCommentsPanel();
-						});
-						
 					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
 						e1.printStackTrace();
-					}						
+					}
+					
+					text.setTextArea(""); 							
+					SwingUtilities.invokeLater(() -> {
+						try {
+							panel.updateCommentsPanel();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					});						
 			}
 			
 		});

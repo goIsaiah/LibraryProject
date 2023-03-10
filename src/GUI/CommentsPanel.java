@@ -17,7 +17,7 @@ class CommentsPanel extends JPanel{
 	private JPanel commentsPanel ; 
 	private ArrayList<String> list; 
 	
-	public CommentsPanel() {
+	public CommentsPanel() throws SQLException {
 		forum = new Forum();
 		setPreferredSize(new Dimension(300, 200));
 		commentsPanel = new JPanel(); 
@@ -39,20 +39,13 @@ class CommentsPanel extends JPanel{
 		sp.setPreferredSize(getPreferredSize());
 	}
 	
-	public void updateCommentsPanel() {
-		try {
-			
-			
-			commentsPanel.removeAll();
-			list = forum.getComments();
-			for(String s: list) {
-				commentsPanel.add(new CommentBlob(s));
-			}
-			commentsPanel.revalidate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public void updateCommentsPanel() throws SQLException {
+		commentsPanel.removeAll();
+		list = forum.getComments();
+		for(String s: list) {
+			commentsPanel.add(new CommentBlob(s));
 		}
+		commentsPanel.revalidate();
 		
 	}
 	

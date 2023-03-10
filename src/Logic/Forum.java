@@ -2,6 +2,7 @@ package Logic;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,20 +14,14 @@ public class Forum {
 	
 	// databse 
 	private  String user = "root";
-	private  String url = "jdbc:mysql://localhost:3306/myDB"; 
+	private String url = "jdbc:mysql://localhost:3306/myDB"; 
 	private  String password = "1977"; 
 	private String query; 
 	private Connection conn; 
 	private Statement stmt; 
 	
-	
-	/*
-	 * Assumees that table Commeents(id int , comment text, user varchar(255), book_title varchar(255)) 
-	 * is in the database
-	 */
-	
 	public Forum() {
-		url = "jdbc:mysql://localhost:3306/mydb";
+
 		try {
 			conn = DriverManager.getConnection(url,user, password);
 			stmt = conn.createStatement();
@@ -37,58 +32,38 @@ public class Forum {
 	}
 	
 	
-	public  void addComment(Comment comment) {
-
-		String bookTitle= "Harry Poter"; 
-		query = String.format("INSERT INTO Comments(id, comment, user, book_title) VALUES (\'%d\', \'%s\', \'%s\', \'%s\'  );"
-					, comment.getId(), comment.getMessage(), comment.getUser(), bookTitle);
-				
-		try {
-
-			
+	public  void addComment(Comment comment) throws SQLException {
+		query = "INSERT INTO COMMENTS(usrname, book_id, book_title, comment) VALUES (?, ?, ? ,?)";
+		
+		
 			if(!comment.getMessage().equals("")) {
-				int res = stmt.executeUpdate(query);
-				System.out.println(res);
+				PreparedStatement statement = conn.prepareStatement(query);
+				
+				statement.setString(1, comment.getUserName() );
+				statement.setInt(2,  comment.getBook_Id());
+				statement.setString(3, comment.getBook_Title() );
+				statement.setString(4, comment.getMessage() );
+
+				statement.executeUpdate();
 			}else {
 				System.out.println("message is empty");
 			}
-			
-			
-		} catch (SQLException e) {
-			System.out.println(e.getSQLState());
-		} 	
+
 	}
 	
-	public void removeComment(int id) {
-		query = "Delete from Comments where " + Integer.toString(id) + " ;";
-		
-		try {
-			
-			int res = stmt.executeUpdate(query);
-			System.out.println(res);
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} 
-		
-	}
+
 	
-	public ArrayList<String> getComments() {
-		query = "SELECT comment from Comments;"; 
+	public ArrayList<String> getComments() throws SQLException {
+		query = "SELECT comment from COMMENTS;"; 
 		ResultSet rs = null; 
 		
 		ArrayList<String> list = new ArrayList<>(); 
-		
-		try {
+	
 			rs = stmt.executeQuery(query);
 			while(rs.next()) {
 				list.add(rs.getString(1) + "\n");
 			}
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		return list;
 		
 	}
