@@ -83,7 +83,7 @@ INSERT INTO USERTABLE (USERNAME, PASSWORD, EMAIL) VALUES
 
 INSERT INTO LIBRARY ( LIB_TITLE, LIB_AUTHOR, LIB_ISBN, LIB_YEAR) VALUES 
 ('To Kill a Mockingbird',  'Harper Lee' , '0446310789', '1960' ), 
-('1984LIBRARY',  'George Orwell' , '0446310789', '1949' ),
+('1984',  'George Orwell' , '0446310789', '1949' ),
 ('Pride and Prejudice',  'Pride and Prejudice' , '0446310789', '1813' ), 
 ('Harry Potter and the Sorcerer s Stone',  'J. K. Rowling' , '1338596705', '2020' ), 
 ('Diary of a Wimpy Kid',  'Jeff Kinney' , '0141324902', '2007' ), 
