@@ -20,7 +20,7 @@ public class Review
 	
 	public void editMessage(String newmessage)
 	{
-		this.message = newmessage + " \n(Edited)";
+		this.message = newmessage + "\n(Edited)";
 	}
 	
 	public void likeMessage()
@@ -45,7 +45,7 @@ public class Review
 	
 	public String toString()
 	{
-		String s = String.format("%s reviewed %s. \nReview: %s", u.getUsername(), b.getTitle(), message);
+		String s = String.format("%s reviewed %s.\nReview: %s", u.getUsername(), b.getTitle(), this.message);
 		return s;
 	}
 	
