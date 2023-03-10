@@ -17,7 +17,7 @@ public class Forum {
 	// databse 
 	private  String user = "root";
 	private String url = "jdbc:mysql://localhost:3306/myDB"; 
-	static String password = LibraryUI.sqlpassword; 
+	public static String password = LibraryUI.sqlpassword; 
 	private String query; 
 	private Connection conn; 
 	private Statement stmt; 
@@ -32,6 +32,9 @@ public class Forum {
 		}
 		
 	}
+	
+
+	
 	
 	
 	public  void addComment(Comment comment) throws SQLException {
@@ -70,5 +73,6 @@ public class Forum {
 		
 	}
 	
+
 
 }

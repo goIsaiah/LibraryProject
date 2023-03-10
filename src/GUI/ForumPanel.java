@@ -18,7 +18,7 @@ import Logic.Comment;
 import Logic.Forum;
 
 
-class ForumPanel extends JPanel{
+public class ForumPanel extends JPanel{
 	private CommentsPanel panel ; 
 	private CommentTextField text; 
 	public ForumPanel( User user, String book_title, int book_id) throws SQLException {
