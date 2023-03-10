@@ -2,6 +2,7 @@ package Logic;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,12 +20,6 @@ public class Forum {
 	private Connection conn; 
 	private Statement stmt; 
 	
-	
-	/*
-	 * Assumees that table Commeents(id int , comment text, user varchar(255), book_title varchar(255)) 
-	 * is in the database
-	 */
-	
 	public Forum() {
 
 		try {
@@ -38,12 +33,18 @@ public class Forum {
 	
 	
 	public  void addComment(Comment comment) throws SQLException {
-
-		query = String.format("INSERT INTO COMMENTS(usrname, book_id, book_title, comment) VALUES (\'%s\', %d, \'%s\', \'%s\' );"
-					, comment.getUserName(), comment.getBook_Id(),comment.getBook_Title(), comment.getMessage());
-
+		query = "INSERT INTO COMMENTS(usrname, book_id, book_title, comment) VALUES (?, ?, ? ,?)";
+		
+		
 			if(!comment.getMessage().equals("")) {
-				stmt.executeUpdate(query);
+				PreparedStatement statement = conn.prepareStatement(query);
+				
+				statement.setString(1, comment.getUserName() );
+				statement.setInt(2,  comment.getBook_Id());
+				statement.setString(3, comment.getBook_Title() );
+				statement.setString(4, comment.getMessage() );
+
+				statement.executeUpdate();
 			}else {
 				System.out.println("message is empty");
 			}
@@ -57,7 +58,6 @@ public class Forum {
 		ResultSet rs = null; 
 		
 		ArrayList<String> list = new ArrayList<>(); 
-		
 	
 			rs = stmt.executeQuery(query);
 			while(rs.next()) {
