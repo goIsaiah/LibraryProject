@@ -124,7 +124,34 @@ public class GoogleJSON {
 		}
 		return pub;
 	}
+	
+	public String getSearchISBN13(JSONObject search) {
+        String isbn13 = "";
+        try {
+            JSONObject volumeInfo = search.getJSONObject("volumeInfo");
+            JSONArray industryIdentifiers = volumeInfo.getJSONArray("industryIdentifiers");
+            for (int i = 0; i < industryIdentifiers.length(); i++) {
+                JSONObject identifier = industryIdentifiers.getJSONObject(i);
+                if (identifier.getString("type").equals("ISBN_13")) {
+                    isbn13 = identifier.getString("identifier");
+                    break;
+                }
+            }
+        } catch (Exception e) {
+        }
+        return isbn13;
+    }
 
+    public String getSearchGenre(JSONObject search) {
+        String genre = "";
+        try {
+            JSONArray categories = search.getJSONArray("categories");
+            genre = categories.getString(0);
+        } catch (Exception e) {
+        }
+        return genre;
+    }
+	
 	private String removeSpaces(String s) {
 		return s.replaceAll(" ", "%20"); //%20 is a whitespace for URLS
 	}

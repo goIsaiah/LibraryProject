@@ -220,6 +220,9 @@ public class Template extends JFrame {
     				try {
 						DBMain db = new DBMain();
 						ArrayList<Book> bookList = db.searchLibrary(query);
+						if (bookList.size() == 0) {
+							bookList = db.getAPILibrary(query);
+						}
 						panelContainer.add(new MainPage(bookList), "SearchMain");
 						showPanel("SearchMain");
 					} catch (SQLException e1) {
