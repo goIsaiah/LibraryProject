@@ -10,6 +10,7 @@ class CommentBlob extends JTextArea{
 	
 	public CommentBlob(String comment) {
 		super(3, 21);
+		this.setBackground(Color.white);
 		this.setText(comment);
 		this.setEditable(true);
 		this.setLineWrap(true);

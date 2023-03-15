@@ -139,7 +139,7 @@ public class WelcomePanel extends JPanel{
 		setLayout(new MigLayout("", "[]30[]", "[]30[]")); // set the layout with constraints
         setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
         setBackground(Color.white);
-
+        
         JLabel label = new JLabel(labelString);
         label.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
         add(label, "cell 0 0");

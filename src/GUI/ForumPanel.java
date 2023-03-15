@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -55,7 +56,9 @@ public class ForumPanel extends JPanel{
 			}
 			
 		});
-		
+		setBackground(Color.white);
+		panel.setBackground(Color.white);
+		text.setBackground(Color.white);
 		add(panel);
 		add(text); 
 		add(submit);

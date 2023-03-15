@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
@@ -14,7 +15,7 @@ class CommentTextField extends JPanel{
 	public JTextArea textArea;
 	
 	public CommentTextField() {
-		
+		setBackground(Color.white);
 		this.setLayout(new MigLayout("wrap", "[]",""));
 		// text to input the comments 
 		initText(); 
@@ -25,13 +26,13 @@ class CommentTextField extends JPanel{
 	
 	private void initText() {
 		textArea = new JTextArea(5, 20);
-		textArea.setPreferredSize(new Dimension(300, 500));
+		textArea.setPreferredSize(new Dimension(500, 500));
 		textArea.setLineWrap(true);
 	}
 	
 	private void initScroll() {
 		scroll = new JScrollPane(textArea);
-		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+//		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 	}
 	

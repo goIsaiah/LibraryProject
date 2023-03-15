@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ class CommentsPanel extends JPanel{
 	
 	public CommentsPanel() throws SQLException {
 		forum = new Forum();
-		setPreferredSize(new Dimension(300, 200));
+		setPreferredSize(new Dimension(1000, 800));
 		commentsPanel = new JPanel(); 
 		
 		initScroll();
@@ -28,7 +29,7 @@ class CommentsPanel extends JPanel{
 		commentsPanel.setLayout(mig);
 		
 		this.updateCommentsPanel(); // populates the commentsPanel
-
+		setBackground(Color.white);
 		add(sp);
 	}
 	
@@ -46,6 +47,7 @@ class CommentsPanel extends JPanel{
 			commentsPanel.add(new CommentBlob(s));
 		}
 		commentsPanel.revalidate();
+		setBackground(Color.white);
 		
 	}
 	
