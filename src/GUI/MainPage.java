@@ -91,6 +91,7 @@ public class MainPage extends JPanel{
         forumButton.addActionListener(e -> parentTemplate.showPanel("Comment"));
         add(forumButton, "cell 0 4");
         JButton citationButton = new JButton("   Citation Machine    ");
+        parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
         citationButton.addActionListener(e -> parentTemplate.showPanel("Citation"));
         add(citationButton, "cell 0 5");
 	}

@@ -6,11 +6,8 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-
 import javax.swing.*;
-
 import org.json.JSONObject;
-
 import DomainObjects.*;
 import Logic.Citation;
 import Logic.GoogleJSON;

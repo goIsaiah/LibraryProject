@@ -88,15 +88,26 @@ public class DBMain {
 	}
 
 	public static void DBBookfromAPI(String title, String author, int year, String ISBN) throws SQLException {
-		Connection con = DriverManager.getConnection(url, user, password);
-        String sql = "INSERT INTO LIBRARY (LIB_TITLE, LIB_AUTHOR, LIB_ISBN, LIB_YEAR) VALUES (?, ?, ?, ?)";
-        PreparedStatement pstmt = con.prepareStatement(sql);
-        pstmt.setString(1,title);
-        pstmt.setString(2, author);
-        pstmt.setString(3, ISBN);
-        pstmt.setInt(4, year);
-        pstmt.executeUpdate();
+	    Connection con = DriverManager.getConnection(url, user, password);
+	    String queryCheck = "SELECT * FROM LIBRARY WHERE LIB_TITLE = ? AND LIB_ISBN = ?";
+	    PreparedStatement pstmtCheck = con.prepareStatement(queryCheck);
+	    pstmtCheck.setString(1, title);
+	    pstmtCheck.setString(2, ISBN);
+	    ResultSet resultSet = pstmtCheck.executeQuery();
+	    if (!resultSet.next()) { // If no record exists, insert a new one
+	        String sql = "INSERT INTO LIBRARY (LIB_TITLE, LIB_AUTHOR, LIB_ISBN, LIB_YEAR) VALUES (?, ?, ?, ?)";
+	        PreparedStatement pstmt = con.prepareStatement(sql);
+	        pstmt.setString(1, title);
+	        pstmt.setString(2, author);
+	        pstmt.setString(3, ISBN);
+	        pstmt.setInt(4, year);
+	        pstmt.executeUpdate();
+	    } 
 
-    }
+	    resultSet.close();
+	    pstmtCheck.close();
+	    con.close();
+	}
+
 
 }

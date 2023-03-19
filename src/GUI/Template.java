@@ -103,54 +103,50 @@ public class Template extends JFrame {
 	}
 
 	public void showPanel(String string) {
-		if (string == "Main") {
-			try {
-				
-				panelContainer.add(new MainPage(), "Main");
-				CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
-		        cardLayout.show(panelContainer, string);
-		        add(searchPanel, BorderLayout.EAST);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		if (string == "Comment") {
-			try {
-				panelContainer.add(new CommentPage(book, user), "Comment");
-				CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
-		        cardLayout.show(panelContainer, string);
-		        add(searchPanel, BorderLayout.EAST);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		if (string == "Citation") {
-			panelContainer.add(new CitationPage(book), "Citation");
-			CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
-			cardLayout.show(panelContainer, string);
-			add(searchPanel, BorderLayout.EAST);
-		}
-		if(string=="Profile") {
-			try {
-				panelContainer.add(new ProfilePage(user), "Profile");
-				CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
-		        cardLayout.show(panelContainer, string);
-		        add(searchPanel, BorderLayout.EAST);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		if(string=="Welcome" && user!=null) {
-			CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
-			cardLayout.show(panelContainer, "Profile");
-			add(searchPanel, BorderLayout.EAST); 
-		}
-		else {
-			CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
+	    JPanel panel = null;
+
+	    try {
+	        switch (string) {
+	            case "Main":
+	                panel = new MainPage();
+	                break;
+	            case "Comment":
+	                panel = new CommentPage(book, user);
+	                break;
+	            case "Citation":
+	                panel = new CitationPage(book);
+	                break;
+	            case "Profile":
+	                panel = new ProfilePage(user);
+	                break;
+	            case "Welcome":
+	                if (user != null) {
+	                    panel = new ProfilePage(user);
+	                    string = "Profile";
+	                }
+	                break;
+	            case "SearchMain":
+	            	CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
+	    	        cardLayout.show(panelContainer, string);
+	    	        add(searchPanel, BorderLayout.EAST);
+	    	        break;
+	            default:
+	                throw new IllegalArgumentException("Invalid panel identifier: " + string);
+	        }
+	        if (panel != null) {
+	        	panelContainer.add(panel, string);
+	        } 
+        	CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
 	        cardLayout.show(panelContainer, string);
-	        add(searchPanel, BorderLayout.EAST); 
-        }
+	        add(searchPanel, BorderLayout.EAST);
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } catch (IllegalArgumentException e) {
+	        e.printStackTrace();
+	    }
 	}
+
 
 	private JButton sideButton(String s) {
 		
