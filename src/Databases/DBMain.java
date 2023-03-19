@@ -39,7 +39,8 @@ public class DBMain {
 	        String author = result.getString("LIB_AUTHOR");
 	        String isbn = result.getString("LIB_ISBN");
 	        int year = result.getInt("LIB_YEAR");
-	        Book book = new Book(title, author, year, isbn);
+	        int id = result.getInt("LIB_ID");
+	        Book book = new Book(id, title, author, year, isbn);
 	        bookList.add(book);
 		}
 		return bookList;
@@ -58,6 +59,7 @@ public class DBMain {
 
 	public ArrayList<Book> getAPILibrary(String query) throws SQLException {
 		ArrayList<Book> apibookList = new ArrayList<>();
+		int maxid = getMaxID();
         GoogleJSON gJSON = new GoogleJSON();
         JSONObject jobj = gJSON.getSearch(query);
         JSONObject titleobj = gJSON.getSearchIndex(jobj, 1);
@@ -67,12 +69,20 @@ public class DBMain {
         Integer Year = Integer.valueOf(gJSON.getSearchYear(titleobj));
         String ISBN = gJSON.getSearchISBN13(titleobj);
 //        String Genre = gJSON.getSearchGenre(titleobj);
-        Book e = new Book(title, Authors.toString(), Year, ISBN);
+        Book e = new Book(maxid, title, Authors.toString(), Year, ISBN); //GET ID FROM DB
         DBBookfromAPI(title, Authors.toString(), Year, ISBN);
         apibookList.add(e);
         return apibookList;
 	}
 	
+	private int getMaxID() throws SQLException {
+		Connection conn = DriverManager.getConnection(url, user, password);
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT MAX(LIB_ID) FROM LIBRARY");
+		int nextId = rs.next() ? rs.getInt(1) + 1 : 1;
+		return nextId;
+	}
+
 	public static void DBBookfromAPI(String title, String author, int year, String ISBN) throws SQLException {
 		Connection con = DriverManager.getConnection(url, user, password);
         String sql = "INSERT INTO LIBRARY (LIB_TITLE, LIB_AUTHOR, LIB_ISBN, LIB_YEAR) VALUES (?, ?, ?, ?)";

@@ -81,10 +81,6 @@ public class Template extends JFrame {
 		//SEARCH_BAR
 		searchPanel = searchBar();
 		
-		//Register Object
-		RegisterFrame regPanel = new RegisterFrame();
-		registerCall(regPanel);
-		
 		//Welcome Object
 		WelcomePanel welPanel = new WelcomePanel();
 		
@@ -92,7 +88,6 @@ public class Template extends JFrame {
 		panelContainer = new JPanel(new CardLayout());
 		panelContainer.add(new MainPage(), "Main");
 		panelContainer.add(welPanel, "Welcome");
-        panelContainer.add(regPanel, "Register");
         container.add(panelContainer, BorderLayout.CENTER);
         container.add(searchPanel, BorderLayout.EAST);
 		closeOP();
@@ -106,15 +101,11 @@ public class Template extends JFrame {
 	public User getUser() {
 		return this.user;
 	}
-	
-	private void registerCall(RegisterFrame regPanel) {
-		JButton regButton = regPanel.getRegisterButton();
-		regButton.addActionListener(e -> showPanel("Main")); 
-	}
 
 	public void showPanel(String string) {
 		if (string == "Main") {
 			try {
+				
 				panelContainer.add(new MainPage(), "Main");
 				CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
 		        cardLayout.show(panelContainer, string);
@@ -123,9 +114,9 @@ public class Template extends JFrame {
 				e.printStackTrace();
 			}
 		}
-		if (string == "Forum") {
+		if (string == "Comment") {
 			try {
-				panelContainer.add(new ForumPanel(user, book.getTitle(), 1), "Forum");
+				panelContainer.add(new CommentPage(book, user), "Comment");
 				CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
 		        cardLayout.show(panelContainer, string);
 		        add(searchPanel, BorderLayout.EAST);

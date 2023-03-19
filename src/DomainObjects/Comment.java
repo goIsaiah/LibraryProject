@@ -1,6 +1,4 @@
-package Logic;
-
-import DomainObjects.User;
+package DomainObjects;
 
 public class Comment {
 	private User user; 

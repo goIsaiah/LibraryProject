@@ -1,4 +1,4 @@
-package Logic;
+package Databases;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,11 +8,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import DomainObjects.Book;
+import DomainObjects.Comment;
+import DomainObjects.User;
 import GUI.LibraryUI;
 
 
 
-public class Forum {
+public class DBForum {
 	
 	// databse 
 	private  String user = "root";
@@ -22,7 +25,7 @@ public class Forum {
 	private Connection conn; 
 	private Statement stmt; 
 	
-	public Forum() {
+	public DBForum() {
 
 		try {
 			conn = DriverManager.getConnection(url,user, password);
@@ -43,7 +46,7 @@ public class Forum {
 		
 			if(!comment.getMessage().equals("")) {
 				PreparedStatement statement = conn.prepareStatement(query);
-				
+				System.out.println(comment.getUserName());
 				statement.setString(1, comment.getUserName() );
 				statement.setInt(2,  comment.getBook_Id());
 				statement.setString(3, comment.getBook_Title() );
@@ -58,8 +61,8 @@ public class Forum {
 	
 
 	
-	public ArrayList<String> getComments() throws SQLException {
-		query = "SELECT comment from COMMENTS;"; 
+	public ArrayList<String> getComments(int id) throws SQLException {
+		query = "SELECT comment FROM COMMENTS WHERE book_id = '" + id +"';";
 		ResultSet rs = null; 
 		
 		ArrayList<String> list = new ArrayList<>(); 
@@ -72,6 +75,23 @@ public class Forum {
 		return list;
 		
 	}
+	
+	public ArrayList<Comment> getCommentList(int id) throws SQLException {
+		ArrayList<Comment> list = new ArrayList<>();
+		query = "SELECT book_title, comment, usrname, book_id FROM COMMENTS WHERE book_id = '" + id + "';";
+		ResultSet result = stmt.executeQuery(query);
+		while (result.next()) {
+	        String title = result.getString("book_title");
+	        String commentString = result.getString("comment");
+	        String usrname = result.getString("usrname");
+	        int bookid = result.getInt("book_id");
+	        User user = new User(usrname);
+	        Comment comment = new Comment(user, commentString, title, bookid);
+	        list.add(comment);
+		}
+		return list;
+	}
+	
 	
 
 

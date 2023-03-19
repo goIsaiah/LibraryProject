@@ -1,7 +1,6 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.sql.SQLException;
@@ -85,8 +84,10 @@ public class MainPage extends JPanel{
         JButton forumButton = new JButton("   Open Comments    ");
         parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
         parentTemplate.setBook(book);
-        forumButton.addActionListener(e -> parentTemplate.showPanel("Forum"));
+        forumButton.addActionListener(e -> parentTemplate.showPanel("Comment"));
         add(forumButton, "cell 0 4");
+        
+        
 	}
 
 }

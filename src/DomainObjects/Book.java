@@ -10,6 +10,7 @@ public class Book
 	private int numOfPages;
 	private int yearPublished;
 	private int rating;
+	private int id; 
 	
 	public Book(String title, String author, int yearPublished, int rating)
 	{
@@ -19,12 +20,13 @@ public class Book
 		this.rating = rating;
 	}
 
-	public Book(String title, String author, int yearPublished, String isbn)
+	public Book(int id, String title, String author, int yearPublished, String isbn)
 	{
 		this.title = title;
 		this.author = author;
 		this.yearPublished = yearPublished;
 		this.isbn=isbn;
+		this.setId(id);
 	}
 	
 	public String getTitle() 
@@ -85,6 +87,14 @@ public class Book
 	public void setRating(int rating) 
 	{
 		this.rating = rating;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

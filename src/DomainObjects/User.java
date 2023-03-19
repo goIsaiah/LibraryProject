@@ -22,6 +22,11 @@ public class User
 	private ArrayList<Book> favouritesList;
 
 	//creating constructor
+	public User(String username) {
+		this.username = username;
+	}
+	
+	
 	public User(String username, String password, String email)
 	{
 		this.username = username;
