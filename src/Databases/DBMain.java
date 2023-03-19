@@ -58,21 +58,25 @@ public class DBMain {
 	}
 
 	public ArrayList<Book> getAPILibrary(String query) throws SQLException {
-		ArrayList<Book> apibookList = new ArrayList<>();
-		int maxid = getMaxID();
-        GoogleJSON gJSON = new GoogleJSON();
-        JSONObject jobj = gJSON.getSearch(query);
-        JSONObject titleobj = gJSON.getSearchIndex(jobj, 1);
-        String title = gJSON.getSearchName(titleobj);
-        String publisher = gJSON.getSearchPublisher(titleobj);
-        JSONArray Authors = gJSON.getSearchAuthor(titleobj);
-        Integer Year = Integer.valueOf(gJSON.getSearchYear(titleobj));
-        String ISBN = gJSON.getSearchISBN13(titleobj);
-//        String Genre = gJSON.getSearchGenre(titleobj);
-        Book e = new Book(maxid, title, Authors.toString(), Year, ISBN); //GET ID FROM DB
-        DBBookfromAPI(title, Authors.toString(), Year, ISBN);
-        apibookList.add(e);
-        return apibookList;
+	    ArrayList<Book> apibookList = new ArrayList<>();
+	    int maxid = getMaxID();
+	    GoogleJSON gJSON = new GoogleJSON();
+	    JSONObject jobj = gJSON.getSearch(query);
+	    JSONObject titleobj = gJSON.getSearchIndex(jobj, 1);
+	    String title = gJSON.getSearchName(titleobj);
+	    String publisher = gJSON.getSearchPublisher(titleobj);
+	    JSONArray authorsArray = gJSON.getSearchAuthor(titleobj);
+	    ArrayList<String> authorsList = new ArrayList<>();
+	    for (int i = 0; i < authorsArray.length(); i++) {
+	        String author = authorsArray.getString(i);
+	        authorsList.add(author);
+	    }
+	    Integer year = Integer.valueOf(gJSON.getSearchYear(titleobj));
+	    String isbn = gJSON.getSearchISBN13(titleobj);
+	    Book e = new Book(maxid, title, authorsList.get(0), year, isbn); //GET ID FROM DB
+	    DBBookfromAPI(title, authorsList.get(0), year, isbn);
+	    apibookList.add(e);
+	    return apibookList;
 	}
 	
 	private int getMaxID() throws SQLException {

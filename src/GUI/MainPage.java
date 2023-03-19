@@ -71,6 +71,8 @@ public class MainPage extends JPanel{
 		removeAll();
 		revalidate();
 		repaint();
+		
+		//Book Information
 		framePanel(book.getTitle());
 		JLabel author = new JLabel("By: " + book.getAuthor());
         author.setFont(new Font(Font.SANS_SERIF, Font.ITALIC,20));
@@ -81,13 +83,16 @@ public class MainPage extends JPanel{
         JLabel yearPub = new JLabel("Published: "  + book.getYearPublished());
         yearPub.setFont(new Font(Font.SANS_SERIF, Font.PLAIN,20));
         add(yearPub, "cell 0 3");
+        
+        //Buttons
         JButton forumButton = new JButton("   Open Comments    ");
         parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
         parentTemplate.setBook(book);
         forumButton.addActionListener(e -> parentTemplate.showPanel("Comment"));
         add(forumButton, "cell 0 4");
-        
-        
+        JButton citationButton = new JButton("   Citation Machine    ");
+        citationButton.addActionListener(e -> parentTemplate.showPanel("Citation"));
+        add(citationButton, "cell 0 5");
 	}
 
 }

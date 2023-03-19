@@ -12,10 +12,10 @@ import Databases.DBUser;
 import DomainObjects.User;
 import net.miginfocom.swing.MigLayout;
 
-public class WelcomePanel extends JPanel{
+public class WelcomePage extends JPanel{
 	 private Template parentTemplate;
 	 
-    public WelcomePanel() throws SQLException {
+    public WelcomePage() throws SQLException {
 	
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");

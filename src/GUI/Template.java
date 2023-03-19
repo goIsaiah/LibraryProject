@@ -82,7 +82,7 @@ public class Template extends JFrame {
 		searchPanel = searchBar();
 		
 		//Welcome Object
-		WelcomePanel welPanel = new WelcomePanel();
+		WelcomePage welPanel = new WelcomePage();
 		
 		//Panel Container 
 		panelContainer = new JPanel(new CardLayout());
@@ -124,9 +124,15 @@ public class Template extends JFrame {
 				e.printStackTrace();
 			}
 		}
+		if (string == "Citation") {
+			panelContainer.add(new CitationPage(book), "Citation");
+			CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
+			cardLayout.show(panelContainer, string);
+			add(searchPanel, BorderLayout.EAST);
+		}
 		if(string=="Profile") {
 			try {
-				panelContainer.add(new Profile(user), "Profile");
+				panelContainer.add(new ProfilePage(user), "Profile");
 				CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
 		        cardLayout.show(panelContainer, string);
 		        add(searchPanel, BorderLayout.EAST);

@@ -41,7 +41,6 @@ public class CommentPage extends JPanel{
     }
 	
 	private void addComments() {
-		
 		//COMMENT_FORM_PANEL
 		JPanel commentFormPanel = new JPanel();
 		commentFormPanel.setLayout(new MigLayout("", "[]10[]", "[]10[]"));
@@ -64,7 +63,6 @@ public class CommentPage extends JPanel{
 			}
 		}); 
 
-		
 		add(commentFormPanel, "cell 0 1");
 	}
 	
@@ -116,10 +114,6 @@ public class CommentPage extends JPanel{
 			
 			commentsPanel.add(commentPanel);
 		}
-
-
-
-
 
 	    //SCROLL_PANE
 	    JScrollPane commentsScrollPane = new JScrollPane(commentsPanel);

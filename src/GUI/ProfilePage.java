@@ -14,9 +14,9 @@ import DomainObjects.User;
 import GUI.Template;
 import net.miginfocom.swing.MigLayout;
 
-public class Profile extends JPanel{
+public class ProfilePage extends JPanel{
 	
-	public Profile(User user) throws SQLException{
+	public ProfilePage(User user) throws SQLException{
 		setLayout(new MigLayout("", "[]30[]", "[]30[]"));
         setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
         setBackground(Color.white);
