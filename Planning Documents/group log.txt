@@ -1,27 +1,10 @@
-groupLog for iteration 2
+group meeting: march 19th, 2023
+members present: abbey, isaiah, sathira, vince
 
-Deligations:
-abbey: tbd
-Vince: testing ; 
-Sathira: citation if needed. testing
-Jet; testing
-Isiah; tbd
+designations: 
+- abbey: ratings and reviews (integrate with gui), wishlist
+- isaiah: checkout books
+- sathira: profile
+- vince: recommendations
+- jet:
 
-Meetings: 8/03/2023; 
-Present: Everyone 
-
-- The team decides on writing an sql file that takes care of initializing the database rather than doing so using JDBC. 
-- Abbey completes ratings and reviews of the books, and merged her branch to the main branch. 
-- Vince completes gui for forum, but still requires to connection to the main gui as well write more tests. 
-- Jet completes logic for switching between Book databse and retrieving data from API as needed by the app. 
-- Isiah completes registration and log in logic and gui. Only thing left is to connect to the new database. 
-- Sathira fixes bugs and possibly implementing citation if group decides it is needed. 
-
-The citation component is not included at this time because other user stories are at 
-higher priority such as searching, checking out, comments/forum , and ratings and reviews. 
-The team also has to do more integration and stub testing before the end of iteration 2. 
-
-Next meeting: 09/03/2023 
-Present: Everyone
-- The team meets and works on testing appropriate classes as well as integration testing.
-- The team irons out final details and prepares for submission on Friday.
