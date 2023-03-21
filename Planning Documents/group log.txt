@@ -5,6 +5,6 @@ designations:
 - abbey: ratings and reviews (integrate with gui), wishlist
 - isaiah: checkout books
 - sathira: profile
-- vince: recommendations
+- vince: FriendsList/ Community user story 
 - jet:
 
