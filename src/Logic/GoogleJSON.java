@@ -145,8 +145,10 @@ public class GoogleJSON {
     public String getSearchGenre(JSONObject search) {
         String genre = "";
         try {
-            JSONArray categories = search.getJSONArray("categories");
+        	JSONObject volumeInfo = search.getJSONObject("volumeInfo");
+            JSONArray categories = volumeInfo.getJSONArray("categories");
             genre = categories.getString(0);
+  
         } catch (Exception e) {
         }
         return genre;

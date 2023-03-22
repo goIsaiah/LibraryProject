@@ -73,8 +73,9 @@ public class DBMain {
 	    }
 	    Integer year = Integer.valueOf(gJSON.getSearchYear(titleobj));
 	    String isbn = gJSON.getSearchISBN13(titleobj);
+	    String Genre = gJSON.getSearchGenre(titleobj);
 	    Book e = new Book(maxid, title, authorsList.get(0), year, isbn); //GET ID FROM DB
-	    DBBookfromAPI(title, authorsList.get(0), year, isbn);
+	    DBBookfromAPI(title, authorsList.get(0), year, isbn, Genre);
 	    apibookList.add(e);
 	    return apibookList;
 	}
@@ -87,7 +88,7 @@ public class DBMain {
 		return nextId;
 	}
 
-	public static void DBBookfromAPI(String title, String author, int year, String ISBN) throws SQLException {
+	public static void DBBookfromAPI(String title, String author, int year, String ISBN, String Genre) throws SQLException {
 	    Connection con = DriverManager.getConnection(url, user, password);
 	    String queryCheck = "SELECT * FROM LIBRARY WHERE LIB_TITLE = ? AND LIB_ISBN = ?";
 	    PreparedStatement pstmtCheck = con.prepareStatement(queryCheck);
@@ -95,12 +96,13 @@ public class DBMain {
 	    pstmtCheck.setString(2, ISBN);
 	    ResultSet resultSet = pstmtCheck.executeQuery();
 	    if (!resultSet.next()) { // If no record exists, insert a new one
-	        String sql = "INSERT INTO LIBRARY (LIB_TITLE, LIB_AUTHOR, LIB_ISBN, LIB_YEAR) VALUES (?, ?, ?, ?)";
+	        String sql = "INSERT INTO LIBRARY (LIB_TITLE, LIB_AUTHOR, LIB_ISBN, LIB_YEAR, GENRE) VALUES (?, ?, ?, ?, ?)";
 	        PreparedStatement pstmt = con.prepareStatement(sql);
 	        pstmt.setString(1, title);
 	        pstmt.setString(2, author);
 	        pstmt.setString(3, ISBN);
 	        pstmt.setInt(4, year);
+	        pstmt.setString(5, Genre);
 	        pstmt.executeUpdate();
 	    } 
 

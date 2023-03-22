@@ -100,6 +100,20 @@ INSERT INTO BOOKLISTS(usrname, usr_id, book_id, book_title, book_isbn) VALUES
 
 ;
 
+CREATE TABLE BOOKLISTSWGenre(
+	usrname VARCHAR(255), 
+    usr_id INT,
+	book_id INT, 
+	book_title VARCHAR(255) NOT NULL, 
+    book_isbn VARCHAR(255) NOT NULL, 
+    book_genre VARCHAR(255),
+    FOREIGN KEY(usr_id) REFERENCES USERTABLE(user_id),
+    FOREIGN KEY(usrname) REFERENCES USERTABLE(USERNAME),
+    FOREIGN KEY(book_title, book_isbn) REFERENCES LIBRARY(LIB_TITLE, LIB_ISBN), -- book_title == LIBRARY.LIB_TITLE &&  book_isbn == LIBRARY.LIB_ISBN
+	FOREIGN KEY (book_id, book_genre) REFERENCES LIBRARY(LIB_ID, GENRE)
+);
+
+
 
 
 
