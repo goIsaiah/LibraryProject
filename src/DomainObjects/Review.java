@@ -1,6 +1,4 @@
-package Logic;
-
-import DomainObjects.*;
+package DomainObjects;
 
 //to do: add table but assume there is already a table for reviews and ratings
 public class Review 
