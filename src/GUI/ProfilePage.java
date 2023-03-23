@@ -1,10 +1,7 @@
 package GUI;
 
-<<<<<<< HEAD
-=======
 import java.awt.BorderLayout;
 
->>>>>>> branch 'master' of https://github.com/goIsaiah/LibraryProject
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -76,7 +73,6 @@ public class ProfilePage extends JPanel{
         bioArea.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
         add(bioArea, "cell 1 2");
 
-//        add(userBanner, "cell 0 1, span 2");
     }
 
 
