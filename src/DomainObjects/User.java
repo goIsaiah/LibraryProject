@@ -15,6 +15,8 @@ public class User
 	private String password;
 	private String email;
 	private String birthday;
+	private String URL;
+	private String bio;
 	//	private String email;
 	private Date dateJoined;
 	private ArrayList<Book> checkedOutBooks;
@@ -38,7 +40,10 @@ public class User
 		this.birthday = null;
 		this.dateJoined = new Date();
 		this.checkedOutBooks = null;
-
+		this.setBio(null);
+		this.setURL(null);
+		
+		
 		this.checkedOutBooks = new ArrayList<Book>();
 		this.followerList = new ArrayList<User>();
 		this.favouritesList = new ArrayList<Book>();
@@ -243,5 +248,25 @@ public class User
 	public ArrayList<User> getFollowersList()
 	{
 		return followerList;
+	}
+
+
+	public String getURL() {
+		return URL;
+	}
+
+
+	public void setURL(String uRL) {
+		URL = uRL;
+	}
+
+
+	public String getBio() {
+		return bio;
+	}
+
+
+	public void setBio(String bio) {
+		this.bio = bio;
 	}
 }

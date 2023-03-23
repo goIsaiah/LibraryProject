@@ -31,6 +31,15 @@ EMAIL varchar(255) NOT NULL UNIQUE,
 UNIQUE KEY ( USERNAME )
 );
 
+CREATE TABLE IF NOT EXISTS USERINFO (
+  info_id INT auto_increment unique PRIMARY KEY,
+  user_id INT NOT NULL,
+  URL varchar(255),
+  TEXTFIELD varchar(255),
+  FIRSTNAME varchar(255),
+  LASTNAME varchar(255),
+  FOREIGN KEY (user_id) REFERENCES USERTABLE(user_id)
+);
 
 CREATE TABLE COMMENTS(
 	usrname VARCHAR(255), 

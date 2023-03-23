@@ -69,14 +69,14 @@ public class Template extends JFrame {
 		//Side Buttons
 		JButton home = sideButton("/home.png"); 
 		JButton profile = sideButton("/profile.png"); 
-		JButton register = sideButton("/settings.png"); 
+		JButton settings = sideButton("/settings.png"); 
 		sidebar.add(home, "cell 0 1");
 		sidebar.add(profile , "cell 0 2");
-		sidebar.add(register , "cell 0 3");
+		sidebar.add(settings , "cell 0 3");
 		//Side Button on Click
 		home.addActionListener(e -> showPanel("Main")); 
 		profile.addActionListener(e -> showPanel("Welcome")); 
-		register.addActionListener(e -> showPanel("Register")); 
+		settings.addActionListener(e -> showPanel("Settings")); 
 		
 		//SEARCH_BAR
 		searchPanel = searchBar();
@@ -119,10 +119,15 @@ public class Template extends JFrame {
 	            case "Profile":
 	                panel = new ProfilePage(user);
 	                break;
+	            case "Settings":
+	            	if (user != null) {
+	            		panel = new SettingsPage(user);
+	            		break;
+	            	}
+	                break;
 	            case "Welcome":
 	                if (user != null) {
 	                    panel = new ProfilePage(user);
-	                    string = "Profile";
 	                }
 	                break;
 	            case "SearchMain":
