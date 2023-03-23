@@ -1,5 +1,10 @@
 package GUI;
 
+<<<<<<< HEAD
+=======
+import java.awt.BorderLayout;
+
+>>>>>>> branch 'master' of https://github.com/goIsaiah/LibraryProject
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;

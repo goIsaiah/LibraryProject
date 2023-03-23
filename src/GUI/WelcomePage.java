@@ -111,8 +111,17 @@ public class WelcomePage extends JPanel{
 	    add(passwordLabel, "cell 0 3");
 	    add(passwordField, "cell 1 3");
 
+	    JLabel favgenreLabel = new JLabel("Favorite Genre");
+	    String[] choices = { "Fiction", "Non-Fiction", "Science Fiction", "Fantasy",
+                "Thriller", "Mystery", "Children's Literature", "Horror","Romance", "Biography/Autobiography",
+                "History", "Young Adult"
+                };
+	    final JComboBox<String> cb = new JComboBox<String>(choices);
+	    add(favgenreLabel, "cell 0 4");
+	    add(cb, "cell 1 4");
+	    
 	    JButton registerButton = new JButton("Register");
-	    add(registerButton, "cell 0 4");
+	    add(registerButton, "cell 0 5");
 	    
 	    parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
 		registerButton.addActionListener(new ActionListener() {
