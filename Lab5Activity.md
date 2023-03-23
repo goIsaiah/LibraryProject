@@ -16,3 +16,11 @@
 - Vince : WelcomePanel, User, GoogleJSON
 - Isaisah : MainPage, AddRating, AddReview, Review
 - Jet : DBMain, Template, AlreadyFriendException,
+
+
+# Manual Tests
+
+### WelComePanel
+> `WelcomePanel` 
+
+
