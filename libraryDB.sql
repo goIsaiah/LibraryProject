@@ -19,6 +19,7 @@ LIB_TITLE varchar(255) NOT NULL,
 LIB_AUTHOR varchar(255) NOT NULL, 
 LIB_YEAR integer NOT NULL, 
 LIB_ISBN varchar(255) NOT NULL, 
+GENRE varchar(255),
 UNIQUE KEY ( LIB_TITLE, LIB_ISBN )
 );
 
