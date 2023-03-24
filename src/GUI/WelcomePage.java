@@ -79,7 +79,6 @@ public class WelcomePage extends JPanel{
 					if (check) {
 						String email = db.getEmail(usernameField.getText());
 						User user = new User(usernameField.getText(),passwordField.getText(), email);
-						System.out.println(user.getEmail());
 						parentTemplate.setUser(user);
 						parentTemplate.showPanel("Profile");
 					}

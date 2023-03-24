@@ -74,7 +74,6 @@ public class DBUserInfo {
 	    try {
 	        int userId = getUserId(currUser.getEmail());
 	        int infoId = getInfoId(userId);
-	        System.out.println(infoId);
 
 	        String firstName = "";
 	        String lastName = "";
@@ -98,7 +97,6 @@ public class DBUserInfo {
 	        currUser.setLastName(lastName);
 	        currUser.setBio(bio);
 	        currUser.setURL(userUrl);
-        	System.out.println(currUser.getURL());
 
 	    } catch (SQLException e) {
 	        e.printStackTrace();
