@@ -17,64 +17,53 @@ import GUI.LibraryUI;
 
 public class DBForum {
 	
-	// databse 
-	private  String user = "root";
-	private String url = "jdbc:mysql://localhost:3306/myDB"; 
-	public static String password = LibraryUI.sqlpassword; 
+	//Static DB Variables
+	static String url = "jdbc:mysql://localhost:3306/myDB";
+	static String urlRoot = "jdbc:mysql://localhost:3306";
+	static String user = "root";
+	static String password = LibraryUI.sqlpassword;
+	
+	//DB Variables
 	private String query; 
 	private Connection conn; 
 	private Statement stmt; 
 	
 	public DBForum() {
-
 		try {
 			conn = DriverManager.getConnection(url,user, password);
 			stmt = conn.createStatement();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
-
-	
-	
-	
-	public  void addComment(Comment comment) throws SQLException {
+	//Adds Comment to DB
+	public void addComment(Comment comment) throws SQLException {
 		query = "INSERT INTO COMMENTS(usrname, book_id, book_title, comment) VALUES (?, ?, ? ,?)";
-		
-		
-			if(!comment.getMessage().equals("")) {
-				PreparedStatement statement = conn.prepareStatement(query);
-				statement.setString(1, comment.getUserName() );
-				statement.setInt(2,  comment.getBook_Id());
-				statement.setString(3, comment.getBook_Title() );
-				statement.setString(4, comment.getMessage() );
-
-				statement.executeUpdate();
-			}else {
-				System.out.println("Message is empty!");
-			}
-
+		if(!comment.getMessage().equals("")) {
+			PreparedStatement statement = conn.prepareStatement(query);
+			statement.setString(1, comment.getUserName() );
+			statement.setInt(2,  comment.getBook_Id());
+			statement.setString(3, comment.getBook_Title() );
+			statement.setString(4, comment.getMessage() );
+			statement.executeUpdate();
+		}
+		else { System.out.println("Message is empty!"); }
 	}
 	
-
-	
+	//Creates ArrayList containing comments from DB
 	public ArrayList<String> getComments(int id) throws SQLException {
 		query = "SELECT comment FROM COMMENTS WHERE book_id = '" + id +"';";
 		ResultSet rs = null; 
-		
 		ArrayList<String> list = new ArrayList<>(); 
-	
 			rs = stmt.executeQuery(query);
 			while(rs.next()) {
 				list.add(rs.getString(1) + "\n");
 			}
-			
 		return list;
-		
 	}
 	
+	//Creates ArrayList of Comments from DB
 	public ArrayList<Comment> getCommentList(int id) throws SQLException {
 		ArrayList<Comment> list = new ArrayList<>();
 		query = "SELECT book_title, comment, usrname, book_id FROM COMMENTS WHERE book_id = '" + id + "';";
@@ -91,7 +80,4 @@ public class DBForum {
 		return list;
 	}
 	
-	
-
-
 }
