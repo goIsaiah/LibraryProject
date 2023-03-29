@@ -13,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import com.mysql.cj.util.StringUtils;
 import DomainObjects.Book;
+import DomainObjects.User;
 import GUI.LibraryUI;
 import Logic.GoogleJSON;
 import java.time.LocalDate;
@@ -23,6 +24,25 @@ public class DBStatus {
 	static String urlRoot = "jdbc:mysql://localhost:3306";
 	static String user = "root";
 	static String password = LibraryUI.sqlpassword;
+	private Connection conn;
+	
+	public DBStatus() throws SQLException {
+		conn = DriverManager.getConnection(url, user, password);
+	}
+	
+	// Use this if the book's entry does not exist yet
+	public void addBookInfo(Book book) throws SQLException {
+		String bookTitle = book.getTitle();
+		String insertQuery = "INSERT INTO STATUSTABLE (user_id, URL, TEXTFIELD, FIRSTNAME, LASTNAME) VALUES (?, ?, ?, ?, ?)";
+		try (PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
+			insertStmt.setString(1, bookTitle);
+			insertStmt.setString(2, null);
+			insertStmt.setInt(3, 0);
+			insertStmt.setInt(4, 0);
+			insertStmt.setInt(5, 0);
+			insertStmt.executeUpdate();
+		}
+	}
 	
 	private void checkOut(Book book, LocalDate date) {
 		Connection conn = null;
