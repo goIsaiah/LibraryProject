@@ -1,10 +1,9 @@
 package Databases;
 
 import java.sql.*;
+import java.util.ArrayList;
 
-import DomainObjects.Critic;
-import DomainObjects.Rating;
-import DomainObjects.Review;
+import DomainObjects.*;
 import GUI.LibraryUI;
 
 public class DBCriticZone 
@@ -68,4 +67,69 @@ public class DBCriticZone
 		}
 
 	}
+	
+	public ArrayList<String> getReviews(int id) throws SQLException
+	{
+		query = String.format("SELECT message FROM RATINGSANDREVIEWS where book_id = '%d'", id);
+		ResultSet rs = null;
+		
+		ArrayList<String> reviews = new ArrayList<>();
+		
+		rs = statement.executeQuery(query);
+		while (rs.next())
+		{
+			reviews.add(rs.getString(1) + "\n");
+		}
+		
+		return reviews;
+	}
+	
+	public ArrayList<Integer> getRatings(int id) throws SQLException
+	{
+		query = String.format("SELECT rating FROM RATINGSANDREVIEWS where book_id = '%d'", id);
+		ResultSet rs = null;
+		
+		ArrayList<Integer> ratings = new ArrayList<>();
+		
+		rs = statement.executeQuery(query);
+		while (rs.next())
+		{
+			ratings.add(rs.getInt(1));
+		}
+		
+		return ratings;
+	}
+	
+	public ArrayList<Critic> getCriticList(int id) throws SQLException
+	{
+		ArrayList<Critic> criticList = new ArrayList<>();
+		query = String.format("SELECT book_title, message, rating, usrnmame, book_id FROM RATINGSANDREVIEWS WHERE book_id = '%d')", id);
+		ResultSet rs = statement.executeQuery(query);
+		
+		
+		while (rs.next())
+		{
+			String title = rs.getString("book_title");
+			String review = rs.getString("message");
+			String username = rs.getString("usrname");
+			int rating = rs.getInt("rating");
+			int bookid = rs.getInt("book_id)");
+			
+			//creating objects
+			Book b = new Book(title);
+			User u = new User(username);
+			Review rev = new Review(review, b, u);
+			Rating ra = new Rating(u, b);
+			ra.setRating(rating);
+			Critic c = new Critic(b, u, rev, ra);
+			
+			//add into arrayList
+			
+			criticList.add(c);
+		}
+		return criticList;
+	}
+	
+	
+	
 }
