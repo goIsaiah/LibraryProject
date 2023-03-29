@@ -21,11 +21,10 @@ public class CriticPage extends JPanel
 		this.currentBook = currentBook;
 		this.criticZone = new DBCriticZone();
 
+		frame(currentBook.getTitle());
+		addCritics();
+		showCritics();
 
-		//framePanel(currentBook.getTitle()
-		//addReview()
-		//addRating()
-		//showCritics
 
 	}
 
@@ -59,13 +58,13 @@ public class CriticPage extends JPanel
 		//add error blocking so they can only input a number between 1 and 5
 		JTextField ratingTextField = new JTextField(10);
 		ratingTextField.add(new JLabel("Add rating (1-5)"));
-		ratingTextField.add(ratingTextField, "wrap");
+		ratingPanel.add(ratingTextField, "wrap");
 
 		//review text field
 
 		JTextField reviewTextField = new JTextField(25);
 		reviewTextField.add(new JLabel("Add review:"));
-		reviewTextField.add(reviewTextField, "wrap");
+		ratingPanel.add(reviewTextField, "wrap");
 		
 		
 		//add post button
@@ -96,7 +95,7 @@ public class CriticPage extends JPanel
 		//creating review
 		Review rev = new Review(review, this.currentBook, this.currentUser);
 		criticZone.addCritic(new Critic(this.currentBook, this.currentUser, rev, rate));
-		//showcritics
+		showCritics();
 
 	}
 

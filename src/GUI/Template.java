@@ -119,6 +119,9 @@ public class Template extends JFrame {
 	            case "Profile":
 	                panel = new ProfilePage(user);
 	                break;
+	            case "Critic":
+	                panel = new CriticPage(user, book);
+	                break;
 	            case "Welcome":
 	                if (user != null) {
 	                    panel = new ProfilePage(user);

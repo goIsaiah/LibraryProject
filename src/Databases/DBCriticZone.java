@@ -103,7 +103,7 @@ public class DBCriticZone
 	public ArrayList<Critic> getCriticList(int id) throws SQLException
 	{
 		ArrayList<Critic> criticList = new ArrayList<>();
-		query = String.format("SELECT book_title, message, rating, usrnmame, book_id FROM RATINGSANDREVIEWS WHERE book_id = '%d')", id);
+		query = String.format("SELECT book_title, message, rating, usrname, book_id FROM RATINGSANDREVIEWS WHERE book_id = '%d'", id);
 		ResultSet rs = statement.executeQuery(query);
 		
 		
