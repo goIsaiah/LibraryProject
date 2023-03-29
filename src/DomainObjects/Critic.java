@@ -56,6 +56,11 @@ public class Critic
 		this.rating = rating;
 	}
 	
+	public String toString()
+	{
+		String s = String.format("%s gave %s %d stars.\nReview: %s", u.getUsername(), b.getTitle(), rating.getRating(), review.getMessage());
+		return s;
+	}
 
 
 }
