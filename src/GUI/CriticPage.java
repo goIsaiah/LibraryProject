@@ -54,6 +54,7 @@ public class CriticPage extends JPanel
 		//rating text field
 		//add error blocking so they can only input a number between 1 and 5
 		JTextField ratingTextField = new JTextField(10);
+		
 		ratingPanel.add(new JLabel("Add rating (1-5):"));
 		ratingPanel.add(ratingTextField, "wrap");
 
@@ -71,6 +72,12 @@ public class CriticPage extends JPanel
 		{
 			try 
 			{
+				//if we have invalid input
+				if (!ratingTextField.getText().equals("1") || !ratingTextField.getText().equals("2") || !ratingTextField.getText().equals("3") || !ratingTextField.getText().equals("4") || !ratingTextField.getText().equals("5"))
+				{
+					//error popup
+					
+				}
 				createCritic(ratingTextField.getText(), reviewTextField.getText());
 			} catch (SQLException ex) {
 
