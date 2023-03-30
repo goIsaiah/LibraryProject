@@ -166,7 +166,7 @@ public class Template extends JFrame {
 	
  	public void closeOP() {
  		setSize(1280,800);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
+//		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setLocationRelativeTo(null);
 		getContentPane().setBackground(Color.white);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

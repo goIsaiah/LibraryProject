@@ -4,6 +4,7 @@ package GUI;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.*;
 
@@ -13,18 +14,22 @@ public class LibraryUI {
 	public static String sqlpassword;
 	
 	public LibraryUI() {
-		password(); 
+		
+		try {
+			init();
+			
+		}catch (SQLException e) {			
+			password(); 
+		}
 	}
 	
 	public static void main(String[] args) {
 		new LibraryUI();
 	}
 	
-	private void init() {
-		try {
+	private void init() throws SQLException {
 			 new Template();
-		} catch (Exception e) {
-		} 
+	
 	}
 	public void password() {
 		JFrame frame = new JFrame(); 
@@ -39,7 +44,10 @@ public class LibraryUI {
 				sqlpassword = text_field.getText(); 
 				text_field.setText("");
 				frame.dispose();
-				init(); 
+				try {
+					init();
+				} catch (SQLException e1) {
+				} 
 			}
 		});
 

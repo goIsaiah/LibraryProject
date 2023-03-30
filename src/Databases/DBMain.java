@@ -14,16 +14,17 @@ import Logic.GoogleJSON;
 
 
 public class DBMain { 
-	static String url = "jdbc:mysql://localhost:3306/myDB";
-	static String urlRoot = "jdbc:mysql://localhost:3306";
-	static String user = "root";
-	static String password = LibraryUI.sqlpassword;
+//	static String url = "jdbc:mysql://localhost:3306/myDB";
+//	static String urlRoot = "jdbc:mysql://localhost:3306";
+//	static String user = "root";
+//	static String password = LibraryUI.sqlpassword;
 	
 	public DBMain() throws SQLException {
 	}
 
 	public ArrayList<Book> searchLibrary(String search) throws SQLException {
-		Connection con = DriverManager.getConnection(url, user, password);
+//		Connection con = DriverManager.getConnection(url, user, password);
+		Connection con = DBUtil.getConnection(DBType_enum.ONLINE);
 		String selectString = "SELECT * FROM LIBRARY WHERE LIB_TITLE LIKE ?";
 		PreparedStatement statement = con.prepareStatement(selectString);
 	    statement.setString(1, "%" + search + "%");
@@ -80,7 +81,8 @@ public class DBMain {
 	}
 	
 	private int getMaxID() throws SQLException {
-		Connection conn = DriverManager.getConnection(url, user, password);
+//		Connection conn = DriverManager.getConnection(url, user, password);
+		Connection conn = DBUtil.getConnection(DBType_enum.ONLINE);
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT MAX(LIB_ID) FROM LIBRARY");
 		int nextId = rs.next() ? rs.getInt(1) + 1 : 1;
@@ -88,7 +90,8 @@ public class DBMain {
 	}
 
 	public static void DBBookfromAPI(String title, String author, int year, String ISBN) throws SQLException {
-	    Connection con = DriverManager.getConnection(url, user, password);
+//	    Connection con = DriverManager.getConnection(url, user, password);
+		Connection con = DBUtil.getConnection(DBType_enum.ONLINE);
 	    String queryCheck = "SELECT * FROM LIBRARY WHERE LIB_TITLE = ? AND LIB_ISBN = ?";
 	    PreparedStatement pstmtCheck = con.prepareStatement(queryCheck);
 	    pstmtCheck.setString(1, title);

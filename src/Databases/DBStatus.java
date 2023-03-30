@@ -19,10 +19,11 @@ import java.time.LocalDate;
 
 // Checks if book is checked out or not
 public class DBStatus {
-	static String url = "jdbc:mysql://localhost:3306/myDB";
-	static String urlRoot = "jdbc:mysql://localhost:3306";
-	static String user = "root";
-	static String password = LibraryUI.sqlpassword;
+//	static String url = "jdbc:mysql://localhost:3306/myDB";
+//	static String urlRoot = "jdbc:mysql://localhost:3306";
+//	static String user = "root";
+//	static String password = LibraryUI.sqlpassword;
+
 	
 	private void checkOut(Book book, LocalDate date) {
 		Connection conn = null;
@@ -31,8 +32,11 @@ public class DBStatus {
 	    boolean userExists = false;
 	    String title = book.getTitle();
 	    
+	    
 	    try {
-	        conn = DriverManager.getConnection(url, user, password);
+//	        conn = DriverManager.getConnection(url, user, password);
+	    	conn = DBUtil.getConnection(DBType_enum.ONLINE);
+	    	
 	        String queryCheck = "SELECT * FROM statustable WHERE TITLE = ? AND YEAR = ? AND MONTH = ? AND DAY = ?";
 	        PreparedStatement pstmtCheck = conn.prepareStatement(queryCheck);
 	        String sql = "INSERT INTO statustable (TITLE, YEAR, MONTH, DAY) VALUES (?, ?, ?, ?)";
