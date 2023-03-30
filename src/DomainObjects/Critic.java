@@ -28,7 +28,7 @@ public class Critic
 
 	public User getUser() 
 	{
-		return u;
+		return this.u;
 	}
 
 	public void setUser(User u) 

@@ -14,11 +14,13 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import Databases.DBMain;
 import DomainObjects.Book;
+import DomainObjects.User;
 import net.miginfocom.swing.MigLayout;
 
 public class MainPage extends JPanel{
 	static int numOfResults = 7;
 	private Template parentTemplate;
+	
 	
     public MainPage() throws SQLException {
     	DBMain db = new DBMain();
@@ -93,6 +95,7 @@ public class MainPage extends JPanel{
         JButton criticButton = new JButton("   Open Critics    ");
         parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
         parentTemplate.setBook(book);
+//        parentTemplate.setUser(user);
         criticButton.addActionListener(e -> parentTemplate.showPanel("Critic"));
         add(criticButton, "cell 0 5");
         JButton citationButton = new JButton("   Citation Machine    ");

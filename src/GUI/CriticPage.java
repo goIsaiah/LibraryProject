@@ -33,17 +33,13 @@ public class CriticPage extends JPanel
 		//content frame
 		setLayout(new MigLayout("", "[]30[]", "[]30[]"));
 		setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
-		setBackground(Color.gray);
+		setBackground(Color.white);
 
 		//book title label
 		JLabel bookName = new JLabel(label);
 		bookName.setFont(new Font(Font.SANS_SERIF, Font.BOLD,30));
 		add(bookName, "cell 0 0");
 
-		//critic zone name
-		JLabel criticTitle = new JLabel("CriticZone");
-		criticTitle.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 25));
-		add(criticTitle, "cell 0 1");
 
 	}
 
@@ -54,16 +50,17 @@ public class CriticPage extends JPanel
 		ratingPanel.setLayout(new MigLayout("", "[]10[]", "[]10[]"));
 		ratingPanel.setBackground(Color.white);
 
+		
 		//rating text field
 		//add error blocking so they can only input a number between 1 and 5
 		JTextField ratingTextField = new JTextField(10);
-		ratingTextField.add(new JLabel("Add rating (1-5)"));
+		ratingPanel.add(new JLabel("Add rating (1-5):"));
 		ratingPanel.add(ratingTextField, "wrap");
 
 		//review text field
 
 		JTextField reviewTextField = new JTextField(25);
-		reviewTextField.add(new JLabel("Add review:"));
+		ratingPanel.add(new JLabel("Add review:"));
 		ratingPanel.add(reviewTextField, "wrap");
 		
 		
@@ -94,7 +91,9 @@ public class CriticPage extends JPanel
 
 		//creating review
 		Review rev = new Review(review, this.currentBook, this.currentUser);
-		criticZone.addCritic(new Critic(this.currentBook, this.currentUser, rev, rate));
+		//creating critic
+		Critic c = new Critic(currentBook, currentUser, rev, rate);
+		criticZone.addCritic(c);
 		showCritics();
 
 	}
@@ -108,7 +107,7 @@ public class CriticPage extends JPanel
 		//critics panel
 		JPanel criticPanel = new JPanel();
 		criticPanel.setLayout(new BoxLayout(criticPanel, BoxLayout.Y_AXIS));
-		criticPanel.setBackground(Color.gray);
+		criticPanel.setBackground(Color.white);
 		
 		//critics label
 		JLabel criticLabel = new JLabel("Critics:");
@@ -127,7 +126,7 @@ public class CriticPage extends JPanel
 			//output the summary of the critic
 			JPanel panel = new JPanel();
 			panel.setLayout(new MigLayout("", "[]20[]", "[]5[grow]"));
-			panel.setBackground(Color.gray);
+			panel.setBackground(Color.white);
 			
 			//create a label to display the summary
 			JLabel summary = new JLabel();
@@ -137,7 +136,7 @@ public class CriticPage extends JPanel
 			//wrap the text 
 			String wrappedSummary = String.format("<html> %s </html>", criticSummary.replaceAll("\n", "<br/>"));
 			summary.setText(wrappedSummary);
-			panel.add(summary, "cell 0 0");
+			panel.add(summary, "cell 0 1");
 			
 			criticPanel.add(panel);
 		}

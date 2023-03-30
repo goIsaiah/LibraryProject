@@ -92,6 +92,8 @@ public class Template extends JFrame {
         container.add(searchPanel, BorderLayout.EAST);
 		closeOP();
 		
+		
+		
 	}
 	
 	public void setUser(User user) {
