@@ -35,7 +35,7 @@ public class DBCriticZone
 	{
 		Connection conn = null;
 		Statement statement = null;
-		url = "jdbc:mysql://localhost:3306/BookMate";
+		url = "jdbc:mysql://localhost:3306/myDB";
 
 		String query = String.format("INSERT INTO RATINGSANDREVIEWS\n(usrname, book_title, message, rating) VALUES\n(%s, '%s', '%s', %d);", c.getUser().getUsername(), c.getBook().getTitle(), c.getReview().getMessage(), c.getRating().getRating());
 
