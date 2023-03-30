@@ -95,7 +95,6 @@ public class MainPage extends JPanel{
         JButton criticButton = new JButton("   Open Critics    ");
         parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
         parentTemplate.setBook(book);
-//        parentTemplate.setUser(user);
         criticButton.addActionListener(e -> parentTemplate.showPanel("Critic"));
         add(criticButton, "cell 0 5");
         JButton citationButton = new JButton("   Citation Machine    ");

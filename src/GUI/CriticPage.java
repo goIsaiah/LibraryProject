@@ -92,7 +92,7 @@ public class CriticPage extends JPanel
 		//creating review
 		Review rev = new Review(review, this.currentBook, this.currentUser);
 		//creating critic
-		Critic c = new Critic(currentBook, currentUser, rev, rate);
+		Critic c = new Critic(currentBook, currentUser, rev, rate, currentBook.getId());
 		criticZone.addCritic(c);
 		showCritics();
 

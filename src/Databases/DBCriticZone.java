@@ -37,7 +37,7 @@ public class DBCriticZone
 		Statement statement = null;
 		url = "jdbc:mysql://localhost:3306/myDB";
 
-		String query = String.format("INSERT INTO RATINGSANDREVIEWS\n(usrname, book_title, message, rating) VALUES\n(%s, '%s', '%s', %d);", c.getUser().getUsername(), c.getBook().getTitle(), c.getReview().getMessage(), c.getRating().getRating());
+		String query = String.format("INSERT INTO RATINGSANDREVIEWS\n(usrname, book_title, message, rating, book_id) VALUES\n('%s', '%s', '%s', '%d', '%d')", c.getUser().getUsername(), c.getBook().getTitle(), c.getReview().getMessage(), c.getRating().getRating(), c.getBook().getId());
 
 		//checking to see if the rating is empty
 		if (c.getReview().getMessage().isEmpty() || c.getRating().getRating() == 0)
@@ -113,7 +113,7 @@ public class DBCriticZone
 			String review = rs.getString("message");
 			String username = rs.getString("usrname");
 			int rating = rs.getInt("rating");
-			int bookid = rs.getInt("book_id)");
+			int bookid = rs.getInt("book_id");
 			
 			//creating objects
 			Book b = new Book(title);
@@ -121,7 +121,7 @@ public class DBCriticZone
 			Review rev = new Review(review, b, u);
 			Rating ra = new Rating(u, b);
 			ra.setRating(rating);
-			Critic c = new Critic(b, u, rev, ra);
+			Critic c = new Critic(b, u, rev, ra, bookid);
 			
 			//add into arrayList
 			
