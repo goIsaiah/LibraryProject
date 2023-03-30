@@ -37,7 +37,7 @@ public class DBCriticZone
 		Statement statement = null;
 		url = "jdbc:mysql://localhost:3306/myDB";
 
-		String query = String.format("INSERT INTO RATINGSANDREVIEWS\n(usrname, book_title, message, rating, book_id) VALUES\n('%s', '%s', '%s', '%d', '%d')", c.getUser().getUsername(), c.getBook().getTitle(), c.getReview().getMessage(), c.getRating().getRating(), c.getBook().getId());
+		String query = String.format("INSERT INTO CRITICS\n(usrname, book_title, message, rating, book_id) VALUES\n('%s', '%s', '%s', '%d', '%d')", c.getUser().getUsername(), c.getBook().getTitle(), c.getReview().getMessage(), c.getRating().getRating(), c.getBook().getId());
 
 		//checking to see if the rating is empty
 		if (c.getReview().getMessage().isEmpty() || c.getRating().getRating() == 0)
@@ -70,7 +70,7 @@ public class DBCriticZone
 	
 	public ArrayList<String> getReviews(int id) throws SQLException
 	{
-		query = String.format("SELECT message FROM RATINGSANDREVIEWS where book_id = '%d'", id);
+		query = String.format("SELECT message FROM CRITICS where book_id = '%d'", id);
 		ResultSet rs = null;
 		
 		ArrayList<String> reviews = new ArrayList<>();
@@ -86,7 +86,7 @@ public class DBCriticZone
 	
 	public ArrayList<Integer> getRatings(int id) throws SQLException
 	{
-		query = String.format("SELECT rating FROM RATINGSANDREVIEWS where book_id = '%d'", id);
+		query = String.format("SELECT rating FROM CRITICS where book_id = '%d'", id);
 		ResultSet rs = null;
 		
 		ArrayList<Integer> ratings = new ArrayList<>();
@@ -103,7 +103,7 @@ public class DBCriticZone
 	public ArrayList<Critic> getCriticList(int id) throws SQLException
 	{
 		ArrayList<Critic> criticList = new ArrayList<>();
-		query = String.format("SELECT book_title, message, rating, usrname, book_id FROM RATINGSANDREVIEWS WHERE book_id = '%d'", id);
+		query = String.format("SELECT book_title, message, rating, usrname, book_id FROM CRITICS WHERE book_id = '%d'", id);
 		ResultSet rs = statement.executeQuery(query);
 		
 		
