@@ -20,7 +20,7 @@ LIB_AUTHOR varchar(255) NOT NULL,
 LIB_YEAR integer NOT NULL, 
 LIB_ISBN varchar(255) NOT NULL, 
 GENRE varchar(255),
-UNIQUE KEY ( LIB_TITLE, LIB_ISBN )
+UNIQUE KEY ( LIB_TITLE, LIB_ISBN, GENRE )
 );
 
 -- creates the table for user information 
