@@ -19,9 +19,9 @@ import Databases.DBUser;
 import net.miginfocom.swing.MigLayout;
 
 public class FrameTest {
-	static String url = "jdbc:mysql://localhost:3306/myDB";
-	static String user = "root";
-	static String password = "Fade2black";
+	static String url = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9609229";
+	static String user = "sql9609229";
+	static String password = "yUHweNy2bX";
 	
 	public static void main(String[] a) {
 		JFrame frame = new JFrame(); 
