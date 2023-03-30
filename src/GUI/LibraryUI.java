@@ -1,37 +1,74 @@
 package GUI;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
 
 public class LibraryUI {
 	public static String sqlpassword;
-	
+
 	public LibraryUI() {
 		password(); 
 	}
-	
+
 	public static void main(String[] args) {
 		new LibraryUI();
 	}
-	
+
 	private void init() {
 		try {
-			
-			 new Template();
+
+			new Template();
 		} catch (Exception e) {
+			JFrame incorrectpwdframe = new JFrame();
+			JLabel incorrectpwd = new JLabel("Incorrect Password", SwingConstants.CENTER);
+			JButton ok = new JButton();
+			ok.setText("OK");
+			incorrectpwd.setFont(incorrectpwd.getFont().deriveFont(Font.BOLD, 14f));
+			incorrectpwdframe.setPreferredSize(new Dimension(200 , 150));
+			incorrectpwdframe.setSize(new Dimension(200 , 150));
+			incorrectpwdframe.setLayout(new MigLayout("", "[]", "[]2[]2[]" ));
+			incorrectpwdframe.add(incorrectpwd);
+			incorrectpwdframe.add(ok, "cell 0 2");
+			incorrectpwdframe.setLocationRelativeTo(null);
+			incorrectpwdframe.setVisible(true);
+			incorrectpwdframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			ok.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					incorrectpwdframe.dispose();
+				}
+
+			});
+			ok.addKeyListener(new KeyAdapter()
+			{
+
+				public void keyPressed(KeyEvent e)
+				{
+					if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+						incorrectpwdframe.dispose();
+					}
+				}
+			});
+
+
 		} 
 	}
-	
+
 	public void password() {
 		JFrame frame = new JFrame(); 
 		JPasswordField text_field = new JPasswordField(); 
@@ -49,18 +86,18 @@ public class LibraryUI {
 			}
 
 		});
-		
+
 		text_field.addKeyListener(new KeyAdapter() {
-		    public void keyPressed(KeyEvent e) {
-		        if (e.getKeyCode()==KeyEvent.VK_ENTER) {
-		            sqlpassword = text_field.getText(); 
-		            text_field.setText("");
-		            frame.dispose();
-		            init(); 
-		        }
-		    }
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					sqlpassword = text_field.getText(); 
+					text_field.setText("");
+					frame.dispose();
+					init(); 
+				}
+			}
 		});
-		
+
 		//SQL Popup
 		submit.setText("Submit");
 		frame.setPreferredSize(new Dimension(200 , 200));
@@ -73,5 +110,5 @@ public class LibraryUI {
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
-	
+
 }
