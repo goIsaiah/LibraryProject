@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import net.miginfocom.swing.MigLayout;
@@ -33,7 +34,7 @@ public class LibraryUI {
 	
 	public void password() {
 		JFrame frame = new JFrame(); 
-		JTextField text_field = new JTextField(); 
+		JPasswordField text_field = new JPasswordField(); 
 		text_field.setColumns(35);
 		JLabel label = new JLabel("Enter Mysql Authentication Password: "); 
 		JButton submit = new JButton();
