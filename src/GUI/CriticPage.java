@@ -2,6 +2,10 @@ package GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.*;
 import Databases.DBCriticZone;
@@ -73,12 +77,46 @@ public class CriticPage extends JPanel
 			try 
 			{
 				//if we have invalid input
-				if (!ratingTextField.getText().equals("1") || !ratingTextField.getText().equals("2") || !ratingTextField.getText().equals("3") || !ratingTextField.getText().equals("4") || !ratingTextField.getText().equals("5"))
+				if (!validRating(ratingTextField.getText()))
 				{
-					//error popup
+					JFrame incorrectinput = new JFrame();
+					JLabel incorrectinputlabel = new JLabel("Please enter a rating between 1 and 5!", SwingConstants.CENTER);
+					JButton ok = new JButton();
+					ok.setText("OK");
+					incorrectinputlabel.setFont(incorrectinputlabel.getFont().deriveFont(Font.BOLD, 14f));
+					incorrectinput.setPreferredSize(new Dimension(200 , 200));
+					incorrectinput.setSize(new Dimension(300 , 200));
+					incorrectinput.setLayout(new MigLayout("", "[]", "[]10[][]" ));
+					incorrectinput.add(incorrectinputlabel);
+					incorrectinput.add(ok, "cell 0 3");
+					incorrectinput.setLocationRelativeTo(null);
+					incorrectinput.setVisible(true);
+					incorrectinput.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+					ok.addActionListener(new ActionListener()
+					{
+						public void actionPerformed(ActionEvent e)
+						{
+							incorrectinput.dispose();
+						}
+
+					});
+					ok.addKeyListener(new KeyAdapter()
+					{
+
+						public void keyPressed(KeyEvent e)
+						{
+							if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+								incorrectinput.dispose();
+							}
+						}
+					});
 					
 				}
-				createCritic(ratingTextField.getText(), reviewTextField.getText());
+				else //if the input is fine, set the critic
+				{
+					createCritic(ratingTextField.getText(), reviewTextField.getText());
+				}
+				
 			} catch (SQLException ex) {
 
 				ex.printStackTrace();
@@ -171,5 +209,20 @@ public class CriticPage extends JPanel
 		removeAll();
 		revalidate();
 		repaint();
+	}
+	
+	private boolean validRating(String rating)
+	{
+		boolean result;
+		if (rating.equals("1") || rating.equals("2") || rating.equals("3") || rating.equals("4") || rating.equals("5"))
+		{
+			result = true;
+		}
+		else
+		{
+			result = false;
+		}
+		
+		return result;
 	}
 }
