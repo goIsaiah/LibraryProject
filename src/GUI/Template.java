@@ -92,6 +92,8 @@ public class Template extends JFrame {
         container.add(searchPanel, BorderLayout.EAST);
 		closeOP();
 		
+		
+		
 	}
 	
 	public void setUser(User user) {
@@ -118,6 +120,9 @@ public class Template extends JFrame {
 	                break;
 	            case "Profile":
 	                panel = new ProfilePage(user);
+	                break;
+	            case "Critic":
+	                panel = new CriticPage(user, book);
 	                break;
 	            case "Welcome":
 	                if (user != null) {

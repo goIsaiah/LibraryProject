@@ -1,6 +1,5 @@
 package GUI;
 
-
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,22 +12,32 @@ import Databases.DBType_enum;
 import Databases.DBUtil;
 import net.miginfocom.swing.MigLayout;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import net.miginfocom.swing.MigLayout;
+
 public class LibraryUI {
 	public static String sqlpassword;
 	public static Connection conn ; 
 	public LibraryUI() {
+
 		try {
 			conn = DBUtil.getConnection(DBType_enum.ONLINE); 
 			init();
 		}catch (SQLException e) {
 			password(); 
 		}
+
 	}
 	
 	public static void main(String[] args) {
 		new LibraryUI();
 	}
 	
+
 	private void init() throws SQLException {
 		new Template();
 	
@@ -71,5 +80,6 @@ public class LibraryUI {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 	}
+	
 	
 }

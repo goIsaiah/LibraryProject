@@ -1,7 +1,4 @@
-package Logic;
-
-import DomainObjects.*;
-
+package DomainObjects;
 
 public class Rating 
 {
