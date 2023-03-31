@@ -54,10 +54,8 @@ public class DBCriticZone
 //				statement = connection.createStatement();
 
 				//adding the query
-				int res = statement.executeUpdate(query);
-				System.out.println(res);
-//				statement.close();
-//				connection.close();
+				
+				statement.executeUpdate(query);
 
 			}
 
