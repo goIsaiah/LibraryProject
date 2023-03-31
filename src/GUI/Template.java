@@ -203,6 +203,8 @@ public class Template extends JFrame {
         searchPanel.add(searchIconLabel,"cell 0 0");
         searchPanel.add(searchField, "cell 1 0");
         searchPanel.setBackground(Color.WHITE);
+        FriendPanel pane = new FriendPanel(); 
+        searchPanel.add(pane.getPane() , "cell 1 4"); // adds FriendsList panel 
        
         //SEARCH_BUTTON
         JButton searchButton = new JButton("Search");

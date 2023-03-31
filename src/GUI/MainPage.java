@@ -28,6 +28,7 @@ public class MainPage extends JPanel{
     	framePanel("BookMate");
         //MAIN_PAGE_RESULTS
         showBookList(bookList);
+                
     }
     
     public MainPage(ArrayList<Book> bookList) {
@@ -37,7 +38,7 @@ public class MainPage extends JPanel{
     
     private void framePanel(String labelString) {
     	//CONTENT_FRAME
-        setLayout(new MigLayout("", "[]30[]", "[]30[]"));
+        setLayout(new MigLayout("", "[]30[]10[]", "[]30[]"));
         setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
         setBackground(Color.white);
         
@@ -45,6 +46,7 @@ public class MainPage extends JPanel{
         JLabel label = new JLabel(labelString);
         label.setFont(new Font(Font.SANS_SERIF, Font.BOLD,30));
         add(label, "cell 0 0");
+        
     }
     
     private void showBookList(ArrayList<Book> bookList) {

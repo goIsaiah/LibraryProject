@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -91,7 +92,7 @@ class FriendProfile extends JPanel{
 
 }
 
-class FriendPanel {
+class FriendPanel  {
 	private JScrollPane pane; 
 	
 	public FriendPanel() {
@@ -99,7 +100,8 @@ class FriendPanel {
 		pane.setPreferredSize(new Dimension(300 , 500));
 		pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		pane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		pane.setColumnHeaderView(new FriendList());
+//		pane.setColumnHeaderView(new FriendList());
+		pane.setViewportView(new FriendList());
 	}
 	
 	public JScrollPane getPane() {
@@ -126,6 +128,13 @@ class FriendList extends JPanel{
 		
 		for(int i = 0 ; i<list.size(); i++) {
 			FriendProfile label1 = new FriendProfile(list.get(i)); 
+		    label1.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    System.out.println("Yay you clicked me");
+                }
+
+            });
 			add(label1); 
 		}
 	}
