@@ -31,7 +31,6 @@ EMAIL varchar(255) NOT NULL UNIQUE,
 UNIQUE KEY ( USERNAME )
 );
 
-
 CREATE TABLE COMMENTS(
 	usrname VARCHAR(255), 
     usr_id INT,
@@ -73,6 +72,14 @@ CREATE TABLE Reviews(
     likes INT NOT NULL
    -- FOREIGN KEY(id) REFERENCES Ratings(id)
 ); 
+
+CREATE TABLE STATUSTABLE(
+	title VARCHAR(255),
+    user VARCHAR(255),
+    year INT NOT NULL,
+    month INT NOT NULL,
+    day INT NOT NULL
+);
 
 -- Populate the tabeles 
 
