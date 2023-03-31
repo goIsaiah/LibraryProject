@@ -72,9 +72,9 @@ public class WelcomePage extends JPanel{
 	    parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
 	    loginButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		DBUser db = new DBUser();
 				boolean check;
 				try {
+					DBUser db = new DBUser();
 					check = db.checkLogin(usernameField.getText(), passwordField.getText());
 					if (check) {
 						String email = db.getEmail(usernameField.getText());
@@ -117,9 +117,9 @@ public class WelcomePage extends JPanel{
 	    parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
 		registerButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		DBUser db = new DBUser();
 				boolean check;
 				try {
+					DBUser db = new DBUser();
 					check = db.checkUserExists(usernameField.getText(), emailField.getText());
 					if (!check) {
 						db.addUser(usernameField.getText(),passwordField.getText(), emailField.getText());

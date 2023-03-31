@@ -3,7 +3,14 @@ package GUI;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import javax.swing.*;
+
+import Databases.DBType_enum;
+import Databases.DBUtil;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,24 +21,28 @@ import net.miginfocom.swing.MigLayout;
 
 public class LibraryUI {
 	public static String sqlpassword;
-	
+	public static Connection conn ; 
 	public LibraryUI() {
-		password(); 
-//		init();
+
+		try {
+			conn = DBUtil.getConnection(DBType_enum.ONLINE); 
+			init();
+		}catch (SQLException e) {
+			password(); 
+		}
+
 	}
 	
 	public static void main(String[] args) {
 		new LibraryUI();
 	}
 	
-	private void init() {
-		try {
-			 new Template();
-		} catch (Exception e) {
-		} 
+
+	private void init() throws SQLException {
+		new Template();
+	
 	}
-	
-	
+
 	public void password() {
 		JFrame frame = new JFrame(); 
 		JTextField text_field = new JTextField(); 
@@ -39,16 +50,18 @@ public class LibraryUI {
 		JLabel label = new JLabel("Enter Mysql Authentication Password"); 
 		JButton submit = new JButton();
 
-		submit.addActionListener(new ActionListener() {
-
+		submit.addActionListener((ActionListener) new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				sqlpassword = text_field.getText(); 
-				text_field.setText("");
-				frame.dispose();
-				init(); 
+				try {
+					LibraryUI.sqlpassword = text_field.getText(); 
+					text_field.setText("");
+					frame.dispose();
+					conn = DBUtil.getConnection(DBType_enum.OFFLINE);
+					init();
+				} catch (SQLException e1) {
+				} 
 			}
-
 		});
 
 		submit.setText("submit");
@@ -67,5 +80,6 @@ public class LibraryUI {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 	}
+	
 	
 }
