@@ -24,7 +24,8 @@ public class DBMain {
 
 	public ArrayList<Book> searchLibrary(String search) throws SQLException {
 //		Connection con = DriverManager.getConnection(url, user, password);
-		Connection con = DBUtil.getConnection(DBType_enum.ONLINE);
+//		Connection con = DBUtil.getConnection(DBType_enum.ONLINE);
+		Connection con = LibraryUI.conn; 
 		String selectString = "SELECT * FROM LIBRARY WHERE LIB_TITLE LIKE ?";
 		PreparedStatement statement = con.prepareStatement(selectString);
 	    statement.setString(1, "%" + search + "%");
@@ -82,7 +83,8 @@ public class DBMain {
 	
 	private int getMaxID() throws SQLException {
 //		Connection conn = DriverManager.getConnection(url, user, password);
-		Connection conn = DBUtil.getConnection(DBType_enum.ONLINE);
+//		Connection conn = DBUtil.getConnection(DBType_enum.ONLINE);
+		Connection conn = LibraryUI.conn; 
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT MAX(LIB_ID) FROM LIBRARY");
 		int nextId = rs.next() ? rs.getInt(1) + 1 : 1;
@@ -91,7 +93,8 @@ public class DBMain {
 
 	public static void DBBookfromAPI(String title, String author, int year, String ISBN) throws SQLException {
 //	    Connection con = DriverManager.getConnection(url, user, password);
-		Connection con = DBUtil.getConnection(DBType_enum.ONLINE);
+//		Connection con = DBUtil.getConnection(DBType_enum.ONLINE);
+		Connection con = LibraryUI.conn; 
 	    String queryCheck = "SELECT * FROM LIBRARY WHERE LIB_TITLE = ? AND LIB_ISBN = ?";
 	    PreparedStatement pstmtCheck = con.prepareStatement(queryCheck);
 	    pstmtCheck.setString(1, title);

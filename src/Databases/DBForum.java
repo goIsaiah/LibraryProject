@@ -29,7 +29,8 @@ public class DBForum {
 
 		try {
 //			conn = DriverManager.getConnection(url,user, password);
-			conn = DBUtil.getConnection(DBType_enum.ONLINE);
+//			conn = DBUtil.getConnection(DBType_enum.ONLINE);
+			conn = LibraryUI.conn; 
 			stmt = conn.createStatement();
 		} catch (SQLException e) {
 			e.printStackTrace();

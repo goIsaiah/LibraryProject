@@ -35,7 +35,8 @@ public class DBStatus {
 	    
 	    try {
 //	        conn = DriverManager.getConnection(url, user, password);
-	    	conn = DBUtil.getConnection(DBType_enum.ONLINE);
+//	    	conn = DBUtil.getConnection(DBType_enum.ONLINE);
+	    	conn = LibraryUI.conn; 
 	    	
 	    	//Add user name
 	        String queryCheck = "SELECT * FROM statustable WHERE TITLE = ? AND YEAR = ? AND MONTH = ? AND DAY = ?";

@@ -17,13 +17,13 @@ public class DBUtil {
 	
 	private static String offlineUserName = "root"; 
 	private static String offline = "jdbc:mysql://localhost:3306/myDB"; 
-	private static String offlinePassword = LibraryUI.sqlpassword; 
+	private static String offlinePassword; 
 	
 	
 	
 	
 	public static Connection getConnection(DBType_enum dbType) throws SQLException{
-		
+		offlinePassword = LibraryUI.sqlpassword;
 		switch(dbType) {
 		
 		case ONLINE:

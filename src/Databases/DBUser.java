@@ -19,7 +19,8 @@ public class DBUser {
 	private static  Connection conn; 
 	
 	public DBUser() throws SQLException {
-		conn = DBUtil.getConnection(DBType_enum.ONLINE);
+//		conn = DBUtil.getConnection(DBType_enum.ONLINE);
+		conn = LibraryUI.conn; 
 	}
 	
 	public static boolean checkUserExists(String username, String email) throws SQLException {

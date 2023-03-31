@@ -4,21 +4,23 @@ package GUI;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.swing.*;
 
+import Databases.DBType_enum;
+import Databases.DBUtil;
 import net.miginfocom.swing.MigLayout;
 
 public class LibraryUI {
 	public static String sqlpassword;
-	
+	public static Connection conn ; 
 	public LibraryUI() {
-		
 		try {
+			conn = DBUtil.getConnection(DBType_enum.ONLINE); 
 			init();
-			
-		}catch (SQLException e) {			
+		}catch (SQLException e) {
 			password(); 
 		}
 	}
@@ -28,9 +30,10 @@ public class LibraryUI {
 	}
 	
 	private void init() throws SQLException {
-			 new Template();
+		new Template();
 	
 	}
+
 	public void password() {
 		JFrame frame = new JFrame(); 
 		JTextField text_field = new JTextField(); 
@@ -41,10 +44,11 @@ public class LibraryUI {
 		submit.addActionListener((ActionListener) new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				sqlpassword = text_field.getText(); 
-				text_field.setText("");
-				frame.dispose();
 				try {
+					LibraryUI.sqlpassword = text_field.getText(); 
+					text_field.setText("");
+					frame.dispose();
+					conn = DBUtil.getConnection(DBType_enum.OFFLINE);
 					init();
 				} catch (SQLException e1) {
 				} 
