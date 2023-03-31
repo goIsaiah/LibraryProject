@@ -10,9 +10,9 @@ public class DBCriticZone
 {
 
 	//declaring variables for the database
-	private String user = "root";
-	private String url = "jdbc:mysql://localhost:3306/myDB";
-	private static String password = LibraryUI.sqlpassword;
+//	private String user = "root";
+//	private String url = "jdbc:mysql://localhost:3306/myDB";
+//	private static String password = LibraryUI.sqlpassword;
 	private String query;
 	private Connection connection;
 	private Statement statement;
@@ -22,7 +22,8 @@ public class DBCriticZone
 		//establish a connection
 		try
 		{
-			connection = DriverManager.getConnection(url, user, password);
+//			connection = DriverManager.getConnection(url, user, password);
+			connection = LibraryUI.conn;
 			statement = connection.createStatement();
 		}
 		catch (SQLException e) //catch any errors when connecting to the DB
@@ -33,9 +34,9 @@ public class DBCriticZone
 
 	public void addCritic(Critic c)
 	{
-		Connection conn = null;
-		Statement statement = null;
-		url = "jdbc:mysql://localhost:3306/myDB";
+//		Connection conn = null;
+//		Statement statement = null;
+//		url = "jdbc:mysql://localhost:3306/myDB";
 
 		String query = String.format("INSERT INTO CRITICS\n(usrname, book_title, message, rating, book_id) VALUES\n('%s', '%s', '%s', '%d', '%d')", c.getUser().getUsername(), c.getBook().getTitle(), c.getReview().getMessage(), c.getRating().getRating(), c.getBook().getId());
 
@@ -48,15 +49,15 @@ public class DBCriticZone
 		{
 			try
 			{
-				//attempt to add the the query into the table
-				conn = DriverManager.getConnection(url, user, password);
-				statement = conn.createStatement();
+//				//attempt to add the the query into the table
+//				connection = DriverManager.getConnection(url, user, password);
+//				statement = connection.createStatement();
 
 				//adding the query
 				int res = statement.executeUpdate(query);
 				System.out.println(res);
-				statement.close();
-				conn.close();
+//				statement.close();
+//				connection.close();
 
 			}
 
