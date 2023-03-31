@@ -15,22 +15,22 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import Databases.DBType_enum;
 import Databases.DBUser;
+import Databases.DBUtil;
 import net.miginfocom.swing.MigLayout;
 
 public class FrameTest {
-	static String url = "jdbc:mysql://sql9.freesqldatabase.com:3306/sql9609229";
-	static String user = "sql9609229";
-	static String password = "yUHweNy2bX";
+
 	
 	public static void main(String[] a) {
 		JFrame frame = new JFrame(); 
-		frame.setBounds(0, 0, 800, 800);
+		frame.setBounds(0, 0, 300, 500);
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
-		frame.add(new FriendList()); 
+		FriendPanel panel = new FriendPanel();
+		frame.add(panel.getPane() ); 
 		frame.pack();
-		
 		
 		try {
 			ArrayList<String> list = getUserInfo();
@@ -44,7 +44,7 @@ public class FrameTest {
 	}
 	
 	public static ArrayList<String> getUserInfo() throws SQLException{
-		Connection conn = DriverManager.getConnection(url, user, password); 
+		Connection conn = DBUtil.getConnection(DBType_enum.ONLINE); 
 		String query = "Select USERNAME, EMAIL from USERTABLE;"; 
 		Statement statement= conn.createStatement(); 
 		ResultSet set = statement.executeQuery(query); 
@@ -60,14 +60,51 @@ public class FrameTest {
 
 class FriendProfile extends JPanel{
 	private JLabel label; 
-	public FriendProfile() {
-		label = new JLabel("Name"); 
-		setPreferredSize(new Dimension(300, 40));
-		this.setLayout(new BorderLayout());
-		setBorder(BorderFactory.createLineBorder(Color.BLACK, 0));
-		add(label, BorderLayout.WEST); 
+	private JPanel photo; 
+	
+	public FriendProfile(String text) {
+		init(); 
+		label = new JLabel();
+		label.setText("<html>"+ text.replaceAll("\n", "<br/>") +"</html>");
+		setPhoto(); 
+		add(photo, BorderLayout.WEST);
+		add(label, BorderLayout.CENTER);
 	}
 	
+	private void init() {
+		setFont(new Font("Arial", Font.BOLD, 20));
+		BorderLayout layout = new BorderLayout(); 
+		 
+		layout.setHgap(5);
+		setPreferredSize(new Dimension(300, 50));
+		this.setLayout(layout);
+	}
+	
+	private void setPhoto() {
+		photo = new JPanel();
+		photo.setPreferredSize(new Dimension(50, 50));
+		photo.setBackground(Color.GREEN);
+	}
+	
+	//TODO onlick user profile should appear
+	//	   or ability to add as friend is added
+
+}
+
+class FriendPanel {
+	private JScrollPane pane; 
+	
+	public FriendPanel() {
+		pane = new JScrollPane(); 
+		pane.setPreferredSize(new Dimension(300 , 500));
+		pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		pane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		pane.setColumnHeaderView(new FriendList());
+	}
+	
+	public JScrollPane getPane() {
+		return pane; 
+	}
 }
 
 
@@ -75,17 +112,22 @@ class FriendList extends JPanel{
 	
 	public FriendList() {
 		this.setPreferredSize(new Dimension(300 , 500));
-		this.setLayout(new MigLayout("", "[][]", "[][][]"));
-		addContent();
+		this.setLayout(new MigLayout("wrap", "[]", "[][][]"));
+		try {
+			addContent();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	private void addContent() {
-		FriendProfile label1 = new FriendProfile(); 
-
-		label1.setFont(new Font("Arial", Font.BOLD, 20));
+	private void addContent() throws SQLException {
+		DBUser user = new DBUser(); 
+		ArrayList<String> list = user.getUserInfo();
 		
-		this.add(label1, "cell 0 0"); 
-
+		for(int i = 0 ; i<list.size(); i++) {
+			FriendProfile label1 = new FriendProfile(list.get(i)); 
+			add(label1); 
+		}
 	}
 	
 	

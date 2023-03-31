@@ -87,6 +87,20 @@ public class DBUser {
 		statement.executeUpdate();
 	}
 	
+	public static ArrayList<String> getUserInfo() throws SQLException{
+		Connection conn = DBUtil.getConnection(DBType_enum.ONLINE); 
+		String query = "Select USERNAME, EMAIL from USERTABLE;"; 
+		Statement statement= conn.createStatement(); 
+		ResultSet set = statement.executeQuery(query); 
+		ArrayList<String> list = new ArrayList<>(); 
+		
+		while(set.next()) {
+			list.add((set.getString(1) + "\n" + set.getString(2) + "\n")); 
+		}
+		return list; 
+	}
+	
+	
 
 
 
