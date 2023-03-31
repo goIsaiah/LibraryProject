@@ -5,12 +5,12 @@ CREATE DATABASE IF NOT EXISTS myDB;
 
 USE myDB; 
 
-DROP TABLE IF EXISTS Ratings; 
-DROP TABLE IF EXISTS Reviews; 
+
 DROP TABLE IF EXISTS BOOKLISTS;
 DROP TABLE IF EXISTS COMMENTS; 
 DROP TABLE IF EXISTS USERTABLE; 
 DROP TABLE IF EXISTS LIBRARY;
+DROP TABLE IF EXISTS CRITICS;
 
 -- Creates the book library table where all the books are stored 
 CREATE TABLE IF NOT EXISTS LIBRARY ( 
@@ -55,22 +55,17 @@ CREATE TABLE BOOKLISTS(
 	FOREIGN KEY (book_id) REFERENCES LIBRARY(LIB_ID)
 );
 
-CREATE TABLE Ratings(
-	id INT NOT NULL auto_increment PRIMARY KEY,
-	book VARCHAR(255),
-	user VARCHAR(255),
-	rating INT NOT NULL
-   -- FOREIGN KEY(book) REFERENCES LIBRARY(LIB_TITLE), 
-   -- FOREIGN KEY(user) REFERENCES USERTABLE(USERNAME)
-); 
-
-CREATE TABLE Reviews(
-	id INT NOT NULL,
-	book VARCHAR(255),
-	user VARCHAR(255),
-	message TEXT,
-    likes INT NOT NULL
-   -- FOREIGN KEY(id) REFERENCES Ratings(id)
+CREATE TABLE CRITICS(
+	usrname VARCHAR(255),
+    user_id INT NOT NULL auto_increment PRIMARY KEY,
+    book_id INT NOT NULL,
+    book_title VARCHAR(255) NOT NULL,
+    message TEXT,
+    rating INT NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES USERTABLE(user_id),          --  usr_id == USERTABLE.user_id
+    FOREIGN KEY(usrname) REFERENCES USERTABLE(USERNAME),        --  usrname == USERTABLE.USERNAME
+    FOREIGN KEY(book_title) REFERENCES LIBRARY(LIB_TITLE) , 
+    FOREIGN KEY (book_id) REFERENCES LIBRARY(LIB_ID)--  book_title == LIBRARY.LIB_TITLE
 ); 
 
 CREATE TABLE STATUSTABLE(
@@ -106,11 +101,3 @@ INSERT INTO BOOKLISTS(usrname, usr_id, book_id, book_title, book_isbn) VALUES
 ('Polywertz', 1, 6, 'The Great Gatsby',  '9780743273565')
 
 ;
-
-
-
-
-
-
-
-
