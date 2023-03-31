@@ -37,6 +37,7 @@ public class DBStatus {
 //	        conn = DriverManager.getConnection(url, user, password);
 	    	conn = DBUtil.getConnection(DBType_enum.ONLINE);
 	    	
+	    	//Add user name
 	        String queryCheck = "SELECT * FROM statustable WHERE TITLE = ? AND YEAR = ? AND MONTH = ? AND DAY = ?";
 	        PreparedStatement pstmtCheck = conn.prepareStatement(queryCheck);
 	        String sql = "INSERT INTO statustable (TITLE, YEAR, MONTH, DAY) VALUES (?, ?, ?, ?)";
