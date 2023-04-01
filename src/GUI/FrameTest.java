@@ -4,9 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -75,7 +80,6 @@ class FriendProfile extends JPanel{
 	private void init() {
 		setFont(new Font("Arial", Font.BOLD, 20));
 		BorderLayout layout = new BorderLayout(); 
-		 
 		layout.setHgap(5);
 		setPreferredSize(new Dimension(300, 50));
 		this.setLayout(layout);
@@ -83,64 +87,194 @@ class FriendProfile extends JPanel{
 	
 	private void setPhoto() {
 		photo = new JPanel();
-		photo.setPreferredSize(new Dimension(50, 50));
-		photo.setBackground(Color.GREEN);
+		photo.setPreferredSize(new Dimension(30, 30));
+
+//		ImageIcon imageIcon = new ImageIcon("/cat_avatar.png");
+//		JLabel imageLabel = new JLabel(imageIcon);
+//		photo.add(imageLabel);
+		
+		
+        URL searchURL = getClass().getResource("/cat_avatar.png");
+        ImageIcon searchIcon = new ImageIcon(searchURL);
+        Image img = searchIcon.getImage();
+        img = img.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
+        searchIcon = new ImageIcon(img);
+        JLabel searchIconLabel = new JLabel(searchIcon);
+		
+        photo.add(searchIconLabel);
+		
+		
+		
+		
+//		photo.setBackground(Color.GREEN);
+
+		
+		
 	}
 	
-	//TODO onlick user profile should appear
-	//	   or ability to add as friend is added
+
 
 }
 
 class FriendPanel  {
 	private JScrollPane pane; 
+	Timer stopwatch; 
+	private int previousPosition; 
 	
 	public FriendPanel() {
 		pane = new JScrollPane(); 
 		pane.setPreferredSize(new Dimension(300 , 500));
 		pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		pane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//		pane.setColumnHeaderView(new FriendList());
 		pane.setViewportView(new FriendList());
+	}
+	
+	private void rememberLastPosition() {
+		previousPosition = pane.getVerticalScrollBar().getValue();
+		pane.getVerticalScrollBar().setValue(previousPosition);
 	}
 	
 	public JScrollPane getPane() {
 		return pane; 
 	}
-}
-
-
-class FriendList extends JPanel{
 	
-	public FriendList() {
-		this.setPreferredSize(new Dimension(300 , 500));
-		this.setLayout(new MigLayout("wrap", "[]", "[][][]"));
-		try {
-			addContent();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 	
-	private void addContent() throws SQLException {
-		DBUser user = new DBUser(); 
-		ArrayList<String> list = user.getUserInfo();
+	class FriendList extends JPanel {
+		private Timer stopwatch ;
 		
-		for(int i = 0 ; i<list.size(); i++) {
-			FriendProfile label1 = new FriendProfile(list.get(i)); 
-		    label1.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    System.out.println("Yay you clicked me");
-                }
+		
+		public FriendList() {
+			this.setPreferredSize(new Dimension(300 , 500));
+			this.setLayout(new MigLayout("wrap", "[]", "[][][]"));
+			refreshTimer();
 
-            });
-			add(label1); 
 		}
-	}
+		
+		private void refreshTimer() {
+			stopwatch = new Timer(5000, refresh());
+			stopwatch.setInitialDelay(0);
+			stopwatch.start();
+		}
+		
+		private ActionListener refresh() {
+			ActionListener action = new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					try {
+					previousPosition = pane.getVerticalScrollBar().getValue();
+					removeAll();
+					revalidate();
+					repaint();
+					pane.getVerticalScrollBar().setValue(previousPosition);
+					System.out.println("Refreshed");
+					addContent();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+					
+				}
+				
+			};
+			
+			return action; 
+			
+		}
+		
+		
+		private void addContent() throws SQLException {
+			DBUser user = new DBUser(); 
+			ArrayList<String> list = user.getUserInfo();
+			
+			for(int i = 0 ; i<list.size(); i++) {
+				FriendProfile label1 = new FriendProfile(list.get(i)); 
+			    label1.addMouseListener(new MouseAdapter() {
+	                @Override
+	                public void mouseClicked(MouseEvent e) {
+	                    System.out.println("Yay you clicked me");
+	                }
+
+	            });
+				add(label1); 
+			}
+			//TODO onlick user profile should appear
+			//	   or ability to add as friend is added
+			
+			
+		}
+		
+		
+	}// End of FriendList
+
 	
 	
+
 }
+
+
+//class FriendList extends JPanel {
+//	private Timer stopwatch ;
+//	
+//	
+//	public FriendList() {
+//		this.setPreferredSize(new Dimension(300 , 500));
+//		this.setLayout(new MigLayout("wrap", "[]", "[][][]"));
+//		refreshTimer();
+//
+//	}
+//	
+//	private void refreshTimer() {
+//		stopwatch = new Timer(5000, refresh());
+//		stopwatch.setInitialDelay(0);
+//		stopwatch.start();
+//	}
+//	
+//	private ActionListener refresh() {
+//		ActionListener action = new ActionListener() {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				try {
+//				removeAll();
+//				revalidate();
+//				repaint();
+//					addContent();
+//				} catch (SQLException e1) {
+//					e1.printStackTrace();
+//				}
+//				
+//			}
+//			
+//		};
+//		
+//		return action; 
+//		
+//	}
+//	
+//	
+//	private void addContent() throws SQLException {
+//		DBUser user = new DBUser(); 
+//		ArrayList<String> list = user.getUserInfo();
+//		
+//		for(int i = 0 ; i<list.size(); i++) {
+//			FriendProfile label1 = new FriendProfile(list.get(i)); 
+//		    label1.addMouseListener(new MouseAdapter() {
+//                @Override
+//                public void mouseClicked(MouseEvent e) {
+//                    System.out.println("Yay you clicked me");
+//                }
+//
+//            });
+//			add(label1); 
+//		}
+//		//TODO onlick user profile should appear
+//		//	   or ability to add as friend is added
+//		
+//		
+//	}
+//	
+//	
+//}
 
 
 
