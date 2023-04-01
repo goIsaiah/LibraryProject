@@ -9,13 +9,17 @@ import java.sql.Statement;
 import GUI.LibraryUI;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import com.mysql.cj.util.StringUtils;
 import DomainObjects.Book;
+import DomainObjects.User;
 import GUI.LibraryUI;
 import Logic.GoogleJSON;
 import java.time.LocalDate;
+import java.util.Date;
 
 // Checks if book is checked out or not
 public class DBStatus {
@@ -25,34 +29,69 @@ public class DBStatus {
 //	static String password = LibraryUI.sqlpassword;
 
 	
-	private void checkOut(Book book, LocalDate date) {
+	public void checkOut(Book book, User user) {
 		Connection conn = null;
 	    PreparedStatement stmt = null;
 	    ResultSet rs = null;
-	    boolean userExists = false;
+	    // boolean userExists = false;
 	    String title = book.getTitle();
+	    String username = user.getUsername();
 	    
+	    java.util.Date date= new Date();
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(date);
+	    int year = cal.get(Calendar.YEAR);
+	    int month = cal.get(Calendar.MONTH);
+	    int day = cal.get(Calendar.DAY_OF_MONTH);
 	    
 	    try {
 //	        conn = DriverManager.getConnection(url, user, password);
-//	    	conn = DBUtil.getConnection(DBType_enum.ONLINE);
-	    	conn = LibraryUI.conn; 
+	    	conn = DBUtil.getConnection(DBType_enum.ONLINE);
 	    	
 	    	//Add user name
-	        String queryCheck = "SELECT * FROM statustable WHERE TITLE = ? AND YEAR = ? AND MONTH = ? AND DAY = ?";
-	        PreparedStatement pstmtCheck = conn.prepareStatement(queryCheck);
-	        String sql = "INSERT INTO statustable (TITLE, YEAR, MONTH, DAY) VALUES (?, ?, ?, ?)";
-	        stmt = conn.prepareStatement(sql);
-	        stmt.setString(1, title);
+	        String queryCheck = "UPDATE STATUSTABLE SET USER = " + username + ", MONTH = " + month + ", DAY = " + day + ", YEAR = " + year + " where TITLE = ?";
+	        //String sql = "INSERT INTO statustable (TITLE, YEAR, MONTH, DAY) VALUES (?, ?, ?, ?)";
+	        stmt = conn.prepareStatement(queryCheck);
+	        // stmt.setString(1, title);
+	        /*
+	        stmt.setString(2, username);
+	        stmt.setInt(3, year);
+	        stmt.setInt(4, month);
+	        stmt.setInt(5, day);
+	        */
 	        //stmt.setString(2, );
 	        rs = stmt.executeQuery();
 	        
-	        if (rs.next()) {
-	            userExists = true;
-	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    } 
+	}
+	
+	public void bookExists(Book book) {
+		String title = book.getTitle();
+		try {
+			Connection con = DBUtil.getConnection(DBType_enum.ONLINE);
+		    String queryCheck = "SELECT * FROM STATUSTABLE WHERE TITLE = ?";
+		    PreparedStatement pstmtCheck = con.prepareStatement(queryCheck);
+		    pstmtCheck.setString(1, title);
+		    ResultSet resultSet = pstmtCheck.executeQuery();
+		    
+		    if (!resultSet.next()) { // If no record exists, insert a new one
+		        String sql = "INSERT INTO LIBRARY (TITLE, USER, MONTH, DAY, YEAR) VALUES (?, ?, ?, ?, ?)";
+		        PreparedStatement pstmt = con.prepareStatement(sql);
+		        pstmt.setString(1, title);
+		        pstmt.setString(2, null);
+		        pstmt.setInt(3, 0);
+		        pstmt.setInt(4, 0);
+		        pstmt.setInt(5, 0);
+		        pstmt.executeUpdate();
+		    } 
+		    resultSet.close();
+		    pstmtCheck.close();
+		    con.close();
+		} catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
 	
 	
