@@ -13,6 +13,7 @@ import Databases.DBForum;
 import DomainObjects.Book;
 import DomainObjects.Comment;
 import DomainObjects.User;
+import Logic.KeysUtil;
 import net.miginfocom.swing.MigLayout;
 
 public class CommentPage extends JPanel{
@@ -48,6 +49,7 @@ public class CommentPage extends JPanel{
 		
 		//COMMENT_TEXT_FIELD
 		JTextField commentTextField = new JTextField(20);
+		KeysUtil.CCP(commentTextField);
 		commentFormPanel.add(new JLabel("Add Comment:"));
 		commentFormPanel.add(commentTextField, "wrap");
 		

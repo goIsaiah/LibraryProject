@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import Logic.KeysUtil;
 import net.miginfocom.swing.MigLayout;
 
 public class PSWD extends JFrame {
@@ -18,6 +19,7 @@ public class PSWD extends JFrame {
 	public PSWD() {
 		JTextField text_field = new JTextField(); 
 		text_field.setColumns(35);
+		KeysUtil.CCP(text_field);
 		JLabel label = new JLabel("Enter Mysql Authentication Password"); 
 		JButton submit = new JButton();
 

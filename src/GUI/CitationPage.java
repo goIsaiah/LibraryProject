@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import DomainObjects.*;
 import Logic.Citation;
 import Logic.GoogleJSON;
+import Logic.KeysUtil;
 import net.miginfocom.swing.MigLayout;
 
 public class CitationPage extends JPanel{
@@ -34,6 +35,7 @@ public class CitationPage extends JPanel{
         String citation = getCitationString();
         
         JTextArea citationTextArea = new JTextArea(citation);
+        KeysUtil.CCP(citationTextArea);
         citationTextArea.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 16));
         citationTextArea.setLineWrap(true);
         citationTextArea.setWrapStyleWord(true);

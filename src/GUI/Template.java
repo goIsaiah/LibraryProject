@@ -26,6 +26,7 @@ import javax.swing.WindowConstants;
 import Databases.DBMain;
 import DomainObjects.Book;
 import DomainObjects.User;
+import Logic.KeysUtil;
 import net.miginfocom.swing.MigLayout;
 
 public class Template extends JFrame {
@@ -189,6 +190,7 @@ public class Template extends JFrame {
 	public Component searchBar() {
 		//SEARCH_FIELD
         JTextField searchField = new JTextField(15);
+        KeysUtil.CCP(searchField);
         searchField.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 20));
         searchField.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY),

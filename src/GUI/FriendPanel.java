@@ -98,6 +98,10 @@ class FriendPanel  {
 			    label1.addMouseListener(new MouseAdapter() {
 	                @Override
 	                public void mouseClicked(MouseEvent e) {
+	                	/*
+	                	 * TODO method that initializes a new Frame
+	                	 * HINT: Class(user_id) 
+	                	 */
 	                    System.out.println("Yay you clicked me");
 	                }
 

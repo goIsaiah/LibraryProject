@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 
 import Databases.DBUserInfo;
 import DomainObjects.User;
+import Logic.KeysUtil;
 import net.miginfocom.swing.MigLayout;
 
 public class SettingsPage extends JPanel{
@@ -44,6 +45,7 @@ public class SettingsPage extends JPanel{
         add(firstNameLabel, "cell 0 1");
 
         JTextField firstNameField = new JTextField(currUser.getFirstName());
+        KeysUtil.CCP(firstNameField);
         firstNameField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
         add(firstNameField, "cell 1 1, width 200, growx");
 
@@ -53,6 +55,7 @@ public class SettingsPage extends JPanel{
         add(lastNameLabel, "cell 0 2");
 
         JTextField lastNameField = new JTextField(currUser.getLastName());
+        KeysUtil.CCP(lastNameField);
         lastNameField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
         add(lastNameField, "cell 1 2, width 200, growx");
 
@@ -62,6 +65,8 @@ public class SettingsPage extends JPanel{
         add(bioLabel, "cell 0 3");
 
         JTextArea bioField = new JTextArea(currUser.getBio());
+        bioField.setLineWrap(true);
+        KeysUtil.CCP(bioField);
         bioField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
         JScrollPane bioScrollPane = new JScrollPane(bioField);
         bioScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -73,6 +78,7 @@ public class SettingsPage extends JPanel{
         userUrlLabel.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
         add(userUrlLabel, "cell 0 4");
         JTextField userUrlField = new JTextField(currUser.getURL());
+        KeysUtil.CCP(userUrlField);
         userUrlField.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 14));
         add(userUrlField, "cell 1 4, width 200, growx, gapbottom 20");
         

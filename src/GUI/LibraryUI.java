@@ -10,6 +10,7 @@ import javax.swing.*;
 
 import Databases.DBType_enum;
 import Databases.DBUtil;
+import Logic.KeysUtil;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JButton;
@@ -47,6 +48,7 @@ public class LibraryUI {
 		JFrame frame = new JFrame(); 
 		JTextField text_field = new JTextField(); 
 		text_field.setColumns(35);
+		KeysUtil.CCP(text_field);
 		JLabel label = new JLabel("Enter Mysql Authentication Password"); 
 		JButton submit = new JButton();
 
