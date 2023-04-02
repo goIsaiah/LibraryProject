@@ -207,7 +207,7 @@ public class Template extends JFrame {
         JLabel searchIconLabel = new JLabel(searchIcon);
 
         //SEARCH_PANEL
-        JPanel searchPanel = new JPanel(new MigLayout("", "[]10[]"));
+        JPanel searchPanel = new JPanel(new MigLayout("wrap 2", "[]10[]", "[][][][]50[]"));
         searchPanel.add(searchIconLabel,"cell 0 0");
         searchPanel.add(searchField, "cell 1 0");
         searchPanel.setBackground(Color.WHITE);

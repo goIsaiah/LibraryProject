@@ -47,84 +47,48 @@ public class CriticPage extends JPanel
 
 	}
 
-	private void addCritics()
-	{
-		//rating form panel
-		JPanel ratingPanel = new JPanel();
-		ratingPanel.setLayout(new MigLayout("", "[]10[]", "[]10[]"));
-		ratingPanel.setBackground(Color.white);
+	private void addCritics() {
+    // rating form panel
+    JPanel ratingPanel = new JPanel();
+    ratingPanel.setLayout(new MigLayout("", "[]10[]", "[]10[]"));
+    ratingPanel.setBackground(Color.white);
 
-		
-		//rating text field
-		//add error blocking so they can only input a number between 1 and 5
-		JTextField ratingTextField = new JTextField(10);
-		
-		ratingPanel.add(new JLabel("Add rating (1-5):"));
-		ratingPanel.add(ratingTextField, "wrap");
+    // star rating system
+    JPanel starRatingPanel = new JPanel();
+    starRatingPanel.setBackground(Color.white);
 
-		//review text field
+    ButtonGroup starGroup = new ButtonGroup();
+    JRadioButton[] starButtons = new JRadioButton[5];
 
-		JTextField reviewTextField = new JTextField(25);
-		ratingPanel.add(new JLabel("Add review:"));
-		ratingPanel.add(reviewTextField, "wrap");
-		
-		
-		//add post button
-		JButton rrButton = new JButton("Post Rating and Review");
-		ratingPanel.add(rrButton, "span");
-		rrButton.addActionListener(e -> 
-		{
-			try 
-			{
-				//if we have invalid input
-				if (!validRating(ratingTextField.getText()))
-				{
-					JFrame incorrectinput = new JFrame();
-					JLabel incorrectinputlabel = new JLabel("Please enter a rating between 1 and 5!", SwingConstants.CENTER);
-					JButton ok = new JButton();
-					ok.setText("OK");
-					incorrectinputlabel.setFont(incorrectinputlabel.getFont().deriveFont(Font.BOLD, 14f));
-					incorrectinput.setPreferredSize(new Dimension(200 , 200));
-					incorrectinput.setSize(new Dimension(300 , 200));
-					incorrectinput.setLayout(new MigLayout("", "[]", "[]10[][]" ));
-					incorrectinput.add(incorrectinputlabel);
-					incorrectinput.add(ok, "cell 0 3");
-					incorrectinput.setLocationRelativeTo(null);
-					incorrectinput.setVisible(true);
-					incorrectinput.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-					ok.addActionListener(new ActionListener()
-					{
-						public void actionPerformed(ActionEvent e)
-						{
-							incorrectinput.dispose();
-						}
+    for (int i = 0; i < 5; i++) {
+        starButtons[i] = new JRadioButton();
+        starButtons[i].setActionCommand(String.valueOf(i + 1));
+        starGroup.add(starButtons[i]);
+        starRatingPanel.add(starButtons[i]);
+    }
 
-					});
-					ok.addKeyListener(new KeyAdapter()
-					{
+    ratingPanel.add(new JLabel("Add rating (1-5):"));
+    ratingPanel.add(starRatingPanel, "wrap");
 
-						public void keyPressed(KeyEvent e)
-						{
-							if (e.getKeyCode()==KeyEvent.VK_ENTER) {
-								incorrectinput.dispose();
-							}
-						}
-					});
-					
-				}
-				else //if the input is fine, set the critic
-				{
-					createCritic(ratingTextField.getText(), reviewTextField.getText());
-				}
-				
-			} catch (SQLException ex) {
+    // review text field
+    JTextField reviewTextField = new JTextField(25);
+    ratingPanel.add(new JLabel("Add review:"));
+    ratingPanel.add(reviewTextField, "wrap");
 
-				ex.printStackTrace();
-			}
-		}); 
+    // add post button
+    JButton rrButton = new JButton("Post Rating and Review");
+    ratingPanel.add(rrButton, "span");
+    rrButton.addActionListener(e -> {
+        try {
+            String rating = starGroup.getSelection().getActionCommand();
+            createCritic(rating, reviewTextField.getText());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    });
 
-		add(ratingPanel, "cell 0 2");
-	}
+    add(ratingPanel, "cell 0 2");
+}
 
 	private void createCritic(String rating, String review) throws SQLException
 	{

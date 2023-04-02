@@ -90,7 +90,6 @@ public class DBUser {
 	}
 	
 	public Hashtable<Integer, String> getUserInfo() throws SQLException{
-		Connection conn = DBUtil.getConnection(DBType_enum.ONLINE); 
 		String query = "Select USERNAME, EMAIL, user_id from USERTABLE;"; 
 		Statement statement= conn.createStatement(); 
 		ResultSet set = statement.executeQuery(query); 
@@ -99,7 +98,6 @@ public class DBUser {
 		while(set.next()) {
 			list.put(set.getInt(3), set.getString(1) + "\n" + set.getString(2) + "\n" );
 		}
-		conn.close();
 		return list; 
 	}
 	

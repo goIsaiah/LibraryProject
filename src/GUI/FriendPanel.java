@@ -8,117 +8,105 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Set;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.Timer;
 
 import Databases.DBUser;
 import Databases.DBUserInfo;
 import net.miginfocom.swing.MigLayout;
 
-class FriendPanel  {
-	private JScrollPane pane; 
-	Timer stopwatch; 
-	private int previousPosition; 
-	
-	public FriendPanel() {
-		pane = new JScrollPane(); 
-		pane.setPreferredSize(new Dimension(300 , 500));
-		pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		pane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		pane.setViewportView(new FriendList());
-	}
-	
-	private void rememberLastPosition() {
-		previousPosition = pane.getVerticalScrollBar().getValue();
-		pane.getVerticalScrollBar().setValue(previousPosition);
-	}
-	
-	public JScrollPane getPane() {
-		return pane; 
-	}
-	
-	
-	class FriendList extends JPanel {
-		private Timer stopwatch ;
-		
-		
-		public FriendList() {
-			this.setPreferredSize(new Dimension(300 , 500));
-			this.setLayout(new MigLayout("wrap", "[]", "[][][]"));
-			refreshTimer();
+class FriendPanel {
+    private JScrollPane pane;
+    private int previousPosition;
 
-		}
-		
-		private void refreshTimer() {
-			stopwatch = new Timer(5000, refresh());
-			stopwatch.setInitialDelay(0);
-			stopwatch.start();
-		}
-		
-		private ActionListener refresh() {
-			ActionListener action = new ActionListener() {
+    public FriendPanel() {
+        pane = new JScrollPane(new FriendList());
+        pane.setPreferredSize(new Dimension(300, 500));
+        pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        pane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    }
 
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					try {
-					previousPosition = pane.getVerticalScrollBar().getValue();
-					removeAll();
-					revalidate();
-					repaint();
-					pane.getVerticalScrollBar().setValue(previousPosition);
-//					System.out.println("Refreshed");
-					addContent();
-					} catch (SQLException e1) {
-//						e1.printStackTrace();
-					}
-					
-				}
-				
-			};
-			
-			return action; 
-			
-		}
-		
-		
-		private void addContent() throws SQLException {
-			DBUser user = new DBUser(); 
-			DBUserInfo info = new DBUserInfo();
-			Hashtable<Integer, String> list = user.getUserInfo();
-			ArrayList<Integer> set = new ArrayList<>(list.keySet());
-			
-						
-			for(int i = 0 ; i<set.size(); i++) {
-				MiniProfile label1 = new MiniProfile(list.get(set.get(i))); 
-				label1.setPhoto(info.getPhotoUrl(set.get(i)));
-				
-			    label1.addMouseListener(new MouseAdapter() {
-	                @Override
-	                public void mouseClicked(MouseEvent e) {
-	                	/*
-	                	 * TODO method that initializes a new Frame
-	                	 * HINT: Class(user_id) 
-	                	 */
-	                    System.out.println("Yay you clicked me");
-	                }
+    public JScrollPane getPane() {
+        return pane;
+    }
 
-	            });
-				add(label1); 
-			}
-			//TODO onlick user profile should appear
-			//	   or ability to add as friend is added
-			
-			
-		}
-	
-		
-		
-	}// End of FriendList
+    class FriendList extends JPanel {
+        private Timer stopwatch;
 
-	
-	
+        public FriendList() {
+            this.setPreferredSize(new Dimension(300, 500));
+            this.setLayout(new MigLayout("wrap", "[grow, fill]", "[][][]"));
+            refreshTimer();
+        }
 
+        private void refreshTimer() {
+            stopwatch = new Timer(10000, refresh());
+            stopwatch.setInitialDelay(0);
+            stopwatch.start();
+        }
+
+        private ActionListener refresh() {
+            ActionListener action = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+                        @Override
+                        protected Void doInBackground() throws Exception {
+                            try {
+                                previousPosition = pane.getVerticalScrollBar().getValue();
+                                pane.getVerticalScrollBar().setValue(previousPosition);
+                                addContent();
+                            } catch (SQLException e1) {
+                                // e1.printStackTrace();
+                            }
+                            return null;
+                        }
+                    };
+                    worker.execute();
+                }
+            };
+            return action;
+        }
+
+        private void addContent() throws SQLException {
+            DBUser user = new DBUser();
+            DBUserInfo info = new DBUserInfo();
+            Hashtable<Integer, String> list = user.getUserInfo();
+            ArrayList<Integer> set = new ArrayList<>(list.keySet());
+
+            // Create an off-screen JPanel to hold the new content
+            JPanel offScreenPanel = new JPanel(new MigLayout("wrap", "[grow, fill]", "[][][]"));
+            offScreenPanel.setOpaque(false);
+
+            for (int i = 0; i < set.size(); i++) {
+                MiniProfile label1 = new MiniProfile(list.get(set.get(i)));
+                label1.setPhoto(info.getPhotoUrl(set.get(i)));
+
+                label1.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        System.out.println("Yay you clicked me");
+                    }
+                });
+                offScreenPanel.add(label1);
+            }
+
+            // Set the preferred height dynamically based on the number of users
+            int userCount = set.size();
+            int rowHeight = 50; // You can adjust this value according to the height of a single user entry
+            this.setPreferredSize(new Dimension(300, rowHeight * userCount));
+
+            // Swap the current content with the off-screen content
+            SwingUtilities.invokeLater(() -> {
+                removeAll();
+                add(offScreenPanel);
+                revalidate();
+                repaint();
+            });
+        }
+    }
 }
