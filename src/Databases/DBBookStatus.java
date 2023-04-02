@@ -22,7 +22,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 // Checks if book is checked out or not
-public class DBStatus {
+public class DBBookStatus {
 //	static String url = "jdbc:mysql://localhost:3306/myDB";
 //	static String urlRoot = "jdbc:mysql://localhost:3306";
 //	static String user = "root";
@@ -52,17 +52,18 @@ public class DBStatus {
 		    	
 		        String queryCheck = "UPDATE STATUSTABLE SET USER = " + username + ", MONTH = " + month + ", DAY = " + day + ", YEAR = " + year + " where TITLE = ?";
 		        stmt = conn.prepareStatement(queryCheck);
-		        rs = stmt.executeQuery();  
+		        rs = stmt.executeQuery();
 		    } catch (SQLException e) {
 		        e.printStackTrace();
 		    }
+		    System.out.println(title + " checked out by: " + username);
 	    }
 	    else {
 	    	System.out.println("Book is unavailable.");
 	    }
 	}
 	
-	public void bookExists(Book book) {
+	private void bookExists(Book book) {
 		String title = book.getTitle();
 		try {
 			Connection con = DBUtil.getConnection(DBType_enum.ONLINE);
@@ -89,7 +90,7 @@ public class DBStatus {
 	    }
 	}
 	
-	private void returnBook(Book book) {
+	public void returnBook(Book book) {
 		Connection conn = null;
 	    PreparedStatement stmt = null;
 	    ResultSet rs = null;
@@ -124,7 +125,7 @@ public class DBStatus {
 	    }
 	}
 	
-	private boolean isBookAvailable(Book book) {
+	public boolean isBookAvailable(Book book) {
 		String title = book.getTitle();
 		boolean available = true;
 		try {
