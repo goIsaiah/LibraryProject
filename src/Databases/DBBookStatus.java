@@ -80,7 +80,7 @@ public class DBBookStatus {
 		    
 		    boolean isThere = false;
 		    while (resultSet.next()) {
-		    	if (resultSet.getString(1) == title) {
+		    	if (resultSet.getString(1).equals(title)) {
 		    		isThere = true;
 		    		break;
 		    	}
@@ -166,7 +166,7 @@ public class DBBookStatus {
 		ArrayList<String> bookList = userBooks(user);
 		String title = book.getTitle();
 		for (int i = 0; i < bookList.size(); i++) {
-			if (bookList.get(i) == title) {
+			if (bookList.get(i).equals(title)) {
 				return true;
 			}
 		}

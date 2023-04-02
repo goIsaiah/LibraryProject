@@ -21,6 +21,7 @@ import javax.swing.border.Border;
 
 import org.json.JSONObject;
 
+import Databases.DBBookStatus;
 import Databases.DBMain;
 import DomainObjects.Book;
 import Logic.GoogleJSON;
@@ -122,6 +123,26 @@ public class MainPage extends JPanel{
         parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
         critic.addActionListener(e -> parentTemplate.showPanel("Critic"));
         add(critic, "cell 0 7");
+        
+        DBBookStatus dbStatus = new DBBookStatus();
+        boolean available = dbStatus.isBookAvailable(book);
+ 
+        JButton returnButton = new JButton("   Return    ");
+        returnButton.addActionListener(e -> {
+			dbStatus.returnBook(book);
+			repaint();
+		});
+        JButton borrowButton = new JButton("   Borrow    ");
+        borrowButton.addActionListener(e -> {
+			dbStatus.checkOut(book, Template.user);
+		}); 
+ 
+        if (available) {
+        	add(borrowButton, "cell 0 8");
+        }
+        else {
+        	add(returnButton, "cell 0 8");
+        }
 	}
 
 	private void bookCover(String coverUrl) {
