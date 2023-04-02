@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS USERINFO (
   info_id INT auto_increment unique PRIMARY KEY,
   user_id INT NOT NULL,
   URL varchar(255),
-  TEXTFIELD varchar(255),
+  TEXTFIELD LongText,
   FIRSTNAME varchar(255),
   LASTNAME varchar(255),
   FOREIGN KEY (user_id) REFERENCES USERTABLE(user_id)
@@ -136,7 +136,8 @@ INSERT INTO BOOKLISTS(usrname, usr_id, book_id, book_title, book_isbn) VALUES
 ('Polywertz', 1, 3, 'Pride and Prejudice',  '0446310789'),
 ('Polywertz', 1, 6, 'The Great Gatsby',  '9780743273565');
 
-
+INSERT INTO STATUSTABLE (TITLE, USER, MONTH, DAY, YEAR) VALUES 
+('Harry Potter' , 'isaiah', 4,  9, 2023);
 
 
 

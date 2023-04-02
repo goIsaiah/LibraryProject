@@ -42,7 +42,7 @@ public class DBBookStatus {
 	    cal.setTime(date);
 	    int year = cal.get(Calendar.YEAR);
 	    int month = cal.get(Calendar.MONTH);
-	    int day = cal.get(Calendar.DAY_OF_MONTH);
+	    int day = cal.get(Calendar.DAY_OF_MONTH + 7);
 	    boolean isAvailable = isBookAvailable(book);
 	    
 	    if (isAvailable == true) {
@@ -137,7 +137,7 @@ public class DBBookStatus {
 		    pstmtCheck.setString(1, title);
 		    ResultSet resultSet = pstmtCheck.executeQuery();
 		    
-		    if (resultSet.getString("USER") != null) { // If book is checked out, it is unavailable
+		    if (resultSet.getString(2) != null) { // If book is checked out, it is unavailable
 		        available = false;
 		    } 
 		    

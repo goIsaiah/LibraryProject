@@ -18,6 +18,8 @@ class DBBookStatusTests {
 		Databases.DBBookStatus db = new Databases.DBBookStatus();
 		db.checkOut(b, u);
 		boolean available = db.isBookAvailable(b);
+		User u2 = new User("abbey", "abbey123","abbey@gmail.com");
+		db.checkOut(b, u2);
 		assertFalse(available);
 	}
 
