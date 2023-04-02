@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import GUI.LibraryUI;
 public class DBUser {
@@ -88,15 +89,15 @@ public class DBUser {
 		statement.executeUpdate();
 	}
 	
-	public ArrayList<String> getUserInfo() throws SQLException{
+	public Hashtable<Integer, String> getUserInfo() throws SQLException{
 		Connection conn = DBUtil.getConnection(DBType_enum.ONLINE); 
-		String query = "Select USERNAME, EMAIL from USERTABLE;"; 
+		String query = "Select USERNAME, EMAIL, user_id from USERTABLE;"; 
 		Statement statement= conn.createStatement(); 
 		ResultSet set = statement.executeQuery(query); 
-		ArrayList<String> list = new ArrayList<>(); 
+		Hashtable<Integer, String> list = new Hashtable<>(); 
 		
 		while(set.next()) {
-			list.add((set.getString(1) + "\n" + set.getString(2) + "\n")); 
+			list.put(set.getInt(3), set.getString(1) + "\n" + set.getString(2) + "\n" );
 		}
 		conn.close();
 		return list; 

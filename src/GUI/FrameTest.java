@@ -7,10 +7,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,9 +19,9 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import Databases.DBType_enum;
-import Databases.DBUser;
+import Databases.DBUserInfo;
 import Databases.DBUtil;
-import net.miginfocom.swing.MigLayout;
+import DomainObjects.User;
 
 public class FrameTest {
 
@@ -64,6 +61,7 @@ public class FrameTest {
 	
 }
 
+
 class FriendProfile extends JPanel{
 	private JLabel label; 
 	private JPanel photo; 
@@ -72,7 +70,7 @@ class FriendProfile extends JPanel{
 		init(); 
 		label = new JLabel();
 		label.setText("<html>"+ text.replaceAll("\n", "<br/>") +"</html>");
-		setPhoto(); 
+	   	 setPhoto(); 
 		add(photo, BorderLayout.WEST);
 		add(label, BorderLayout.CENTER);
 	}
@@ -87,194 +85,55 @@ class FriendProfile extends JPanel{
 	
 	private void setPhoto() {
 		photo = new JPanel();
-		photo.setPreferredSize(new Dimension(30, 30));
-
-//		ImageIcon imageIcon = new ImageIcon("/cat_avatar.png");
-//		JLabel imageLabel = new JLabel(imageIcon);
-//		photo.add(imageLabel);
-		
-		
-        URL searchURL = getClass().getResource("/cat_avatar.png");
-        ImageIcon searchIcon = new ImageIcon(searchURL);
-        Image img = searchIcon.getImage();
-        img = img.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
-        searchIcon = new ImageIcon(img);
-        JLabel searchIconLabel = new JLabel(searchIcon);
-		
-        photo.add(searchIconLabel);
-		
-		
-		
-		
-//		photo.setBackground(Color.GREEN);
-
-		
-		
-	}
-	
-
-
-}
-
-class FriendPanel  {
-	private JScrollPane pane; 
-	Timer stopwatch; 
-	private int previousPosition; 
-	
-	public FriendPanel() {
-		pane = new JScrollPane(); 
-		pane.setPreferredSize(new Dimension(300 , 500));
-		pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		pane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		pane.setViewportView(new FriendList());
-	}
-	
-	private void rememberLastPosition() {
-		previousPosition = pane.getVerticalScrollBar().getValue();
-		pane.getVerticalScrollBar().setValue(previousPosition);
-	}
-	
-	public JScrollPane getPane() {
-		return pane; 
-	}
-	
-	
-	class FriendList extends JPanel {
-		private Timer stopwatch ;
-		
-		
-		public FriendList() {
-			this.setPreferredSize(new Dimension(300 , 500));
-			this.setLayout(new MigLayout("wrap", "[]", "[][][]"));
-			refreshTimer();
-
+		ImageIcon profilePic = null;
+    	try {
+    		profilePic = new ImageIcon(new URL("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"));
+    		JLabel picLabel = photoLabelConfig(profilePic);
+    		photo.add(picLabel);
+		} catch (MalformedURLException e1) {
 		}
 		
-		private void refreshTimer() {
-			stopwatch = new Timer(5000, refresh());
-			stopwatch.setInitialDelay(0);
-			stopwatch.start();
-		}
+	}
+	private JLabel photoLabelConfig(ImageIcon profilePic) {
+	       Image scaledImage = profilePic.getImage().getScaledInstance(30, -1, Image.SCALE_SMOOTH); // scale the image
+	        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+	        JLabel picLabel = new JLabel(scaledIcon);
+	        picLabel.setPreferredSize(new Dimension(30, 30)); // set fixed size
+	        picLabel.setMinimumSize(new Dimension(30, 30)); // set minimum size to prevent distortion
+	        picLabel.setMaximumSize(new Dimension(30, 30)); // set maximum size to prevent stretching
+	        
+		return picLabel; 
+	}
+	
+   public void setPhoto(String url)  {
+	   photo.removeAll();
+	   photo.revalidate();
+	   photo.repaint();
 		
-		private ActionListener refresh() {
-			ActionListener action = new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					try {
-					previousPosition = pane.getVerticalScrollBar().getValue();
-					removeAll();
-					revalidate();
-					repaint();
-					pane.getVerticalScrollBar().setValue(previousPosition);
-					System.out.println("Refreshed");
-					addContent();
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
-					
-				}
-				
-			};
-			
-			return action; 
-			
-		}
-		
-		
-		private void addContent() throws SQLException {
-			DBUser user = new DBUser(); 
-			ArrayList<String> list = user.getUserInfo();
-			
-			for(int i = 0 ; i<list.size(); i++) {
-				FriendProfile label1 = new FriendProfile(list.get(i)); 
-			    label1.addMouseListener(new MouseAdapter() {
-	                @Override
-	                public void mouseClicked(MouseEvent e) {
-	                    System.out.println("Yay you clicked me");
-	                }
-
-	            });
-				add(label1); 
+        ImageIcon profilePic;
+        try {
+            profilePic = new ImageIcon(new URL(url));
+            photo.add(  photoLabelConfig(profilePic) );
+          
+        } catch (MalformedURLException e) {
+        	try {
+				profilePic = new ImageIcon(new URL("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"));
+			    photo.add(  photoLabelConfig(profilePic) );
+        	} catch (MalformedURLException e1) {
 			}
-			//TODO onlick user profile should appear
-			//	   or ability to add as friend is added
-			
-			
-		}
-		
-		
-	}// End of FriendList
+        }
+        
+     
 
+       
+	}
 	
-	
+
 
 }
 
 
-//class FriendList extends JPanel {
-//	private Timer stopwatch ;
-//	
-//	
-//	public FriendList() {
-//		this.setPreferredSize(new Dimension(300 , 500));
-//		this.setLayout(new MigLayout("wrap", "[]", "[][][]"));
-//		refreshTimer();
-//
-//	}
-//	
-//	private void refreshTimer() {
-//		stopwatch = new Timer(5000, refresh());
-//		stopwatch.setInitialDelay(0);
-//		stopwatch.start();
-//	}
-//	
-//	private ActionListener refresh() {
-//		ActionListener action = new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				try {
-//				removeAll();
-//				revalidate();
-//				repaint();
-//					addContent();
-//				} catch (SQLException e1) {
-//					e1.printStackTrace();
-//				}
-//				
-//			}
-//			
-//		};
-//		
-//		return action; 
-//		
-//	}
-//	
-//	
-//	private void addContent() throws SQLException {
-//		DBUser user = new DBUser(); 
-//		ArrayList<String> list = user.getUserInfo();
-//		
-//		for(int i = 0 ; i<list.size(); i++) {
-//			FriendProfile label1 = new FriendProfile(list.get(i)); 
-//		    label1.addMouseListener(new MouseAdapter() {
-//                @Override
-//                public void mouseClicked(MouseEvent e) {
-//                    System.out.println("Yay you clicked me");
-//                }
-//
-//            });
-//			add(label1); 
-//		}
-//		//TODO onlick user profile should appear
-//		//	   or ability to add as friend is added
-//		
-//		
-//	}
-//	
-//	
-//}
+
 
 
 

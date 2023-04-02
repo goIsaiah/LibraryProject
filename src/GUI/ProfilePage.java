@@ -48,9 +48,7 @@ public class ProfilePage extends JPanel{
         	try {
 				profilePic = new ImageIcon(new URL("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"));
 			} catch (MalformedURLException e1) {
-//				e1.printStackTrace();
 			}
-//            e.printStackTrace();
         }
         Image scaledImage = profilePic.getImage().getScaledInstance(150, -1, Image.SCALE_SMOOTH); // scale the image
         ImageIcon scaledIcon = new ImageIcon(scaledImage);

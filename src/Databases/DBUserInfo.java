@@ -14,6 +14,9 @@ public class DBUserInfo {
 	public DBUserInfo() throws SQLException {
 		conn = LibraryUI.conn;
 	}
+	public void setConnection(Connection conn) {
+		this.conn = conn;
+	}
 
 	public void addUserInfo(User user) throws SQLException {
 		String firstName = user.getFirstName();
@@ -100,5 +103,28 @@ public class DBUserInfo {
 
 	    return currUser;
 	}
+	
+	public String getPhotoUrl(int key) {
+        String query = "SELECT URL FROM USERINFO WHERE user_id = " + Integer.toString(key);
+        String url = ""; 
+        Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			if(rs.next()) {			
+				url = rs.getString("URL");
+				return url ;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return url;
+        
+        
+	}
+	
+	
 
 }
