@@ -112,6 +112,10 @@ public class MainPage extends JPanel{
         parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
         citationButton.addActionListener(e -> parentTemplate.showPanel("Citation"));
         add(citationButton, "cell 0 6");
+        JButton critic = new JButton("   Critic Zone    ");
+        parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
+        critic.addActionListener(e -> parentTemplate.showPanel("Critic"));
+        add(critic, "cell 0 7");
 	}
 
 	private void bookCover(String coverUrl) {
