@@ -47,11 +47,16 @@ public class DBBookStatus {
 	    
 	    if (isAvailable == true) {
 		    try {
-	//	        conn = DriverManager.getConnection(url, user, password);
+		        // conn = DriverManager.getConnection(url, user, password);
 		    	conn = DBUtil.getConnection(DBType_enum.ONLINE);
 		    	
-		        String queryCheck = "UPDATE STATUSTABLE SET USER = " + username + ", MONTH = " + month + ", DAY = " + day + ", YEAR = " + year + " where TITLE = ?";
+		        String queryCheck = "UPDATE STATUSTABLE SET USER=?, MONTH=?, DAY=?, YEAR=? where TITLE=?";
 		        stmt = conn.prepareStatement(queryCheck);
+		        stmt.setString(1, username);
+		        stmt.setInt(2, month);
+		        stmt.setInt(3, day);
+		        stmt.setInt(4, year);
+		        stmt.setString(5, title);
 		        rs = stmt.executeQuery();
 		    } catch (SQLException e) {
 		        e.printStackTrace();
@@ -108,17 +113,14 @@ public class DBBookStatus {
 //	        conn = DriverManager.getConnection(url, user, password);
 	    	conn = DBUtil.getConnection(DBType_enum.ONLINE);
 	    	
-	        String queryCheck = "UPDATE STATUSTABLE SET USER = " + username + ", MONTH = " + month + ", DAY = " + day + ", YEAR = " + year + " where TITLE = ?";
+	        String queryCheck = "UPDATE STATUSTABLE SET USER=?, MONTH=?, DAY=?, YEAR=? where TITLE=?";
 	        //String sql = "INSERT INTO statustable (TITLE, YEAR, MONTH, DAY) VALUES (?, ?, ?, ?)";
 	        stmt = conn.prepareStatement(queryCheck);
-	        // stmt.setString(1, title);
-	        /*
-	        stmt.setString(2, username);
-	        stmt.setInt(3, year);
-	        stmt.setInt(4, month);
-	        stmt.setInt(5, day);
-	        */
-	        //stmt.setString(2, );
+	        stmt.setString(1, title);
+	        stmt.setString(2, null);
+	        stmt.setInt(3, 0);
+	        stmt.setInt(4, 0);
+	        stmt.setInt(5, 0);
 	        rs = stmt.executeQuery();
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -130,7 +132,7 @@ public class DBBookStatus {
 		boolean available = true;
 		try {
 			Connection con = DBUtil.getConnection(DBType_enum.ONLINE);
-		    String queryCheck = "SELECT * FROM STATUSTABLE WHERE TITLE = ?";
+		    String queryCheck = "SELECT * FROM STATUSTABLE WHERE TITLE=?";
 		    PreparedStatement pstmtCheck = con.prepareStatement(queryCheck);
 		    pstmtCheck.setString(1, title);
 		    ResultSet resultSet = pstmtCheck.executeQuery();
