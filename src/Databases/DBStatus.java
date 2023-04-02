@@ -30,10 +30,10 @@ public class DBStatus {
 
 	
 	public void checkOut(Book book, User user) {
+		bookExists(book);
 		Connection conn = null;
 	    PreparedStatement stmt = null;
 	    ResultSet rs = null;
-	    // boolean userExists = false;
 	    String title = book.getTitle();
 	    String username = user.getUsername();
 	    
@@ -48,7 +48,6 @@ public class DBStatus {
 //	        conn = DriverManager.getConnection(url, user, password);
 	    	conn = DBUtil.getConnection(DBType_enum.ONLINE);
 	    	
-	    	//Add user name
 	        String queryCheck = "UPDATE STATUSTABLE SET USER = " + username + ", MONTH = " + month + ", DAY = " + day + ", YEAR = " + year + " where TITLE = ?";
 	        //String sql = "INSERT INTO statustable (TITLE, YEAR, MONTH, DAY) VALUES (?, ?, ?, ?)";
 	        stmt = conn.prepareStatement(queryCheck);
@@ -60,11 +59,10 @@ public class DBStatus {
 	        stmt.setInt(5, day);
 	        */
 	        //stmt.setString(2, );
-	        rs = stmt.executeQuery();
-	        
+	        rs = stmt.executeQuery();  
 	    } catch (SQLException e) {
 	        e.printStackTrace();
-	    } 
+	    }
 	}
 	
 	public void bookExists(Book book) {
@@ -94,5 +92,38 @@ public class DBStatus {
 	    }
 	}
 	
-	
+	public void returnBook(Book book) {
+		Connection conn = null;
+	    PreparedStatement stmt = null;
+	    ResultSet rs = null;
+	    String title = book.getTitle();
+	    String username = null;
+	    
+	    java.util.Date date= new Date();
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(date);
+	    int year = 0;
+	    int month = 0;
+	    int day = 0;
+	    
+	    try {
+//	        conn = DriverManager.getConnection(url, user, password);
+	    	conn = DBUtil.getConnection(DBType_enum.ONLINE);
+	    	
+	        String queryCheck = "UPDATE STATUSTABLE SET USER = " + username + ", MONTH = " + month + ", DAY = " + day + ", YEAR = " + year + " where TITLE = ?";
+	        //String sql = "INSERT INTO statustable (TITLE, YEAR, MONTH, DAY) VALUES (?, ?, ?, ?)";
+	        stmt = conn.prepareStatement(queryCheck);
+	        // stmt.setString(1, title);
+	        /*
+	        stmt.setString(2, username);
+	        stmt.setInt(3, year);
+	        stmt.setInt(4, month);
+	        stmt.setInt(5, day);
+	        */
+	        //stmt.setString(2, );
+	        rs = stmt.executeQuery();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
 }
