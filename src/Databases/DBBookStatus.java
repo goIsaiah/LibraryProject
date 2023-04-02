@@ -57,7 +57,7 @@ public class DBBookStatus {
 		        stmt.setInt(3, day);
 		        stmt.setInt(4, year);
 		        stmt.setString(5, title);
-		        rs = stmt.executeQuery();
+		        stmt.executeQuery();
 		    } catch (SQLException e) {
 		        e.printStackTrace();
 		    }
@@ -77,8 +77,16 @@ public class DBBookStatus {
 		    pstmtCheck.setString(1, title);
 		    ResultSet resultSet = pstmtCheck.executeQuery();
 		    
-		    if (!resultSet.next()) { // If no record exists, insert a new one
-		        String sql = "INSERT INTO LIBRARY (TITLE, USER, MONTH, DAY, YEAR) VALUES (?, ?, ?, ?, ?)";
+		    boolean isThere = false;
+		    while (resultSet.next()) {
+		    	if (resultSet.getString(1) == title) {
+		    		isThere = true;
+		    		break;
+		    	}
+		    }
+		    
+		    if (isThere == false) { // If no record exists, insert a new one
+		        String sql = "INSERT INTO STATUSTABLE (TITLE, USER, MONTH, DAY, YEAR) VALUES (?, ?, ?, ?, ?)";
 		        PreparedStatement pstmt = con.prepareStatement(sql);
 		        pstmt.setString(1, title);
 		        pstmt.setString(2, null);
@@ -86,6 +94,7 @@ public class DBBookStatus {
 		        pstmt.setInt(4, 0);
 		        pstmt.setInt(5, 0);
 		        pstmt.executeUpdate();
+		        //pstmt.executeQuery();
 		    } 
 		    resultSet.close();
 		    pstmtCheck.close();
@@ -137,11 +146,11 @@ public class DBBookStatus {
 		    PreparedStatement pstmtCheck = con.prepareStatement(queryCheck);
 		    pstmtCheck.setString(1, title);
 		    ResultSet resultSet = pstmtCheck.executeQuery();
-		    while (resultSet.next()) {
+		    if (resultSet.next()) {
 		    	if (resultSet.getString(2) != null) { // If book is checked out, it is unavailable
 			        available = false;
-			    } 
-		    }
+				}
+		    }	
 		    resultSet.close();
 		    pstmtCheck.close();
 		    con.close();

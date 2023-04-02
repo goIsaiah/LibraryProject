@@ -21,7 +21,8 @@ class DBBookStatusTests {
 	@Test
 	void checkOutBookTest() {
 		User u = new User("isaiah", "isaiah123","isaiah@gmail.com");
-		Book b = new Book("Harry Potter", "JK Rowling", 2005, 4);
+		//Book b = new Book("Harry Potter", "JK Rowling", 2005, 4);
+		Book b = new Book("The Fault in Our Stars", "John Green", 2012, 4);
 		Databases.DBBookStatus db = new Databases.DBBookStatus();
 		db.checkOut(b, u);
 		boolean available = db.isBookAvailable(b);
