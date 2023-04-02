@@ -57,7 +57,8 @@ public class DBBookStatus {
 		        stmt.setInt(3, day);
 		        stmt.setInt(4, year);
 		        stmt.setString(5, title);
-		        stmt.executeQuery();
+		        //stmt.executeQuery();
+		        stmt.executeUpdate();
 		    } catch (SQLException e) {
 		        e.printStackTrace();
 		    }
@@ -125,12 +126,12 @@ public class DBBookStatus {
 	        String queryCheck = "UPDATE STATUSTABLE SET USER=?, MONTH=?, DAY=?, YEAR=? where TITLE=?";
 	        //String sql = "INSERT INTO statustable (TITLE, YEAR, MONTH, DAY) VALUES (?, ?, ?, ?)";
 	        stmt = conn.prepareStatement(queryCheck);
-	        stmt.setString(1, title);
-	        stmt.setString(2, null);
-	        stmt.setInt(3, year);
-	        stmt.setInt(4, month);
-	        stmt.setInt(5, day);
-	        rs = stmt.executeQuery();
+	        stmt.setString(1, null);
+	        stmt.setInt(2, year);
+	        stmt.setInt(3, month);
+	        stmt.setInt(4, day);
+	        stmt.setString(5, title);
+	        stmt.executeUpdate();
 	        System.out.println(title + " was returned.");
 	    } catch (SQLException e) {
 	        e.printStackTrace();
