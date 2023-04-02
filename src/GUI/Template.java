@@ -32,6 +32,7 @@ import net.miginfocom.swing.MigLayout;
 public class Template extends JFrame {
 	private JPanel panelContainer;
 	private Component searchPanel;
+	public static User userF;
 	public static User user;
 	public static Book book;
 	public Template() throws SQLException {
@@ -124,6 +125,9 @@ public class Template extends JFrame {
 	                break;
 	            case "Critic":
 	                panel = new CriticPage(user, book);
+	                break;
+	            case "fProfile":
+	                panel = new ProfilePage(userF);
 	                break;
 	            case "Settings":
 	            	if (user != null) {

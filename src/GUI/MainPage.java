@@ -22,7 +22,6 @@ import javax.swing.border.Border;
 import org.json.JSONObject;
 
 import Databases.DBMain;
-import Databases.DBBookStatus;
 import DomainObjects.Book;
 import Logic.GoogleJSON;
 import net.miginfocom.swing.MigLayout;
@@ -109,6 +108,12 @@ public class MainPage extends JPanel{
         parentTemplate.setBook(book);
         forumButton.addActionListener(e -> parentTemplate.showPanel("Comment"));
         add(forumButton, "cell 0 5");
+        
+        parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
+        parentTemplate.setBook(book);
+        forumButton.addActionListener(e -> parentTemplate.showPanel("Comment"));
+        
+        
         JButton citationButton = new JButton("   Citation Machine    ");
         parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
         citationButton.addActionListener(e -> parentTemplate.showPanel("Citation"));
@@ -117,8 +122,6 @@ public class MainPage extends JPanel{
         parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
         critic.addActionListener(e -> parentTemplate.showPanel("Critic"));
         add(critic, "cell 0 7");
-        //DBBookStatus dbStatus = new DBBookStatus();
-        //if (dbStatus.)
 	}
 
 	private void bookCover(String coverUrl) {

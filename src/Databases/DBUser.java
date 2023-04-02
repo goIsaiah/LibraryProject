@@ -106,7 +106,7 @@ public class DBUser {
 	public User getUser(int key) {
 		User user = null; 
 		ResultSet result = null; 
-		String query = "select * from USERTABLE INNER JOIN USERINFO on USERTABLE.user_id = USERINFO.user_id "
+		String query = "select * from USERTABLE LEFT JOIN USERINFO on USERTABLE.user_id = USERINFO.user_id "
 				+ "where USERTABLE.user_id = " + Integer.toString(key) + ";"; 
 		try {
 			Statement statement = conn.createStatement();

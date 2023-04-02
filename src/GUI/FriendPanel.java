@@ -17,12 +17,14 @@ import javax.swing.Timer;
 
 import Databases.DBUser;
 import Databases.DBUserInfo;
+import DomainObjects.User;
 import net.miginfocom.swing.MigLayout;
 
 class FriendPanel {
     private JScrollPane pane;
     private int previousPosition;
-
+    private Template parentTemplate;
+    
     public FriendPanel() {
         pane = new JScrollPane(new FriendList());
         pane.setPreferredSize(new Dimension(300, 500));
@@ -81,16 +83,20 @@ class FriendPanel {
             // Create an off-screen JPanel to hold the new content
             JPanel offScreenPanel = new JPanel(new MigLayout("wrap", "[grow, fill]", "[][][]"));
             offScreenPanel.setOpaque(false);
-
+            parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
             for (int i = 0; i < set.size(); i++) {
             	int user_id = set.get(i);
                 MiniProfile label1 = new MiniProfile(list.get(user_id));
                 label1.setPhoto(info.getPhotoUrl(user_id));
-
+                
                 label1.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
                     	//TODO call a new JFrame
+                    	User friend = user.getUser(user_id);
+                    	parentTemplate.userF = friend; 
+                    	System.out.println(friend.getUsername());
+                    	parentTemplate.showPanel("fProfile");
                         System.out.println("Yay you clicked me");
                     }
                 });
