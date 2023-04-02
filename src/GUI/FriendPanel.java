@@ -92,7 +92,7 @@ class FriendPanel  {
 			
 						
 			for(int i = 0 ; i<set.size(); i++) {
-				FriendProfile label1 = new FriendProfile(list.get(set.get(i))); 
+				MiniProfile label1 = new MiniProfile(list.get(set.get(i))); 
 				label1.setPhoto(info.getPhotoUrl(set.get(i)));
 				
 			    label1.addMouseListener(new MouseAdapter() {
