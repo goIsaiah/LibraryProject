@@ -43,25 +43,22 @@ public class DBStatus {
 	    int year = cal.get(Calendar.YEAR);
 	    int month = cal.get(Calendar.MONTH);
 	    int day = cal.get(Calendar.DAY_OF_MONTH);
+	    boolean isAvailable = isBookAvailable(book);
 	    
-	    try {
-//	        conn = DriverManager.getConnection(url, user, password);
-	    	conn = DBUtil.getConnection(DBType_enum.ONLINE);
-	    	
-	        String queryCheck = "UPDATE STATUSTABLE SET USER = " + username + ", MONTH = " + month + ", DAY = " + day + ", YEAR = " + year + " where TITLE = ?";
-	        //String sql = "INSERT INTO statustable (TITLE, YEAR, MONTH, DAY) VALUES (?, ?, ?, ?)";
-	        stmt = conn.prepareStatement(queryCheck);
-	        // stmt.setString(1, title);
-	        /*
-	        stmt.setString(2, username);
-	        stmt.setInt(3, year);
-	        stmt.setInt(4, month);
-	        stmt.setInt(5, day);
-	        */
-	        //stmt.setString(2, );
-	        rs = stmt.executeQuery();  
-	    } catch (SQLException e) {
-	        e.printStackTrace();
+	    if (isAvailable == true) {
+		    try {
+	//	        conn = DriverManager.getConnection(url, user, password);
+		    	conn = DBUtil.getConnection(DBType_enum.ONLINE);
+		    	
+		        String queryCheck = "UPDATE STATUSTABLE SET USER = " + username + ", MONTH = " + month + ", DAY = " + day + ", YEAR = " + year + " where TITLE = ?";
+		        stmt = conn.prepareStatement(queryCheck);
+		        rs = stmt.executeQuery();  
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    }
+	    }
+	    else {
+	    	System.out.println("Book is unavailable.");
 	    }
 	}
 	
@@ -92,7 +89,7 @@ public class DBStatus {
 	    }
 	}
 	
-	public void returnBook(Book book) {
+	private void returnBook(Book book) {
 		Connection conn = null;
 	    PreparedStatement stmt = null;
 	    ResultSet rs = null;
@@ -125,5 +122,29 @@ public class DBStatus {
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
+	}
+	
+	private boolean isBookAvailable(Book book) {
+		String title = book.getTitle();
+		boolean available = true;
+		try {
+			Connection con = DBUtil.getConnection(DBType_enum.ONLINE);
+		    String queryCheck = "SELECT * FROM STATUSTABLE WHERE TITLE = ?";
+		    PreparedStatement pstmtCheck = con.prepareStatement(queryCheck);
+		    pstmtCheck.setString(1, title);
+		    ResultSet resultSet = pstmtCheck.executeQuery();
+		    
+		    if (resultSet.getString("USER") != null) { // If book is checked out, it is unavailable
+		        available = false;
+		    } 
+		    
+		    resultSet.close();
+		    pstmtCheck.close();
+		    con.close();
+		    //return available;
+		} catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+		return available;
 	}
 }
