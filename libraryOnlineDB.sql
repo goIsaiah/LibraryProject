@@ -136,9 +136,6 @@ INSERT INTO BOOKLISTS(usrname, usr_id, book_id, book_title, book_isbn) VALUES
 ('Polywertz', 1, 3, 'Pride and Prejudice',  '0446310789'),
 ('Polywertz', 1, 6, 'The Great Gatsby',  '9780743273565');
 
-INSERT INTO STATUSTABLE (TITLE, USER, MONTH, DAY, YEAR) VALUES 
-('Harry Potter' , 'isaiah', 4,  9, 2023);
-
 
 
 

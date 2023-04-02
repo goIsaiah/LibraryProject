@@ -10,6 +10,13 @@ import GUI.LibraryUI;
 import Logic.*;
 
 class DBBookStatusTests {
+	
+	//@Test
+	void bookExistsTest() {
+		Book b = new Book("Harry Potter", "JK Rowling", 2005, 4);
+		Databases.DBBookStatus db = new Databases.DBBookStatus();
+		db.bookExists(b);
+	}
 
 	@Test
 	void checkOutBookTest() {

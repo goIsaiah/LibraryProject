@@ -68,7 +68,7 @@ public class DBBookStatus {
 	    }
 	}
 	
-	private void bookExists(Book book) {
+	public void bookExists(Book book) {
 		String title = book.getTitle();
 		try {
 			Connection con = DBUtil.getConnection(DBType_enum.ONLINE);
@@ -118,10 +118,11 @@ public class DBBookStatus {
 	        stmt = conn.prepareStatement(queryCheck);
 	        stmt.setString(1, title);
 	        stmt.setString(2, null);
-	        stmt.setInt(3, 0);
-	        stmt.setInt(4, 0);
-	        stmt.setInt(5, 0);
+	        stmt.setInt(3, year);
+	        stmt.setInt(4, month);
+	        stmt.setInt(5, day);
 	        rs = stmt.executeQuery();
+	        System.out.println(title + " was returned.");
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
@@ -136,11 +137,11 @@ public class DBBookStatus {
 		    PreparedStatement pstmtCheck = con.prepareStatement(queryCheck);
 		    pstmtCheck.setString(1, title);
 		    ResultSet resultSet = pstmtCheck.executeQuery();
-		    
-		    if (resultSet.getString(2) != null) { // If book is checked out, it is unavailable
-		        available = false;
-		    } 
-		    
+		    while (resultSet.next()) {
+		    	if (resultSet.getString(2) != null) { // If book is checked out, it is unavailable
+			        available = false;
+			    } 
+		    }
 		    resultSet.close();
 		    pstmtCheck.close();
 		    con.close();
