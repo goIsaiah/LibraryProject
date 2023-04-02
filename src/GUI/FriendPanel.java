@@ -44,7 +44,7 @@ class FriendPanel {
         }
 
         private void refreshTimer() {
-            stopwatch = new Timer(10000, refresh());
+            stopwatch = new Timer(1000, refresh());
             stopwatch.setInitialDelay(0);
             stopwatch.start();
         }
@@ -83,12 +83,14 @@ class FriendPanel {
             offScreenPanel.setOpaque(false);
 
             for (int i = 0; i < set.size(); i++) {
-                MiniProfile label1 = new MiniProfile(list.get(set.get(i)));
-                label1.setPhoto(info.getPhotoUrl(set.get(i)));
+            	int user_id = set.get(i);
+                MiniProfile label1 = new MiniProfile(list.get(user_id));
+                label1.setPhoto(info.getPhotoUrl(user_id));
 
                 label1.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
+                    	//TODO call a new JFrame
                         System.out.println("Yay you clicked me");
                     }
                 });

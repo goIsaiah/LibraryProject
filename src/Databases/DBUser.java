@@ -10,7 +10,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import DomainObjects.User;
 import GUI.LibraryUI;
+import Logic.AlreadyAFriendException;
 public class DBUser {
 	
 //	static String url = "jdbc:mysql://localhost:3306/myDB";
@@ -101,6 +103,65 @@ public class DBUser {
 		return list; 
 	}
 	
+	public User getUser(int key) {
+		User user = null; 
+		ResultSet result = null; 
+		String query = "select * from USERTABLE INNER JOIN USERINFO on USERTABLE.user_id = USERINFO.user_id "
+				+ "where USERTABLE.user_id = " + Integer.toString(key) + ";"; 
+		try {
+			Statement statement = conn.createStatement();
+			result = statement.executeQuery(query);
+			if(result.next()) {
+				user = new User(result.getString(2)); 
+				user.setEmail(result.getString(4));
+				user.setURL(result.getString(7)); 
+				user.setBio(result.getString(8));
+				user.setFirstName(result.getString(9));
+				user.setLastName(result.getString(10)); 
+				//TODO set followerList 
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return user; 
+	}
+	
+	public void addFollower(int user_id , int friend_id) {
+		if(user_id == friend_id) {
+			
+		}
+			else {			
+			String query ="INSERT INTO FOLLOWERS(user_id, friend_id) values " 
+			+ "(" + Integer.toString(user_id) +","+Integer.toString(friend_id) + ")" ;  
+			try {
+				Statement statement = conn.createStatement();
+				statement.executeUpdate(query);
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+	}
+	
+	public void removeFollower(int user_id,  int friend_id) {
+		if(user_id == friend_id) {
+		}else {
+			String query = "REMOVE FROM FOLLOWERS WHERE user_id = ? AND friend_id = ?;"; 
+			PreparedStatement statement;
+			try {
+				statement = conn.prepareStatement(query);
+				statement.setInt(user_id, 1);
+				statement.setInt(friend_id, 2);
+				statement.executeUpdate(); 
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} 
+		}
+		
+	}
 	
 
 
