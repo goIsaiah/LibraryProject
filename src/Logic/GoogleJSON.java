@@ -99,6 +99,9 @@ public class GoogleJSON {
 		try {
 			JSONObject volumeInfo = search.getJSONObject("volumeInfo");
 			aArr = volumeInfo.getJSONArray("authors");
+			if(aArr == null) {
+				aArr = new JSONArray(); 
+			}
 		}catch (Exception e) {
 		}
 		return aArr;

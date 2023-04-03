@@ -68,6 +68,7 @@ public class DBMain {
 	    String title = gJSON.getSearchName(titleobj);
 	    String publisher = gJSON.getSearchPublisher(titleobj);
 	    JSONArray authorsArray = gJSON.getSearchAuthor(titleobj);
+	    if(authorsArray == null ) return apibookList;
 	    ArrayList<String> authorsList = new ArrayList<>();
 	    for (int i = 0; i < authorsArray.length(); i++) {
 	        String author = authorsArray.getString(i);
