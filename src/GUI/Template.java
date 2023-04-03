@@ -80,7 +80,7 @@ public class Template extends JFrame {
 		sidebar.add(settings , "cell 0 4");
 		//Side Button on Click
 		home.addActionListener(e -> showPanel("Main")); 
-		profile.addActionListener(e -> showPanel("Welcome")); 
+		profile.addActionListener(e -> showPanel("Profile")); 
 		checkedOut.addActionListener(e -> showPanel("Library"));
 		settings.addActionListener(e -> showPanel("Settings")); 
 		
@@ -93,7 +93,6 @@ public class Template extends JFrame {
 		
 		//Panel Container 
 		panelContainer = new JPanel(new CardLayout());
-		panelContainer.add(new MainPage(), "Main");
 		panelContainer.add(welPanel, "Welcome");
         container.add(panelContainer, BorderLayout.CENTER);
         container.add(searchPanel, BorderLayout.EAST);
@@ -117,28 +116,42 @@ public class Template extends JFrame {
 	    try {
 	        switch (string) {
 	            case "Main":
-	                panel = new MainPage();
-	                break;
+	            	if(user != null) {
+	            		panel = new MainPage();
+		                break;	
+	            	}
 	            case "Comment":
-	                panel = new CommentPage(book, user);
-	                break;
+	            	if (user != null) {
+	            		panel = new CommentPage(book, user);
+		                break;
+	            	}
 	            case "Library":
-	            	DBBookStatus db = new DBBookStatus();
-	            	ArrayList<Book> bookList= db.searchLibrary(user.getUsername());
-	                panel = new MainPage(bookList);
-	                break;
+	            	if(user != null) {
+	            		DBBookStatus db = new DBBookStatus();
+		            	ArrayList<Book> bookList= db.searchLibrary(user.getUsername());
+		                panel = new MainPage(bookList);
+		                break;
+	            	}
 	            case "Citation":
-	                panel = new CitationPage(book);
-	                break;
+	            	if (user != null) {
+	            		panel = new CitationPage(book);
+		                break;
+	            	}
 	            case "Profile":
+	            	if (user != null) {
 	                panel = new ProfilePage(user);
 	                break;
+	            	}
 	            case "Critic":
+	            	if(user != null) {
 	                panel = new CriticPage(user, book);
 	                break;
+	            	}
 	            case "fProfile":
+	            	if (user != null) {
 	                panel = new ProfilePage(userF);
 	                break;
+	            	}
 	            case "Settings":
 	            	if (user != null) {
 	            		panel = new SettingsPage(user);
@@ -146,16 +159,16 @@ public class Template extends JFrame {
 	            	}
 	                break;
 	            case "Welcome":
-	                if (user != null) {
-	                    panel = new ProfilePage(user);
+	                    panel = new WelcomePage();
 	                    string = "Profile";
-	                }
 	                break;
 	            case "SearchMain":
+	            	if (user != null) {
 	            	CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
 	    	        cardLayout.show(panelContainer, string);
 	    	        add(searchPanel, BorderLayout.EAST);
 	    	        break;
+	            	}
 	            default:
 	                throw new IllegalArgumentException("Invalid panel identifier: " + string);
 	        }
@@ -246,7 +259,9 @@ public class Template extends JFrame {
 							bookList = db.getAPILibrary(query);
 						}
 						panelContainer.add(new MainPage(bookList), "SearchMain");
-						showPanel("SearchMain");
+						if (user != null) {
+							showPanel("SearchMain");
+						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}

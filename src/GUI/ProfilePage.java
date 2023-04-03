@@ -19,6 +19,13 @@ public class ProfilePage extends JPanel{
     User currUser;
 
     public ProfilePage(User user) throws SQLException{
+    	try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         this.currUser=user;
         framePanel(currUser.getUsername());
     }
