@@ -138,6 +138,26 @@ public class DBBookStatus {
 	    }
 	}
 	
+	public ArrayList<Book> searchLibrary(String username) throws SQLException {
+		Connection con = LibraryUI.conn; 
+		String sql = "SELECT title, user FROM STATUSTABLE WHERE user = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, username);
+        ResultSet rs = stmt.executeQuery();
+        ArrayList<Book> bookList= getBookList(rs);
+		return bookList;
+	}
+	
+	private ArrayList<Book> getBookList(ResultSet result) throws SQLException {
+		ArrayList<Book> bookList = new ArrayList<Book>();
+		DBMain db = new DBMain();
+		while (result.next()) {
+	        String title = result.getString("title");
+	        bookList.addAll(db.searchLibrary(title));
+		}
+		return bookList;
+	}
+	
 	public boolean isBookAvailable(Book book) {
 		String title = book.getTitle();
 		boolean available = true;

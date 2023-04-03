@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import Databases.DBBookStatus;
 import Databases.DBMain;
 import DomainObjects.Book;
 import DomainObjects.User;
@@ -72,13 +73,17 @@ public class Template extends JFrame {
 		JButton home = sideButton("/home.png"); 
 		JButton profile = sideButton("/profile.png"); 
 		JButton settings = sideButton("/settings.png"); 
+		JButton checkedOut = sideButton("/library.png");
 		sidebar.add(home, "cell 0 1");
 		sidebar.add(profile , "cell 0 2");
-		sidebar.add(settings , "cell 0 3");
+		sidebar.add(checkedOut, "cell 0 3");
+		sidebar.add(settings , "cell 0 4");
 		//Side Button on Click
 		home.addActionListener(e -> showPanel("Main")); 
 		profile.addActionListener(e -> showPanel("Welcome")); 
+		checkedOut.addActionListener(e -> showPanel("Library"));
 		settings.addActionListener(e -> showPanel("Settings")); 
+		
 		
 		//SEARCH_BAR
 		searchPanel = searchBar();
@@ -116,6 +121,11 @@ public class Template extends JFrame {
 	                break;
 	            case "Comment":
 	                panel = new CommentPage(book, user);
+	                break;
+	            case "Library":
+	            	DBBookStatus db = new DBBookStatus();
+	            	ArrayList<Book> bookList= db.searchLibrary(user.getUsername());
+	                panel = new MainPage(bookList);
 	                break;
 	            case "Citation":
 	                panel = new CitationPage(book);
