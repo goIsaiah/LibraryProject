@@ -112,7 +112,7 @@ public class DBMain {
 
 	    resultSet.close();
 	    pstmtCheck.close();
-	    con.close();
+//	    con.close();
 	}
 
 

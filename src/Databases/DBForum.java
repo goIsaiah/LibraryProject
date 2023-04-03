@@ -80,6 +80,10 @@ public class DBForum {
 	
 	public ArrayList<Comment> getCommentList(int id) throws SQLException {
 		ArrayList<Comment> list = new ArrayList<>();
+		if(stmt == null) {
+			conn = DBUtil.getConnection(DBType_enum.ONLINE);
+			stmt = conn.createStatement();
+		}
 		query = "SELECT book_title, comment, usrname, book_id FROM COMMENTS WHERE book_id = '" + id + "';";
 		ResultSet result = stmt.executeQuery(query);
 		while (result.next()) {
