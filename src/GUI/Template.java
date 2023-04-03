@@ -36,6 +36,7 @@ public class Template extends JFrame {
 	public static User userF;
 	public static User user;
 	public static Book book;
+	private Container container;
 	public Template() throws SQLException {
 		
 		// WINDOW_NAME
@@ -47,7 +48,7 @@ public class Template extends JFrame {
 		setIconImage(icon.getImage());
 		
 		// SIDEBAR
-		Container container = getContentPane();
+		container = getContentPane();
 		container.setLayout(new BorderLayout());
 		JPanel sidebar = new JPanel();
 		sidebar.setPreferredSize(new Dimension(75, 0));
@@ -86,7 +87,7 @@ public class Template extends JFrame {
 		
 		
 		//SEARCH_BAR
-		searchPanel = searchBar();
+		
 		
 		//Welcome Object
 		WelcomePage welPanel = new WelcomePage();
@@ -95,7 +96,6 @@ public class Template extends JFrame {
 		panelContainer = new JPanel(new CardLayout());
 		panelContainer.add(welPanel, "Welcome");
         container.add(panelContainer, BorderLayout.CENTER);
-        container.add(searchPanel, BorderLayout.EAST);
 		closeOP();
 		
 		
@@ -104,6 +104,8 @@ public class Template extends JFrame {
 	
 	public void setUser(User user) {
 		this.user = user;
+		searchPanel = searchBar();
+		container.add(searchPanel, BorderLayout.EAST);
 	}
 	
 	public User getUser() {
@@ -177,7 +179,10 @@ public class Template extends JFrame {
 	        } 
         	CardLayout cardLayout = (CardLayout) panelContainer.getLayout();
 	        cardLayout.show(panelContainer, string);
-	        add(searchPanel, BorderLayout.EAST);
+	        
+	        if (user != null) {
+	        	add(searchPanel, BorderLayout.EAST);
+	        }
 	        
 	    } catch (SQLException e) {
 	        e.printStackTrace();
