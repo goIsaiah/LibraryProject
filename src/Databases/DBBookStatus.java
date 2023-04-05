@@ -184,6 +184,7 @@ public class DBBookStatus {
 	
 	public boolean userHasBook (Book book, User user) {
 		ArrayList<String> bookList = userBooks(user);
+		
 		String title = book.getTitle();
 		for (int i = 0; i < bookList.size(); i++) {
 			if (bookList.get(i).equals(title)) {
@@ -193,27 +194,23 @@ public class DBBookStatus {
 		return false;
 	}
 	
-	public ArrayList<String> userBooks (User user) {
-		ArrayList<String> bookList = new ArrayList<String>();
-		String username = user.getUsername();
-		// String title = book.getTitle();
-		try {
-			Connection con = DBUtil.getConnection(DBType_enum.ONLINE);
-		    String queryCheck = "SELECT * FROM STATUSTABLE WHERE USER = ?";
-		    PreparedStatement pstmtCheck = con.prepareStatement(queryCheck);
-		    pstmtCheck.setString(1, username);
-		    ResultSet resultSet = pstmtCheck.executeQuery();
-		    while (resultSet.next()) {
-		    	if (resultSet.getString(2) == username) {
-		    		bookList.add(resultSet.getString(1));
-		    	}
-		    }
-		    resultSet.close();
-		    pstmtCheck.close();
-		    con.close();
-		} catch (SQLException e) {
+	public ArrayList<String> userBooks(User user) {
+	    ArrayList<String> bookList = new ArrayList<String>();
+	    String username = user.getUsername();
+	    try (Connection con = DBUtil.getConnection(DBType_enum.ONLINE);
+	         PreparedStatement pstmtCheck = con.prepareStatement("SELECT * FROM STATUSTABLE WHERE USER = ?")) {
+	        pstmtCheck.setString(1, username);
+	        try (ResultSet resultSet = pstmtCheck.executeQuery()) {
+	            while (resultSet.next()) {
+	                if (resultSet.getString(2).equals(username)) {
+	                    bookList.add(resultSet.getString(1));
+	                }
+	            }
+	        }
+	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
-		return bookList;
+	    return bookList;
 	}
+
 }

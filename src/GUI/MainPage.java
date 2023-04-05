@@ -24,6 +24,7 @@ import org.json.JSONObject;
 import Databases.DBBookStatus;
 import Databases.DBMain;
 import DomainObjects.Book;
+import DomainObjects.User;
 import Logic.GoogleJSON;
 import net.miginfocom.swing.MigLayout;
 
@@ -126,23 +127,29 @@ public class MainPage extends JPanel{
         
         DBBookStatus dbStatus = new DBBookStatus();
         boolean available = dbStatus.isBookAvailable(book);
- 
-        JButton returnButton = new JButton("   Return    ");
-        returnButton.addActionListener(e -> {
-			dbStatus.returnBook(book);
-			repaint();
-		});
-        JButton borrowButton = new JButton("   Borrow    ");
-        borrowButton.addActionListener(e -> {
-			dbStatus.checkOut(book, Template.user);
-		}); 
- 
-        if (available) {
-        	add(borrowButton, "cell 0 8");
+        User user = parentTemplate.getUser();
+        boolean isUsers = dbStatus.userHasBook(book, user);
+        JButton checkOut = new JButton();
+        System.out.println("CONSOLE LOG: " + available + isUsers);
+        
+        
+        if (isUsers) {
+        	checkOut.setText(" Return  ");
+        	checkOut.addActionListener(e -> {
+    			dbStatus.returnBook(book);
+    			repaint();
+    		});
+        } else if (available && !isUsers) {
+        	checkOut.setText("  Borrow  ");
+        	checkOut.addActionListener(e -> {
+    			dbStatus.checkOut(book, Template.user);
+    		}); 
+        } else {
+        	checkOut.setText("  Taken out  ");
         }
-        else {
-        	add(returnButton, "cell 0 8");
-        }
+        
+        add(checkOut, "cell 0 8");
+        
 	}
 
 	private void bookCover(String coverUrl) {
