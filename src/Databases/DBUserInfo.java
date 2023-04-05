@@ -111,11 +111,10 @@ public class DBUserInfo {
 		try {
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
-			if(rs.next()) {			
+			while(rs.next()) {			
 				url = rs.getString("URL");
-				return url ;
 			}
-			
+			return url;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
