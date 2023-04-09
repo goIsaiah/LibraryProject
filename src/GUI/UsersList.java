@@ -20,12 +20,12 @@ import Databases.DBUserInfo;
 import DomainObjects.User;
 import net.miginfocom.swing.MigLayout;
 
-class FriendPanel {
+class UsersList {
     private JScrollPane pane;
     private int previousPosition;
     private Template parentTemplate;
     
-    public FriendPanel() {
+    public UsersList() {
         pane = new JScrollPane(new FriendList());
         pane.setPreferredSize(new Dimension(300, 500));
         pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
