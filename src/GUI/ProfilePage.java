@@ -30,7 +30,7 @@ public class ProfilePage extends JPanel{
         framePanel(currUser.getUsername());
     }
 
-    private void framePanel(String labelString) throws SQLException {
+    protected void framePanel(String labelString) throws SQLException {
         setLayout(new MigLayout("", "[][]", "[][][]"));
         setBorder(BorderFactory.createEmptyBorder(30, 50, 20, 50));
         setBackground(Color.white);

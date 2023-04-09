@@ -171,6 +171,9 @@ public class Template extends JFrame {
 	    	        add(searchPanel, BorderLayout.EAST);
 	    	        break;
 	            	}
+	            case "OtherProfile":
+	            	panel = new OtherProfile(userF); 
+	            	break; 
 	            default:
 	                throw new IllegalArgumentException("Invalid panel identifier: " + string);
 	        }

@@ -118,6 +118,7 @@ public class DBUser {
 				user.setBio(result.getString(8));
 				user.setFirstName(result.getString(9));
 				user.setLastName(result.getString(10)); 
+				user.setUsername(result.getString(2));
 				//TODO set followerList 
 			}
 			
@@ -128,7 +129,25 @@ public class DBUser {
 		return user; 
 	}
 	
-	public void addFollower(int user_id , int friend_id) {
+	public int getUserId(User u) {
+		int id = 0 ; 
+		String query = "Select user_id, USERNAME from USERTABLE  ;"; 
+		Statement statement;
+		try {
+			statement = conn.createStatement();
+			ResultSet  set = statement.executeQuery(query); 
+			while(set.next()) {
+				if(set.getString(2).equals(u.getUsername())) {
+					id=  set.getInt(1); 
+					break; 
+				}
+			}
+		} catch (SQLException e) {
+		} 
+		return id; 
+	}
+	
+	public void beFriendUser(int user_id , int friend_id) {
 		if(user_id == friend_id) {
 			
 		}
@@ -140,27 +159,49 @@ public class DBUser {
 				statement.executeUpdate(query);
 			} 
 			catch (SQLException e) {
-				e.printStackTrace();
 			}
 			
 		}
 	}
 	
-	public void removeFollower(int user_id,  int friend_id) {
+	public void unFriendUser(int user_id,  int friend_id) {
 		if(user_id == friend_id) {
 		}else {
-			String query = "REMOVE FROM FOLLOWERS WHERE user_id = ? AND friend_id = ?;"; 
+			String query = "delete FROM FOLLOWERS WHERE user_id = ? AND friend_id = ?;"; 
 			PreparedStatement statement;
 			try {
 				statement = conn.prepareStatement(query);
-				statement.setInt(user_id, 1);
-				statement.setInt(friend_id, 2);
+				statement.setInt(1, user_id);
+				statement.setInt(2, friend_id);
 				statement.executeUpdate(); 
 			} catch (SQLException e) {
-				e.printStackTrace();
 			} 
 		}
 		
+	}
+	
+
+	public boolean isFriend(User loggedIn_user , User other) {
+		boolean status = false ; 
+		try {
+			Statement statement = LibraryUI.conn.createStatement(); 
+			int loggedIn_id = getUserId(loggedIn_user);
+			int other_id = getUserId(other); 
+			System.out.println(loggedIn_id);
+			String query = "Select friend_id from FOLLOWERS where user_id = "+ Integer.toString(loggedIn_id) + ";"; 
+
+			ResultSet set = statement.executeQuery(query);
+			while(set.next())
+			{
+				if( set.getInt(1) == other_id) {
+					status = true; 
+					System.out.println(status); 
+				}
+			}
+		} catch (SQLException e) {
+			System.out.println("not a friend"); 
+		}
+		return status; 
 	}
 	
 
