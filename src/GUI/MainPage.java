@@ -134,6 +134,8 @@ public class MainPage extends JPanel{
         
         
         if (isUsers) {
+        	JLabel dueDate = new JLabel(dbStatus.getDueDate(book));
+        	add(dueDate, "cell 1 8");
         	checkOut.setText(" Return  ");
         	checkOut.addActionListener(e -> {
     			dbStatus.returnBook(book);

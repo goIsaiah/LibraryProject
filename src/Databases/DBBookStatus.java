@@ -20,6 +20,7 @@ import GUI.LibraryUI;
 import Logic.GoogleJSON;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Calendar;
 
 // Checks if book is checked out or not
 public class DBBookStatus {
@@ -37,12 +38,13 @@ public class DBBookStatus {
 	    String title = book.getTitle();
 	    String username = user.getUsername();
 	    
-	    java.util.Date date= new Date();
+	    // java.util.Date date= new Date();
 	    Calendar cal = Calendar.getInstance();
-	    cal.setTime(date);
+	    cal.setTime(new Date());
+	    cal.add(Calendar.DAY_OF_MONTH, 7);
 	    int year = cal.get(Calendar.YEAR);
-	    int month = cal.get(Calendar.MONTH);
-	    int day = cal.get(Calendar.DAY_OF_MONTH + 7);
+	    int month = (cal.get(Calendar.MONTH))+1;
+	    int day = cal.get(Calendar.DAY_OF_MONTH);
 	    boolean isAvailable = isBookAvailable(book);
 	    
 	    if (isAvailable == true) {
@@ -211,6 +213,39 @@ public class DBBookStatus {
 	        e.printStackTrace();
 	    }
 	    return bookList;
+	}
+	
+	public String getDueDate(Book book) {
+		String date = "";
+		int month, day, year;
+		String title = book.getTitle();
+		try {
+			Connection con = DBUtil.getConnection(DBType_enum.ONLINE);
+		    String queryCheck = "SELECT * FROM STATUSTABLE WHERE TITLE=?";
+		    PreparedStatement pstmtCheck = con.prepareStatement(queryCheck);
+		    pstmtCheck.setString(1, title);
+		    ResultSet resultSet = pstmtCheck.executeQuery();
+		    if (resultSet.next()) {
+		    	if (resultSet.getString(1).equals(title)) { // If book is checked out, it is unavailable
+			        /*
+		    		month = resultSet.getInt(3);
+			        day = resultSet.getInt(4);
+			        year = resultSet.getInt(5);
+			        */
+		    		month = resultSet.getInt(4);
+			        day = resultSet.getInt(5);
+			        year = resultSet.getInt(3);
+			        date = "Due: " + month + "/" + day + "/" + year;
+			        return date;
+				}
+		    }	
+		    resultSet.close();
+		    pstmtCheck.close();
+		    con.close();
+		} catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+		return date;
 	}
 
 }
