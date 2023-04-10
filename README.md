@@ -10,7 +10,7 @@ of the books they’ve checked out or placed holds on.  BookMate's social media 
 
 ### Preview 
 
-<img width="1552" alt="Preview" src="https://user-images.githubusercontent.com/29023871/223938698-a344e7a5-443b-48a8-9fa1-4a625d8ebae7.png">
+![image](https://user-images.githubusercontent.com/71765888/231013180-7df2774c-3d98-41f5-8da0-54e2bc4a0cec.png)
 
 ***
 
@@ -40,7 +40,7 @@ Open MySQL Workbench -> Open your root/local instance account -> Server -> Data 
 Once you open the Data Import page, the settings should look like this: 
 ![image](https://user-images.githubusercontent.com/71765888/224203661-a34fe2b9-d202-4cf7-8074-cdf47c49702c.png)
 The path to the libraryDB.sql should be changed to the path to the file in your repository. \
-Once all the settings are the same, hit the "Start Import" button.
+Once all the settings are the same, hit the "Start Import" button.  The same process should also be done to the libraryOnlineDB.sql file as well.
 
 ### Running The Project
 
@@ -55,7 +55,7 @@ Enter your account information, hit "Register", and then you will be taken to yo
 ![image](https://user-images.githubusercontent.com/71765888/224207200-0348f818-08d9-4794-8813-baf61271674a.png)
 ![image](https://user-images.githubusercontent.com/71765888/224207238-562a1ee1-4a2d-496f-9e9a-74a31576536c.png) \
 If you click on the home button icon, you will see a list of books that you can open or search for in the search bar on the top right.
-![image](https://user-images.githubusercontent.com/71765888/224207413-a13945aa-5c33-47c3-a94a-010c4bc63a7e.png) 
+![image](https://user-images.githubusercontent.com/71765888/231013180-7df2774c-3d98-41f5-8da0-54e2bc4a0cec.png)
 
 ## Current Roadmap
 
