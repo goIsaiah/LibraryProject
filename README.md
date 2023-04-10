@@ -55,7 +55,10 @@ Enter your account information, hit "Register", and then you will be taken to yo
 ![image](https://user-images.githubusercontent.com/71765888/224207200-0348f818-08d9-4794-8813-baf61271674a.png)
 ![image](https://user-images.githubusercontent.com/71765888/231013639-ef203774-da34-426d-9952-e16d198f5302.png) \
 If you click on the home button icon, you will see a list of books that you can open or search for in the search bar on the top right.
-![image](https://user-images.githubusercontent.com/71765888/231013180-7df2774c-3d98-41f5-8da0-54e2bc4a0cec.png)
+![image](https://user-images.githubusercontent.com/71765888/231013180-7df2774c-3d98-41f5-8da0-54e2bc4a0cec.png) \
+If you click on the "book" icon in the sidebar, you can see the list of books you have checked out.
+![image](https://user-images.githubusercontent.com/71765888/231014158-3c419b24-05b0-42a6-908e-607e3e717955.png)
+
 
 ## Current Roadmap
 
