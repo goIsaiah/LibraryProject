@@ -80,7 +80,14 @@ public class OtherProfile extends ProfilePage {
 				if(!db.isFriend(user , other_user)) {
 					setTextPrompt("Added");
 					System.out.println("added"); 
-					db.beFriendUser(db.getUserId(user), db.getUserId(other_user)); 
+					
+					try {
+					int	currId = db.getUserId(user);
+					System.out.printf("currId = %d\n", currId); 
+						db.beFriendUser(currId, db.getUserId(other_user)); 
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
 				}else {
 					setTextPrompt("Already a friend");
 					System.out.println("already a friend"); 
@@ -100,8 +107,12 @@ public class OtherProfile extends ProfilePage {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(db.isFriend(user, other_user)) {
-					db.unFriendUser(db.getUserId(OtherProfile.user), db.getUserId(other_user));
-					setTextPrompt("Removed");
+					try {
+						db.unFriendUser(db.getUserId(OtherProfile.user), db.getUserId(other_user));
+						setTextPrompt("Removed");
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
 				}else {
 					System.out.println("Not a friend"); 
 					setTextPrompt("Not a friend");

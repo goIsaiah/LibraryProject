@@ -34,8 +34,7 @@ public class User
 
 		this.firstName = null;
 		this.lastName = null;
-//		this.birthday = null;
-//		this.dateJoined = new Date();
+
 		this.checkedOutBooks = null;
 		this.setBio(null);
 		this.setURL(null);
