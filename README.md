@@ -49,9 +49,6 @@ Now only thing to do is to open Eclipse -> LibraryPorject -> src -> GUI -> Libra
 <img width="294" alt="one" src="https://user-images.githubusercontent.com/29023871/223938233-71200c8b-62a3-4b7d-93af-184544089c5d.png"> 
 <img width="711" alt="two" src="https://user-images.githubusercontent.com/29023871/223938312-debd4ac7-ed46-4206-b311-77dc8ab5febe.png"> 
 
-The console will appear with a prompt asking you to enter your MySQL password.  Once you enter your password, the actual BookMate application will open. 
-
-![image](https://user-images.githubusercontent.com/71765888/224206680-602781a0-adf1-440b-83d3-cfe20a307b50.png) \
 Hit the profile icon on the bottom left of the sidebar to create an account.
 ![image](https://user-images.githubusercontent.com/71765888/224206807-1e171f43-285b-4b60-95df-be2edba57f0a.png) \
 Enter your account information, hit "Register", and then you will be taken to your profile. \
