@@ -129,28 +129,29 @@ public class DBUser {
 		return user; 
 	}
 	
-	public int getUserId(User u) {
-		int id = 0 ; 
-		String query = "Select user_id, USERNAME from USERTABLE  ;"; 
+	public int getUserId(User u) throws SQLException {
+	
+		String query = "Select USERNAME, user_id  from USERTABLE  ;"; 
 		Statement statement;
-		try {
+		int id = 1; 
+		boolean flag = true; 
 			statement = conn.createStatement();
 			ResultSet  set = statement.executeQuery(query); 
-			while(set.next()) {
-				if(set.getString(2).equals(u.getUsername())) {
-					id=  set.getInt(1); 
-					System.out.println("id got");
-					break; 
+			while(set.next() && flag ) {
+				if(set.getString(1).equals(u.getUsername())) {
+					id=set.getInt(2); 
+					System.out.printf("id got is %d\n", id);
+					flag = true; 
 				}
 			}
-		} catch (SQLException e) {
-		} 
-		return id; 
+			System.out.printf("id after while loop is %d\n", id);
+		int y  = id ; 
+		return y; 
+		
 	}
 	
 	public void beFriendUser(int user_id , int friend_id) {
 		if(user_id == friend_id) {
-			
 		}
 			else {			
 			System.out.println(user_id);
