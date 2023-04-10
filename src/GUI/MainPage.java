@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -41,7 +42,7 @@ public class MainPage extends JPanel{
     }
     
     public MainPage(ArrayList<Book> bookList) {
-    	framePanel("BookMate", 0);
+    	framePanel("Checked Out Books", 0);
         showBookList(bookList);
 	}
     
@@ -58,6 +59,13 @@ public class MainPage extends JPanel{
     }
     
     private void showBookList(ArrayList<Book> bookList) {
+    	if (bookList.size() == 0)
+    	{
+    		JLabel noBooksCheckedOut = new JLabel("\nNo books currently checked out.");
+        	noBooksCheckedOut.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 15));
+        	add(noBooksCheckedOut, "cell 0 " + 1);
+    	}
+    	
     	String padding = "        ";
     	Border border = BorderFactory.createLineBorder(Color.DARK_GRAY, 1);
     	for (int i = 0; i < bookList.size() && i < numOfResults; i++) {
