@@ -51,9 +51,9 @@ Now only thing to do is to open Eclipse -> LibraryPorject -> src -> GUI -> Libra
 
 Hit the profile icon on the bottom left of the sidebar to create an account.
 ![image](https://user-images.githubusercontent.com/71765888/224206807-1e171f43-285b-4b60-95df-be2edba57f0a.png) \
-Enter your account information, hit "Register", and then you will be taken to your profile. \
+Enter your account information, hit "Register", and then you will be taken to your profile.  To edit your profile, you can click on the "gear" icon in the sidebar. \
 ![image](https://user-images.githubusercontent.com/71765888/224207200-0348f818-08d9-4794-8813-baf61271674a.png)
-![image](https://user-images.githubusercontent.com/71765888/224207238-562a1ee1-4a2d-496f-9e9a-74a31576536c.png) \
+![image](https://user-images.githubusercontent.com/71765888/231013639-ef203774-da34-426d-9952-e16d198f5302.png) \
 If you click on the home button icon, you will see a list of books that you can open or search for in the search bar on the top right.
 ![image](https://user-images.githubusercontent.com/71765888/231013180-7df2774c-3d98-41f5-8da0-54e2bc4a0cec.png)
 
