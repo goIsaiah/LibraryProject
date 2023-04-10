@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import javax.swing.*;
 
@@ -83,8 +85,44 @@ public class WelcomePage extends JPanel{
 						parentTemplate.setUser(user);
 						parentTemplate.showPanel("Profile");
 					}
+					else
+					{
+						//add incorrect password popup
+						JFrame incorrectinput = new JFrame();
+						JLabel incorrectinputlabel = new JLabel("Incorrect username or password", SwingConstants.CENTER);
+						JButton ok = new JButton();
+						ok.setText("OK");
+						incorrectinputlabel.setFont(incorrectinputlabel.getFont().deriveFont(Font.BOLD, 14f));
+						incorrectinput.setPreferredSize(new Dimension(300 , 150));
+						incorrectinput.setSize(new Dimension(300 , 150));
+						incorrectinput.setLayout(new MigLayout("", "[]", "[]10[][]" ));
+						incorrectinput.add(incorrectinputlabel);
+						incorrectinput.add(ok, "cell 0 3");
+						incorrectinput.setLocationRelativeTo(null);
+						incorrectinput.setVisible(true);
+						incorrectinput.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+						ok.addActionListener(new ActionListener()
+						{
+							public void actionPerformed(ActionEvent e)
+							{
+								incorrectinput.dispose();
+							}
+
+						});
+						ok.addKeyListener(new KeyAdapter()
+						{
+
+							public void keyPressed(KeyEvent e)
+							{
+								if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+									incorrectinput.dispose();
+								}
+							}
+						});
+					}
 
 				} catch (SQLException e1) {
+					
 					e1.printStackTrace();
 				}
         	}
@@ -129,6 +167,7 @@ public class WelcomePage extends JPanel{
 					}
 
 				} catch (SQLException e1) {
+					
 					e1.printStackTrace();
 				}
         	}
