@@ -14,11 +14,8 @@ public class User
 	private String username;
 	private String password;
 	private String email;
-	private String birthday;
 	private String URL;
 	private String bio;
-	//	private String email;
-	private Date dateJoined;
 	private ArrayList<Book> checkedOutBooks;
 	private ArrayList<User> followerList; 
 	private ArrayList<Book> favouritesList;
@@ -37,8 +34,8 @@ public class User
 
 		this.firstName = null;
 		this.lastName = null;
-		this.birthday = null;
-		this.dateJoined = new Date();
+//		this.birthday = null;
+//		this.dateJoined = new Date();
 		this.checkedOutBooks = null;
 		this.setBio(null);
 		this.setURL(null);
@@ -214,25 +211,6 @@ public class User
 		this.email = email;
 	}
 
-	public String getBirthday()
-	{
-		return birthday;
-	}
-
-	public void setBirthday(String birthday) 
-	{
-		this.birthday = birthday;
-	}
-
-	public Date getDateJoined() 
-	{
-		return dateJoined;
-	}
-
-	public void setDateJoined(Date dateJoined) 
-	{
-		this.dateJoined = dateJoined;
-	}
 
 	public ArrayList<Book> getCheckedOutBooks() 
 	{
