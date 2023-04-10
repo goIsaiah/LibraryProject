@@ -37,40 +37,42 @@ public class Template extends JFrame {
 	public static User user;
 	public static Book book;
 	private Container container;
+	private JPanel sidebar; 
+	private  JTextField searchField; 
+	private  JLabel searchIconLabel; 
 	public Template() throws SQLException {
 		
 		// WINDOW_NAME
 		setTitle("BookMate");
 		
-		// ICON
-		URL iconUrl = getClass().getResource("/Icon.png");
-		ImageIcon icon = new ImageIcon(iconUrl);
-		setIconImage(icon.getImage());
+		setIcon(); 
 		
-		// SIDEBAR
 		container = getContentPane();
 		container.setLayout(new BorderLayout());
-		JPanel sidebar = new JPanel();
-		sidebar.setPreferredSize(new Dimension(75, 0));
-		sidebar.setBackground(Color.decode("#0B6BCC"));
-		sidebar.setLayout(new MigLayout("wrap", "[]", "[]push[]5[]5[]")); 
-		sidebar.setBorder(BorderFactory.createEmptyBorder(0, 10, 30, 0));
-		container.add(sidebar, BorderLayout.WEST);
+		// SIDEBAR
+		setSideBar();
 		
 		// HAMBURGER_MENU
-		URL hamURL = getClass().getResource("/Ham.png");
-		ImageIcon hamIcon = new ImageIcon(hamURL);
-		Image img = hamIcon.getImage();
-		img = img.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
-		hamIcon = new ImageIcon(img);
-		JButton hamburger = new JButton();
-		hamburger.setIcon(hamIcon);
-		hamburger.setPreferredSize(new Dimension(40, 40));
-		hamburger.setBorder(null);
-		hamburger.setContentAreaFilled(false);
-		sidebar.add(hamburger , "cell 0 0");
+		setHamBurgerMenu();
 		
 		//Side Buttons
+		setSideButtons();
+		//Panel Container 
+		setPanelContainer(); 
+		closeOP();
+		
+		
+		
+	}
+	
+	private void setPanelContainer() throws SQLException {
+		WelcomePage welPanel = new WelcomePage();
+		panelContainer = new JPanel(new CardLayout());
+		panelContainer.add(welPanel, "Welcome");
+        container.add(panelContainer, BorderLayout.CENTER);
+	}
+	
+	private void setSideButtons() {
 		JButton home = sideButton("/home.png"); 
 		JButton profile = sideButton("/profile.png"); 
 		JButton settings = sideButton("/settings.png"); 
@@ -85,29 +87,38 @@ public class Template extends JFrame {
 		checkedOut.addActionListener(e -> showPanel("Library"));
 		settings.addActionListener(e -> showPanel("Settings")); 
 		
-		//Welcome Object
-		WelcomePage welPanel = new WelcomePage();
-		
-		//Panel Container 
-		panelContainer = new JPanel(new CardLayout());
-		panelContainer.add(welPanel, "Welcome");
-        container.add(panelContainer, BorderLayout.CENTER);
-		closeOP();
-		
-		
-		
 	}
 	
-	public void setUser(User user) {
-		this.user = user;
-		searchPanel = searchBar();
-		container.add(searchPanel, BorderLayout.EAST);
+	private void setHamBurgerMenu() {
+		URL hamURL = getClass().getResource("/Ham.png");
+		ImageIcon hamIcon = new ImageIcon(hamURL);
+		Image img = hamIcon.getImage();
+		img = img.getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
+		hamIcon = new ImageIcon(img);
+		JButton hamburger = new JButton();
+		hamburger.setIcon(hamIcon);
+		hamburger.setPreferredSize(new Dimension(40, 40));
+		hamburger.setBorder(null);
+		hamburger.setContentAreaFilled(false);
+		sidebar.add(hamburger , "cell 0 0");
 	}
 	
-	public User getUser() {
-		return this.user;
+	private void setSideBar() {
+		sidebar = new JPanel();
+		sidebar.setPreferredSize(new Dimension(75, 0));
+		sidebar.setBackground(Color.decode("#0B6BCC"));
+		sidebar.setLayout(new MigLayout("wrap", "[]", "[]push[]5[]5[]")); 
+		sidebar.setBorder(BorderFactory.createEmptyBorder(0, 10, 30, 0));
+		container.add(sidebar, BorderLayout.WEST);		
 	}
-
+	
+	private void setIcon() {
+		// ICON
+		URL iconUrl = getClass().getResource("/Icon.png");
+		ImageIcon icon = new ImageIcon(iconUrl);
+		setIconImage(icon.getImage());
+	}
+	
 	public void showPanel(String string) {
 	    JPanel panel = null;
 
@@ -209,7 +220,6 @@ public class Template extends JFrame {
 	
  	public void closeOP() {
  		setSize(1280,800);
-//		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setLocationRelativeTo(null);
 		getContentPane().setBackground(Color.white);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -220,22 +230,9 @@ public class Template extends JFrame {
 
 	public Component searchBar() {
 		//SEARCH_FIELD
-        JTextField searchField = new JTextField(15);
-        KeysUtil.CCP(searchField);
-        searchField.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 20));
-        searchField.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY),
-            BorderFactory.createEmptyBorder(0, 0, 0, 0) // Add left margin for the text
-        ));
-        searchField.setBackground(Color.WHITE);
-
+		setSearchField();
         //SEARCH_ICON
-        URL searchURL = getClass().getResource("/searchIcon.png");
-        ImageIcon searchIcon = new ImageIcon(searchURL);
-        Image img = searchIcon.getImage();
-        img = img.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
-        searchIcon = new ImageIcon(img);
-        JLabel searchIconLabel = new JLabel(searchIcon);
+		searchIcon(); 
 
         //SEARCH_PANEL
         JPanel searchPanel = new JPanel(new MigLayout("wrap 2", "[]10[]", "[][][][]50[]"));
@@ -273,8 +270,28 @@ public class Template extends JFrame {
     		}; 
         });
 		return searchPanel;
-
 	}
+	
+	private void searchIcon() {
+        URL searchURL = getClass().getResource("/searchIcon.png");
+        ImageIcon searchIcon = new ImageIcon(searchURL);
+        Image img = searchIcon.getImage();
+        img = img.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH);
+        searchIcon = new ImageIcon(img);
+        searchIconLabel = new JLabel(searchIcon);
+	}
+	
+	private void setSearchField() {
+        searchField = new JTextField(15);
+        KeysUtil.CCP(searchField);
+        searchField.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 20));
+        searchField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY),
+            BorderFactory.createEmptyBorder(0, 0, 0, 0) // Add left margin for the text
+        ));
+        searchField.setBackground(Color.WHITE);
+	}
+	
 
 	public void setBook(Book book) {
 		this.book=book;
@@ -282,6 +299,16 @@ public class Template extends JFrame {
 	
 	public Book getBook() {
 		return(book);
+	}
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+		searchPanel = searchBar();
+		container.add(searchPanel, BorderLayout.EAST);
 	}
 
 }

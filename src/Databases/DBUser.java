@@ -139,6 +139,7 @@ public class DBUser {
 			while(set.next()) {
 				if(set.getString(2).equals(u.getUsername())) {
 					id=  set.getInt(1); 
+					System.out.println("id got");
 					break; 
 				}
 			}
@@ -152,6 +153,8 @@ public class DBUser {
 			
 		}
 			else {			
+			System.out.println(user_id);
+			System.out.println(friend_id);
 			String query ="INSERT INTO FOLLOWERS(user_id, friend_id) values " 
 			+ "(" + Integer.toString(user_id) +","+Integer.toString(friend_id) + ")" ;  
 			try {

@@ -27,8 +27,8 @@ import net.miginfocom.swing.MigLayout;
 
 public class OtherProfile extends ProfilePage {
 	
-	static User other_user; 
-	static User user; 
+	public static User other_user; 
+	public static User user; 
 	private DBUser db; 
 	private JLabel label; 
 	
@@ -80,7 +80,7 @@ public class OtherProfile extends ProfilePage {
 				if(!db.isFriend(user , other_user)) {
 					setTextPrompt("Added");
 					System.out.println("added"); 
-					db.beFriendUser(db.getUserId(OtherProfile.user), db.getUserId(other_user)); 
+					db.beFriendUser(db.getUserId(user), db.getUserId(other_user)); 
 				}else {
 					setTextPrompt("Already a friend");
 					System.out.println("already a friend"); 
