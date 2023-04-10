@@ -24,11 +24,6 @@ import java.util.Calendar;
 
 // Checks if book is checked out or not
 public class DBBookStatus {
-//	static String url = "jdbc:mysql://localhost:3306/myDB";
-//	static String urlRoot = "jdbc:mysql://localhost:3306";
-//	static String user = "root";
-//	static String password = LibraryUI.sqlpassword;
-
 	
 	public void checkOut(Book book, User user) {
 		bookExists(book);
@@ -38,7 +33,6 @@ public class DBBookStatus {
 	    String title = book.getTitle();
 	    String username = user.getUsername();
 	    
-	    // java.util.Date date= new Date();
 	    Calendar cal = Calendar.getInstance();
 	    cal.setTime(new Date());
 	    cal.add(Calendar.DAY_OF_MONTH, 7);
@@ -49,7 +43,6 @@ public class DBBookStatus {
 	    
 	    if (isAvailable == true) {
 		    try {
-		        // conn = DriverManager.getConnection(url, user, password);
 		    	conn = DBUtil.getConnection(DBType_enum.ONLINE);
 		    	
 		        String queryCheck = "UPDATE STATUSTABLE SET USER=?, MONTH=?, DAY=?, YEAR=? where TITLE=?";
@@ -59,7 +52,6 @@ public class DBBookStatus {
 		        stmt.setInt(3, day);
 		        stmt.setInt(4, year);
 		        stmt.setString(5, title);
-		        //stmt.executeQuery();
 		        stmt.executeUpdate();
 		    } catch (SQLException e) {
 		        e.printStackTrace();
@@ -97,7 +89,6 @@ public class DBBookStatus {
 		        pstmt.setInt(4, 0);
 		        pstmt.setInt(5, 0);
 		        pstmt.executeUpdate();
-		        //pstmt.executeQuery();
 		    } 
 		    resultSet.close();
 		    pstmtCheck.close();
@@ -110,9 +101,7 @@ public class DBBookStatus {
 	public void returnBook(Book book) {
 		Connection conn = null;
 	    PreparedStatement stmt = null;
-	    ResultSet rs = null;
 	    String title = book.getTitle();
-	    String username = null;
 	    
 	    java.util.Date date= new Date();
 	    Calendar cal = Calendar.getInstance();
@@ -122,11 +111,9 @@ public class DBBookStatus {
 	    int day = 0;
 	    
 	    try {
-//	        conn = DriverManager.getConnection(url, user, password);
 	    	conn = DBUtil.getConnection(DBType_enum.ONLINE);
 	    	
 	        String queryCheck = "UPDATE STATUSTABLE SET USER=?, MONTH=?, DAY=?, YEAR=? where TITLE=?";
-	        //String sql = "INSERT INTO statustable (TITLE, YEAR, MONTH, DAY) VALUES (?, ?, ?, ?)";
 	        stmt = conn.prepareStatement(queryCheck);
 	        stmt.setString(1, null);
 	        stmt.setInt(2, year);
@@ -177,7 +164,6 @@ public class DBBookStatus {
 		    resultSet.close();
 		    pstmtCheck.close();
 		    con.close();
-		    //return available;
 		} catch (SQLException e) {
 	        e.printStackTrace();
 	    }
@@ -227,11 +213,6 @@ public class DBBookStatus {
 		    ResultSet resultSet = pstmtCheck.executeQuery();
 		    if (resultSet.next()) {
 		    	if (resultSet.getString(1).equals(title)) { // If book is checked out, it is unavailable
-			        /*
-		    		month = resultSet.getInt(3);
-			        day = resultSet.getInt(4);
-			        year = resultSet.getInt(5);
-			        */
 		    		month = resultSet.getInt(4);
 			        day = resultSet.getInt(5);
 			        year = resultSet.getInt(3);
