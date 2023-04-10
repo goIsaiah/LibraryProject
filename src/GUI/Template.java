@@ -255,23 +255,20 @@ public class Template extends JFrame {
         searchButton.addActionListener(new ActionListener(){
     			@Override
     			public void actionPerformed(ActionEvent e) {
-    				String query =  searchField.getText();
-    				try {
-						DBMain db = new DBMain();
-						ArrayList<Book> bookList = db.searchLibrary(query);
-						if (bookList.size() == 0) {
-							bookList = db.getAPILibrary(query);
-						}
-						panelContainer.add(new MainPage(bookList), "SearchMain");
-						if (user != null) {
-							showPanel("SearchMain");
-						}
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
-    				
+    				searchforBook();
     		}; 
         });
+        searchField.addKeyListener(new KeyAdapter()
+		{
+
+			public void keyPressed(KeyEvent e)
+			{
+				if (e.getKeyCode()==KeyEvent.VK_ENTER)
+				{
+					searchforBook();
+				}
+			}
+		});
       
 		return searchPanel;
 	}
@@ -313,6 +310,25 @@ public class Template extends JFrame {
 		this.user = user;
 		searchPanel = searchBar();
 		container.add(searchPanel, BorderLayout.EAST);
+	}
+	
+	private void searchforBook()
+	{
+		String query =  searchField.getText();
+		try {
+			DBMain db = new DBMain();
+			ArrayList<Book> bookList = db.searchLibrary(query);
+			if (bookList.size() == 0) {
+				bookList = db.getAPILibrary(query);
+			}
+			panelContainer.add(new MainPage(bookList), "SearchMain");
+			if (user != null) {
+				showPanel("SearchMain");
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
 	}
 
 }
