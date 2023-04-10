@@ -137,7 +137,7 @@ class FriendsList extends JScrollPane {
 		panel = new JPanel(); 
 		panel.setPreferredSize(new Dimension(900, 300));
 		panel.setBorder(BorderFactory.createLineBorder(Color.black));
-		panel.setLayout(new MigLayout("", "[]", "[] [] [] "));
+		panel.setLayout(new MigLayout("wrap", "[]", "[] [] [] "));
 		return panel; 
 	}
 	
@@ -149,7 +149,9 @@ class FriendsList extends JScrollPane {
 		ArrayList<Integer> ids = db_f.getAllFriend_id(db.getUserId(this.user));
 		//TODO get list of the userinfo
 		Hashtable<Integer , String> set = getInfo(ids);
-	 parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
+//	 parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
+//	 parentTemplate = (Template)SwingUtilities.getRoot(this);
+	 parentTemplate = (Template)SwingUtilities.getAncestorOfClass(getClass(), this);
 		
 		
 		int size = ids.size(); 

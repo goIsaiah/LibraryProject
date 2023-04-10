@@ -78,9 +78,9 @@ public class OtherProfile extends ProfilePage {
 			@Override
             public void mouseClicked(MouseEvent e) {
 				if(!db.isFriend(user , other_user)) {
+					setTextPrompt("Added");
 					System.out.println("added"); 
 					db.beFriendUser(db.getUserId(OtherProfile.user), db.getUserId(other_user)); 
-					setTextPrompt("Added");
 				}else {
 					setTextPrompt("Already a friend");
 					System.out.println("already a friend"); 
@@ -117,7 +117,8 @@ public class OtherProfile extends ProfilePage {
 		
 		if(label == null) {
 			label = new JLabel(msg);	
-			add(label);
+			add(label, "cell 1 6");
+//			add(label);
 		}else {
 			label.setText(msg);
 		}
