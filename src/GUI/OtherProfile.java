@@ -107,8 +107,12 @@ public class OtherProfile extends ProfilePage {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(db.isFriend(user, other_user)) {
-					db.unFriendUser(db.getUserId(OtherProfile.user), db.getUserId(other_user));
-					setTextPrompt("Removed");
+					try {
+						db.unFriendUser(db.getUserId(OtherProfile.user), db.getUserId(other_user));
+						setTextPrompt("Removed");
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
 				}else {
 					System.out.println("Not a friend"); 
 					setTextPrompt("Not a friend");
