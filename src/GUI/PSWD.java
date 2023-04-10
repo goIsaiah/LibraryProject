@@ -60,11 +60,5 @@ public class PSWD extends JFrame {
 	public String getPassword() {
 		return password; 
 	}
-
-//	public static void main(String[] args) {
-//		new PSWD(); 
-//	}
-
-
-
+	
 }

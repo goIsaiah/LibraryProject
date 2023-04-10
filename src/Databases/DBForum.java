@@ -18,9 +18,6 @@ import GUI.LibraryUI;
 public class DBForum {
 	
 	// databse 
-//	private  String user = "root";
-//	private String url = "jdbc:mysql://localhost:3306/myDB"; 
-//	public static String password = LibraryUI.sqlpassword; 
 	private String query; 
 	private Connection conn; 
 	private Statement stmt; 
@@ -28,8 +25,6 @@ public class DBForum {
 	public DBForum() {
 
 		try {
-//			conn = DriverManager.getConnection(url,user, password);
-//			conn = DBUtil.getConnection(DBType_enum.ONLINE);
 			conn = LibraryUI.conn; 
 			stmt = conn.createStatement();
 		} catch (SQLException e) {
