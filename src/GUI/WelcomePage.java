@@ -74,59 +74,22 @@ public class WelcomePage extends JPanel{
 	    parentTemplate = (Template)SwingUtilities.getWindowAncestor(this);
 	    loginButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-				boolean check;
-				try {
-					DBUser db = new DBUser();
-					check = db.checkLogin(usernameField.getText(), passwordField.getText());
-					if (check) {
-						String email = db.getEmail(usernameField.getText());
-						User user = new User(usernameField.getText(),passwordField.getText(), email);
-						System.out.println(user.getEmail());
-						parentTemplate.setUser(user);
-						parentTemplate.showPanel("Profile");
-					}
-					else
-					{
-						//add incorrect password popup
-						JFrame incorrectinput = new JFrame();
-						JLabel incorrectinputlabel = new JLabel("Incorrect username or password", SwingConstants.CENTER);
-						JButton ok = new JButton();
-						ok.setText("OK");
-						incorrectinputlabel.setFont(incorrectinputlabel.getFont().deriveFont(Font.BOLD, 14f));
-						incorrectinput.setPreferredSize(new Dimension(300 , 150));
-						incorrectinput.setSize(new Dimension(300 , 150));
-						incorrectinput.setLayout(new MigLayout("", "[]", "[]10[][]" ));
-						incorrectinput.add(incorrectinputlabel);
-						incorrectinput.add(ok, "cell 0 3");
-						incorrectinput.setLocationRelativeTo(null);
-						incorrectinput.setVisible(true);
-						incorrectinput.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-						ok.addActionListener(new ActionListener()
-						{
-							public void actionPerformed(ActionEvent e)
-							{
-								incorrectinput.dispose();
-							}
-
-						});
-						ok.addKeyListener(new KeyAdapter()
-						{
-
-							public void keyPressed(KeyEvent e)
-							{
-								if (e.getKeyCode()==KeyEvent.VK_ENTER) {
-									incorrectinput.dispose();
-								}
-							}
-						});
-					}
-
-				} catch (SQLException e1) {
-					
-					e1.printStackTrace();
-				}
+        		logUserIn(usernameField, passwordField);
         	}
         });
+	 
+	    
+	    passwordField.addKeyListener(new KeyAdapter()
+		{
+
+			public void keyPressed(KeyEvent e)
+			{
+				if (e.getKeyCode()==KeyEvent.VK_ENTER)
+				{
+					logUserIn(usernameField, passwordField);
+				}
+			}
+		});
 	}
 
 	private void showRegisterPanel() throws SQLException{
@@ -184,5 +147,61 @@ public class WelcomePage extends JPanel{
         add(label, "cell 0 0");
 		
 	}
+	
+	private void logUserIn(JTextField usernameField, JTextField passwordField)
+	{
+		boolean check;
+		try {
+			DBUser db = new DBUser();
+			check = db.checkLogin(usernameField.getText(), passwordField.getText());
+			if (check) {
+				String email = db.getEmail(usernameField.getText());
+				User user = new User(usernameField.getText(),passwordField.getText(), email);
+				System.out.println(user.getEmail());
+				parentTemplate.setUser(user);
+				parentTemplate.showPanel("Profile");
+			}
+			else
+			{
+				//add incorrect password popup
+				JFrame incorrectinput = new JFrame();
+				JLabel incorrectinputlabel = new JLabel("Incorrect username or password", SwingConstants.CENTER);
+				JButton ok = new JButton();
+				ok.setText("OK");
+				incorrectinputlabel.setFont(incorrectinputlabel.getFont().deriveFont(Font.BOLD, 14f));
+				incorrectinput.setPreferredSize(new Dimension(300 , 150));
+				incorrectinput.setSize(new Dimension(300 , 150));
+				incorrectinput.setLayout(new MigLayout("", "[]", "[]10[][]" ));
+				incorrectinput.add(incorrectinputlabel);
+				incorrectinput.add(ok, "cell 0 3");
+				incorrectinput.setLocationRelativeTo(null);
+				incorrectinput.setVisible(true);
+				incorrectinput.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				ok.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent e)
+					{
+						incorrectinput.dispose();
+					}
+
+				});
+				ok.addKeyListener(new KeyAdapter()
+				{
+
+					public void keyPressed(KeyEvent e)
+					{
+						if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+							incorrectinput.dispose();
+						}
+					}
+				});
+			}
+
+		} catch (SQLException e1) {
+			
+			e1.printStackTrace();
+		}
+	}
+	
 
 }
