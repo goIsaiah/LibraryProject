@@ -85,10 +85,6 @@ public class Template extends JFrame {
 		checkedOut.addActionListener(e -> showPanel("Library"));
 		settings.addActionListener(e -> showPanel("Settings")); 
 		
-		
-		//SEARCH_BAR
-		
-		
 		//Welcome Object
 		WelcomePage welPanel = new WelcomePage();
 		
