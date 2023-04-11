@@ -21,7 +21,8 @@ public class DBMain {
 
 	public ArrayList<Book> searchLibrary(String search) throws SQLException {
 
-		Connection con = LibraryUI.conn;
+
+		Connection con = LibraryUI.conn; 
 		String selectString = "SELECT * FROM LIBRARY WHERE LIB_TITLE LIKE ?";
 		PreparedStatement statement = con.prepareStatement(selectString);
 	    statement.setString(1, "%" + search + "%");
@@ -70,7 +71,7 @@ public class DBMain {
 	
 	private int getMaxID() throws SQLException {
 
-		Connection conn = LibraryUI.conn;
+		Connection conn = LibraryUI.conn; 
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT MAX(LIB_ID) FROM LIBRARY");
 		int nextId = rs.next() ? rs.getInt(1) + 1 : 1;
@@ -97,7 +98,6 @@ public class DBMain {
 
 	    resultSet.close();
 	    pstmtCheck.close();
-
 	}
 
 

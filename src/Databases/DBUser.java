@@ -114,7 +114,6 @@ public class DBUser {
 				user.setFirstName(result.getString(9));
 				user.setLastName(result.getString(10)); 
 				user.setUsername(result.getString(2));
-				//TODO set followerList 
 			}
 			
 		} catch (SQLException e) {
@@ -149,8 +148,6 @@ public class DBUser {
 		if(user_id == friend_id) {
 		}
 			else {			
-			System.out.println(user_id);
-			System.out.println(friend_id);
 			String query ="INSERT INTO FOLLOWERS(user_id, friend_id) values " 
 			+ "(" + Integer.toString(user_id) +","+Integer.toString(friend_id) + ")" ;  
 			try {

@@ -66,9 +66,7 @@ public class OtherProfile extends ProfilePage {
 		
 	}
 	
-	/**
-	 * When the current user is a friend then return true otherwise return false
-	 */
+
 
 	
 	
@@ -129,7 +127,6 @@ public class OtherProfile extends ProfilePage {
 		if(label == null) {
 			label = new JLabel(msg);	
 			add(label, "cell 1 6");
-//			add(label);
 		}else {
 			label.setText(msg);
 		}
