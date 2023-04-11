@@ -189,7 +189,6 @@ public class DBUser {
 			{
 				if( set.getInt(1) == other_id) {
 					status = true; 
-					System.out.println(status); 
 				}
 			}
 		} catch (SQLException e) {

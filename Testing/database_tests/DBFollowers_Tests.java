@@ -83,7 +83,8 @@ class DBFollowers_Tests
 
 	@Test
 	public void getAllFriendId_test_02() {
-		String query = "SELECT * FROM FOLLOWERS where user_id = 3";
+		String query = "SELE"
+				+ "CT * FROM FOLLOWERS where user_id = 3";
 		try {
 			Statement m = con.createStatement();
 			ResultSet resultset = m.executeQuery(query); 
