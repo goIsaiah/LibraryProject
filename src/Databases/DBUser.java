@@ -134,7 +134,6 @@ public class DBUser {
 			while(set.next() && flag ) {
 				if(set.getString(1).equals(u.getUsername())) {
 					id=set.getInt(2); 
-					System.out.printf("id got is %d\n", id);
 					flag = true; 
 				}
 			}
@@ -183,7 +182,6 @@ public class DBUser {
 			Statement statement = LibraryUI.conn.createStatement(); 
 			int loggedIn_id = getUserId(loggedIn_user);
 			int other_id = getUserId(other); 
-			System.out.println(loggedIn_id);
 			String query = "Select friend_id from FOLLOWERS where user_id = "+ Integer.toString(loggedIn_id) + ";"; 
 
 			ResultSet set = statement.executeQuery(query);
@@ -191,7 +189,6 @@ public class DBUser {
 			{
 				if( set.getInt(1) == other_id) {
 					status = true; 
-					System.out.println(status); 
 				}
 			}
 		} catch (SQLException e) {
