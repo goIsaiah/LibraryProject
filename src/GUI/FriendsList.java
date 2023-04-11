@@ -67,14 +67,6 @@ class FriendsList extends  JScrollPane {
 			String value = set.get(id); 
 			MiniProfile profile = new MiniProfile(value); 
 			profile.setPhoto(info.getPhotoUrl(id));
-            profile.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                	User friend = db.getUser(id);
-                	System.out.println(friend.getUsername());
-                    System.out.println("Yay you clicked me");
-                }
-            });
             panel.add(profile);
 			
 		}
