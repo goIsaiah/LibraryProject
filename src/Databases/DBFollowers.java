@@ -13,7 +13,7 @@ public class DBFollowers {
 	protected static Connection conn; 
 	
 	public DBFollowers() throws SQLException{
-		conn = LibraryUI.conn; 
+		conn = DBUtil.getConnection(DBType_enum.ONLINE);
 	}
 	
 	
