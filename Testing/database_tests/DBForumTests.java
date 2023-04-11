@@ -1,12 +1,12 @@
 package database_tests;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,32 +47,65 @@ class DBForumTests {
 
 	@Test
 	void addComment_test_01() {
-		String query = "Select * from Comments where book_id = 2"; 
+		String query = "Select * from COMMENTS where book_id = 2;"; 
 		String message = "This is a comment for the book 1984 and a test for Forum";
 		String expected = message + '\n'; 
 		Comment comment = new Comment(user , message, "1984", 2);
 		try {
-			ResultSet r = statement.executeQuery(query); 
-//			ArrayList<String> list = new ArrayList<>(); 
 			boolean flag = false; 
+			forum.addComment(comment);
+			ResultSet r = statement.executeQuery(query); 
 			while(r.next()) {
-				String actual = r.getString(1); 
-				if(expected.equals(actual)) {
+				String actual = r.getString(5); 
+				
+				if(message.equals(actual)) {
+					System.out.printf("when equal %s\n", actual); 
+					System.out.printf("when equal %s\n", expected); 
 					flag = true; 
 				}
 			}
-			
 			assertTrue(flag); 
-			forum.addComment(comment);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
 	}
 	
 	
-//	@Test
+	@Test
 	void getComments_test_01() {
-		fail("Not yet implemented");
+		String query = "Select * from COMMENTS where book_id = 2";
+		String message1 = "test for getComment 1";
+		String message2 = "test for getComment 2";
+		String message3 = "test for getComment 3";
+		String expected1 = message1 + '\n'; 
+		String expected2 = message2 + '\n'; 
+		String expected3 = message3 + '\n'; 
+		Comment comment1 = new Comment(user , message1, "1984", 2);
+		Comment comment2 = new Comment(user , message2, "1984", 2);
+		Comment comment3 = new Comment(user , message3, "1984", 2);
+		
+		ArrayList<String> expected = new ArrayList<>(); 
+		expected.add(expected1);
+		expected.add(expected2);
+		expected.add(expected3);
+		System.out.println(expected);
+		
+		try {
+			forum.addComment(comment1);
+			forum.addComment(comment2);
+			forum.addComment(comment3);
+			forum.getComments(2);
+			ResultSet r = statement.executeQuery(query); 
+			boolean flag = true;
+			ArrayList<String> actual = forum.getComments(2);	
+			System.out.println(actual);
+			flag = actual.containsAll(expected); 
+			assertTrue(flag); 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 	}
 
 	
