@@ -15,14 +15,9 @@ import GUI.LibraryUI;
 import Logic.AlreadyAFriendException;
 public class DBUser {
 	
-//	static String url = "jdbc:mysql://localhost:3306/myDB";
-//	static String urlRoot = "jdbc:mysql://localhost:3306";
-//	static String user = "root";
-//	static String password = LibraryUI.sqlpassword; //Change this
 	private static  Connection conn; 
 	
 	public DBUser() throws SQLException {
-//		conn = DBUtil.getConnection(DBType_enum.ONLINE);
 		conn = LibraryUI.conn; 
 	}
 	

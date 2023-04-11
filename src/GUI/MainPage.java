@@ -42,7 +42,7 @@ public class MainPage extends JPanel{
     }
     
     public MainPage(ArrayList<Book> bookList) {
-    	framePanel("Checked Out Books", 0);
+    	framePanel("BookMate", 0);
         showBookList(bookList);
 	}
     
@@ -59,11 +59,12 @@ public class MainPage extends JPanel{
     }
     
     private void showBookList(ArrayList<Book> bookList) {
+    
     	if (bookList.size() == 0)
     	{
     		JLabel noBooksCheckedOut = new JLabel("\nNo books currently checked out.");
         	noBooksCheckedOut.setFont(new Font(Font.SANS_SERIF, Font.ITALIC, 15));
-        	add(noBooksCheckedOut, "cell 0 " + 1);
+        	add(noBooksCheckedOut, "cell 0 " + 2);
     	}
     	
     	String padding = "        ";

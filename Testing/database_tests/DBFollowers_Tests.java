@@ -13,10 +13,13 @@ import org.junit.jupiter.api.Test;
 
 import Databases.DBFollowers;
 import Databases.DBType_enum;
+import Databases.DBUser;
 import Databases.DBUtil;
+import DomainObjects.User;
 import GUI.LibraryUI;
 
-class DBFollowers_Tests {
+class DBFollowers_Tests 
+{
 	public Connection con; 
 	@BeforeEach
 	public void init() {
@@ -28,6 +31,7 @@ class DBFollowers_Tests {
 		} 
 	}
 	
+
 	@Test
 	public void getAllFriendId_test_01() {
 		String query = "SELECT * FROM FOLLOWERS where user_id = 2";
@@ -58,6 +62,25 @@ class DBFollowers_Tests {
 			e.printStackTrace();
 		} 
 	}
+	void getFriendsIDList() throws SQLException
+	{
+		ArrayList<Integer> friendsList = new ArrayList<>();
+		Databases.DBFollowers db = new Databases.DBFollowers();
+		User u = new User("abbey22", "1224", "a.jarmillan@gmail.com");
+		DBUser dbUser = new DBUser(); 
+		
+		try
+		{
+			friendsList = db.getAllFriend_id(dbUser.getUserId(u));
+			assertEquals(friendsList.get(0), 2);
+		}
+		catch (SQLException e)
+		{
+			fail("friendsList not properly returned");
+		}
+	}
+
+
 	@Test
 	public void getAllFriendId_test_02() {
 		String query = "SELECT * FROM FOLLOWERS where user_id = 3";
@@ -86,7 +109,7 @@ class DBFollowers_Tests {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
 	}
-
 }
+

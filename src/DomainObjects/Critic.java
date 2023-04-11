@@ -16,6 +16,7 @@ public class Critic
 		this.book_id = book_id;
 		
 	}
+	
 
 	public Book getBook() 
 	{
