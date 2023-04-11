@@ -96,7 +96,6 @@ class UsersList {
                     	User friend = user.getUser(user_id);
                     	parentTemplate.userF = friend; 
                     	System.out.println(friend.getUsername());
-//                    	parentTemplate.showPanel("fProfile");
                     	parentTemplate.showPanel("OtherProfile");
                         System.out.println("Yay you clicked me");
                     }

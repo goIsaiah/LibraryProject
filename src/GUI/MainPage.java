@@ -139,7 +139,6 @@ public class MainPage extends JPanel{
         User user = parentTemplate.getUser();
         boolean isUsers = dbStatus.userHasBook(book, user);
         JButton checkOut = new JButton();
-        System.out.println("CONSOLE LOG: " + available + isUsers);
         
         
         if (isUsers) {

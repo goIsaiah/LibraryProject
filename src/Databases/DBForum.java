@@ -43,7 +43,6 @@ public class DBForum {
 		
 			if(!comment.getMessage().equals("")) {
 				PreparedStatement statement = conn.prepareStatement(query);
-				System.out.println(comment.getUserName());
 				statement.setString(1, comment.getUserName() );
 				statement.setInt(2,  comment.getBook_Id());
 				statement.setString(3, comment.getBook_Title() );
