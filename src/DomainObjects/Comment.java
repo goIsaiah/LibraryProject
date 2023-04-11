@@ -7,11 +7,14 @@ public class Comment {
 	private int book_id; 
 	
 	
-	/*
-	 * TODO get main user from database 
+
+	/**
 	 * 
+	 * @param user The user that wrote the comment. 
+	 * @param message The comment message that is to be stored and displayed to other users. 
+	 * @param book_title The title of the book being commented on. 
+	 * @param book_id The id of the book.
 	 */
-	
 	public Comment(User user, String message, String book_title,int book_id) {
 		this.user = user  ; 
 		this.message = message; 
