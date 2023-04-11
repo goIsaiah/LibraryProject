@@ -19,7 +19,7 @@ public class DBCriticZone
 		//establish a connection
 		try
 		{
-			connection = LibraryUI.conn;
+			connection = DBUtil.getConnection(DBType_enum.ONLINE);
 			statement = connection.createStatement();
 		}
 		catch (SQLException e) //catch any errors when connecting to the DB
@@ -28,7 +28,7 @@ public class DBCriticZone
 		}
 	}
 
-	public void addCritic(Critic c)
+	public void addCritic(Critic c) throws SQLException
 	{
 		String query = String.format("INSERT INTO CRITICS\n(usrname, book_title, message, rating, book_id) VALUES\n('%s', '%s', '%s', '%d', '%d')", c.getUser().getUsername(), c.getBook().getTitle(), c.getReview().getMessage(), c.getRating().getRating(), c.getBook().getId());
 
