@@ -14,18 +14,14 @@ import Logic.GoogleJSON;
 
 
 public class DBMain { 
-//	static String url = "jdbc:mysql://localhost:3306/myDB";
-//	static String urlRoot = "jdbc:mysql://localhost:3306";
-//	static String user = "root";
-//	static String password = LibraryUI.sqlpassword;
+
 	
 	public DBMain() throws SQLException {
 	}
 
 	public ArrayList<Book> searchLibrary(String search) throws SQLException {
-//		Connection con = DriverManager.getConnection(url, user, password);
-//		Connection con = DBUtil.getConnection(DBType_enum.ONLINE);
-		Connection con = LibraryUI.conn; 
+
+		Connection con = LibraryUI.conn;
 		String selectString = "SELECT * FROM LIBRARY WHERE LIB_TITLE LIKE ?";
 		PreparedStatement statement = con.prepareStatement(selectString);
 	    statement.setString(1, "%" + search + "%");
@@ -48,16 +44,6 @@ public class DBMain {
 		return bookList;
 	}
 
-	private static void printDB(ResultSet result) throws SQLException {
-		while (result.next()) {
-	        int bookId = result.getInt("LIB_ID");
-	        String title = result.getString("LIB_TITLE");
-	        String author = result.getString("LIB_AUTHOR");
-	        String isbn = result.getString("LIB_ISBN");
-	        int year = result.getInt("LIB_YEAR");
-	        System.out.printf("%d %s %s %s %d%n", bookId, title, author, isbn, year);
-		}
-	}
 
 	public ArrayList<Book> getAPILibrary(String query) throws SQLException {
 	    ArrayList<Book> apibookList = new ArrayList<>();
@@ -83,9 +69,8 @@ public class DBMain {
 	}
 	
 	private int getMaxID() throws SQLException {
-//		Connection conn = DriverManager.getConnection(url, user, password);
-//		Connection conn = DBUtil.getConnection(DBType_enum.ONLINE);
-		Connection conn = LibraryUI.conn; 
+
+		Connection conn = LibraryUI.conn;
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT MAX(LIB_ID) FROM LIBRARY");
 		int nextId = rs.next() ? rs.getInt(1) + 1 : 1;
@@ -93,8 +78,7 @@ public class DBMain {
 	}
 
 	public static void DBBookfromAPI(String title, String author, int year, String ISBN) throws SQLException {
-//	    Connection con = DriverManager.getConnection(url, user, password);
-//		Connection con = DBUtil.getConnection(DBType_enum.ONLINE);
+
 		Connection con = LibraryUI.conn; 
 	    String queryCheck = "SELECT * FROM LIBRARY WHERE LIB_TITLE = ? AND LIB_ISBN = ?";
 	    PreparedStatement pstmtCheck = con.prepareStatement(queryCheck);
@@ -113,7 +97,7 @@ public class DBMain {
 
 	    resultSet.close();
 	    pstmtCheck.close();
-//	    con.close();
+
 	}
 
 
