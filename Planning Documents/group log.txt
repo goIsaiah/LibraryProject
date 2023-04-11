@@ -8,3 +8,58 @@ designations:
 - vince: FriendsList/ Community user story 
 - jet:
 
+
+Group meeting: March 22nd, 2023
+Members present: Abbey, Isaiah, Sathira, Vince, Jet:
+
+Designmations:
+Assigned members to code review tasks
+
+
+Group meeting: March 29th, 2023
+Members present: Abbey, Isaiah, Sathira, Vince, Jet
+
+Designmations:
+- Abbey: Wishlist
+- Isaiah: Borrow books
+- Sathira: Profile
+- Vince: Friends list
+
+
+Group meeting: April 1st, 2023
+Members present: Isaiah, Vince
+
+Designations:
+- Isaiah: Finished borrowing and returning books
+- Vince: Finished community user story
+
+
+Group meeting: April 2nd, 2023
+Members present: Abbey, Isaiah, Sathira, Vince
+
+Designations:
+Assign members for video roles, and prepare for the demo
+
+
+Group meeting: April 3rd, 2023
+Members present: Abbey, Isaiah, Sathira, Vince, Jet
+
+Designations:
+Demo for the lab.
+
+
+Group meeting: April 7th, 2023
+Members present: Abbey, Isaiah, Sathira, Vince
+
+Designations:
+Continued to do bug fixes.
+
+
+Group meeting: April 10th, 2023
+Members present: Abbey, Isaiah, Sathira, Vince
+
+Designations:
+- Abbey: JUnit test cases
+- Isaiah: Bug/code smells report
+- Sathira: JUnit test cases
+- Vince: UML diagram

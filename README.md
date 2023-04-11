@@ -1,6 +1,10 @@
 # BookMate  
 > Created by: Abbey, Isaiah, Jet, Sathira and Vince
 
+Note for lab 5: Our lab 5 activity work is located in the "Lab 5 Activity" folder in the "PreOnlineDBBranch" branch.
+
+![image](https://user-images.githubusercontent.com/71765888/231034211-b8ee9ee7-7e68-43e2-a548-1bb7549ca671.png)
+
 ## What is BookMate?
 
 BookMate is a library system and social media hybrid app that is focused on students and book lovers alike. 
